@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "clockworkaddons",
+  "version": "${version}",
+
+  "name": "ClockworkAddons",
+  "description": "",
+  "authors": [],
+  "contact": {},
+
+  "license": "All Rights Reserved",
+  "icon": "icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.github.guyapooye.clockworkaddons.fabric.ClockworkAddonsFabric"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.15.9",
+    "minecraft": ">=1.18.2"
+  }
+}

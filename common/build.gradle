@@ -1,0 +1,42 @@
+architectury {
+    common(rootProject.enabled_platforms.split(","))
+}
+
+repositories {
+    maven { url = "https://mvn.devos.one/releases" } // Porting Lib Releases
+    maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" } // Forge config api port
+    maven { url = "https://maven.cafeteria.dev/releases" } // Fake Player API
+    maven { url = "https://maven.jamieswhiteshirt.com/libs-release" } // Reach Entity Attributes
+    maven { url = "https://jitpack.io/" } // Mixin Extras, Fabric ASM
+}
+
+dependencies {
+    // We depend on fabric loader here to use the fabric @Environment annotations and get the mixin dependencies
+    // Do NOT use other classes from fabric loader
+    modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
+
+    modApi("org.valkyrienskies:valkyrienskies-118-common:$vs2_version") { transitive = false }
+
+    modImplementation("org.valkyrienskies.core:api:$vs_core_version")
+    modImplementation("org.valkyrienskies.core:api-game:$vs_core_version")
+    modImplementation("org.valkyrienskies.core:util:$vs_core_version")
+    modImplementation("org.valkyrienskies.core:impl:$vs_core_version")
+
+    modImplementation("com.simibubi.create:create-fabric-${minecraft_version}:${create_fabric_version}")
+
+    modImplementation(files("libs/clockwork-1.18.2-fabric.jar"))
+}
+
+publishing {
+    publications {
+        mavenCommon(MavenPublication) {
+            artifactId = rootProject.archives_base_name
+            from components.java
+        }
+    }
+
+    // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
+    repositories {
+        // Add repositories to publish to here.
+    }
+}
