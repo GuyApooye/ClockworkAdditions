@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "clockworkaddons:block/mechanical_pedals"
+    },
+    "facing=south": {
+      "model": "clockworkaddons:block/mechanical_pedals",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "clockworkaddons:block/mechanical_pedals",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "clockworkaddons:block/mechanical_pedals",
+      "y": 90
+    }
+  }
+}

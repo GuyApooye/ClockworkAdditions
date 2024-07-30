@@ -3,6 +3,8 @@
   "textures": {
     "top": "clockworkaddons:block/kinetic_flap_bearing",
     "side": "create:block/clockwork_bearing_side",
-    "particle": "create:block/clockwork_bearing_side"
+    "particle": "create:block/clockwork_bearing_side",
+    "shaft": "create:block/axis",
+    "shaft_top": "create:block/axis_top"
   }
 }

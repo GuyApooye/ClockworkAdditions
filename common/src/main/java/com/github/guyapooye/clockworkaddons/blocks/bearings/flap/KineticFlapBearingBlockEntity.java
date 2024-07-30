@@ -158,24 +158,21 @@ public class KineticFlapBearingBlockEntity extends KineticBlockEntity implements
 
     public void tick() {
         super.tick();
+//        if (getSpeed() == 0) bearingAngle -= 1;
         ControlledContraptionEntity var10000;
         if (this.flap != null) {
             var10000 = this.flap;
-            Intrinsics.checkNotNull(var10000);
             var10000.tick();
         }
 
         Level var4 = this.level;
-        Intrinsics.checkNotNull(var4);
         if (var4.isClientSide) {
             this.prevForcedAngle = this.bearingAngle;
             this.clientAngleDiff /= 2.0F;
         }
 
         Level var10002 = this.level;
-        Intrinsics.checkNotNull(var10002);
         BlockPos var10003 = this.worldPosition;
-        Intrinsics.checkNotNullExpressionValue(var10003, "worldPosition");
         if(poweredMode.get() == PoweredMode.NORMAL) this.redstoneLevel = 15-this.getPower(var10002, var10003);
         else this.redstoneLevel = this.getPower(var10002, var10003);
 
@@ -193,7 +190,6 @@ public class KineticFlapBearingBlockEntity extends KineticBlockEntity implements
         setSidesFromSpeed();
 
         var4 = this.level;
-        Intrinsics.checkNotNull(var4);
         if (!var4.isClientSide && this.assembleNextTick) {
             this.assembleNextTick = false;
             if (this.isRunning) {
@@ -201,7 +197,6 @@ public class KineticFlapBearingBlockEntity extends KineticBlockEntity implements
                 if (this.speed == 0.0F) {
                     if (this.flap != null) {
                         var10000 = this.flap;
-                        Intrinsics.checkNotNull(var10000);
                         var10000.getContraption().stop(this.level);
                     }
 
@@ -215,7 +210,6 @@ public class KineticFlapBearingBlockEntity extends KineticBlockEntity implements
             label52: {
                 if (this.flap != null) {
                     var10000 = this.flap;
-                    Intrinsics.checkNotNull(var10000);
                     if (var10000.isStalled()) {
                         break label52;
                     }
@@ -233,7 +227,6 @@ public class KineticFlapBearingBlockEntity extends KineticBlockEntity implements
     }
 
     public void write(@NotNull CompoundTag compound, boolean clientPacket) {
-        Intrinsics.checkNotNullParameter(compound, "compound");
         compound.putBoolean(ClockworkConstants.Nbt.INSTANCE.getRUNNING(), this.isRunning);
         compound.putFloat(ClockworkConstants.Nbt.INSTANCE.getANGLE(), this.bearingAngle);
         AssemblyException.write(compound, this.lastException);
@@ -241,7 +234,6 @@ public class KineticFlapBearingBlockEntity extends KineticBlockEntity implements
     }
 
     protected void read(@NotNull CompoundTag compound, boolean clientPacket) {
-        Intrinsics.checkNotNullParameter(compound, "compound");
         float angleBefore = this.bearingAngle;
         this.isRunning = compound.getBoolean(ClockworkConstants.Nbt.INSTANCE.getRUNNING());
         this.bearingAngle = compound.getFloat(ClockworkConstants.Nbt.INSTANCE.getANGLE());
@@ -268,10 +260,7 @@ public class KineticFlapBearingBlockEntity extends KineticBlockEntity implements
             try {
                 FlapContraption.Companion var5 = FlapContraption.Companion;
                 Level var10001 = this.level;
-                Intrinsics.checkNotNull(var10001);
                 BlockPos var10002 = this.worldPosition;
-                Intrinsics.checkNotNullExpressionValue(var10002, "worldPosition");
-                Intrinsics.checkNotNull(direction);
                 contraption = var5.assembleFlap(var10001, var10002, direction);
                 this.lastException = null;
             } catch (AssemblyException var4) {
@@ -284,18 +273,14 @@ public class KineticFlapBearingBlockEntity extends KineticBlockEntity implements
                 if (!contraption.getBlocks().isEmpty()) {
                     BlockPos anchor = this.worldPosition.relative(direction);
                     contraption.removeBlocksFromWorld(this.level, BlockPos.ZERO);
-                    this.flap = ControlledContraptionEntity.create(this.level, (IControlContraption)this, (Contraption)contraption);
+                    this.flap = ControlledContraptionEntity.create(this.level, this, contraption);
                     ControlledContraptionEntity var6 = this.flap;
-                    Intrinsics.checkNotNull(var6);
-                    var6.setPos((double)anchor.getX(), (double)anchor.getY(), (double)anchor.getZ());
+                    var6.setPos(anchor.getX(), anchor.getY(), anchor.getZ());
                     var6 = this.flap;
-                    Intrinsics.checkNotNull(var6);
                     var6.setRotationAxis(direction.getAxis());
                     var10000 = this.level;
-                    Intrinsics.checkNotNull(var10000);
                     ControlledContraptionEntity var7 = this.flap;
-                    Intrinsics.checkNotNull(var7);
-                    var10000.addFreshEntity((Entity)var7);
+                    var10000.addFreshEntity(var7);
                     this.isRunning = true;
                     this.bearingAngle = 0.0F;
                     this.sendData();
@@ -305,9 +290,7 @@ public class KineticFlapBearingBlockEntity extends KineticBlockEntity implements
     }
 
     public void remove() {
-        Level var10000 = this.level;
-        Intrinsics.checkNotNull(var10000);
-        if (!var10000.isClientSide) {
+        if (!level.isClientSide) {
             this.disassemble();
         }
 

@@ -40,7 +40,7 @@ public class KineticFlapBearingRenderer extends KineticBlockEntityRenderer<Kinet
         superBuffer.renderInto(ms, buffer.getBuffer(RenderType.solid()));
 //        KineticFlapBearingBlockEntity var10000 = te;
 //        BlockState var10003 = te.getBlockState();
-//        KineticBlockEntityRenderer.renderRotatingBuffer(var10000, this.getRotatedModel(te, var10003), ms, buffer.getBuffer(RenderType.solid()), light);
+        KineticBlockEntityRenderer.renderRotatingBuffer(te, this.getRotatedModel(te, te.getBlockState()), ms, buffer.getBuffer(RenderType.solid()), light);
     }
 
     @Override

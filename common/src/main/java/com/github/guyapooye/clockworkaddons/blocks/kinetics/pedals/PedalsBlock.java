@@ -2,6 +2,8 @@ package com.github.guyapooye.clockworkaddons.blocks.kinetics.pedals;
 
 import com.github.guyapooye.clockworkaddons.registries.BlockEntityRegistry;
 import com.google.common.base.Optional;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllShapes;
 import com.simibubi.create.AllTags;
@@ -51,11 +53,19 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.EntityCollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
+import org.joml.Vector3d;
+import org.joml.Vector3dc;
+import org.spongepowered.asm.mixin.injection.At;
+import org.valkyrienskies.core.api.ships.Ship;
+import org.valkyrienskies.mod.common.VSGameUtilsKt;
+import org.valkyrienskies.mod.common.entity.ShipMountingEntity;
+import org.valkyrienskies.mod.common.util.EntityDraggingInformation;
+import org.valkyrienskies.mod.common.util.IEntityDraggingInformationProvider;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class PedalsBlock extends HorizontalKineticBlock implements ProperWaterloggedBlock, CustomPathNodeTypeBlock, IBE<PedalsBlockEntity> {
+public class PedalsBlock extends HorizontalKineticBlock implements ProperWaterloggedBlock, IBE<PedalsBlockEntity> {
 
     public PedalsBlock(Properties properties) {
         super(properties);
@@ -94,15 +104,11 @@ public class PedalsBlock extends HorizontalKineticBlock implements ProperWaterlo
         super.fallOn(level, blockState, blockPos, entity, f * 0.5F);
     }
 
-    @Override
-    public BlockPathTypes getAiPathNodeType(BlockState state, BlockGetter world, BlockPos pos, @Nullable Mob entity) {
-        return BlockPathTypes.RAIL;
-    }
 
     @Override
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos,
                                CollisionContext ctx) {
-        return AllShapes.TURNTABLE_SHAPE;
+        return AllShapes.SCHEMATICANNON_SHAPE;
     }
 
     @Override
@@ -110,8 +116,12 @@ public class PedalsBlock extends HorizontalKineticBlock implements ProperWaterlo
                                         CollisionContext ctx) {
 //        if (ctx instanceof EntityCollisionContext ecc && ecc.getEntity() instanceof Player)
 //            return AllShapes.TURNTABLE_SHAPE;
-        return AllShapes.TURNTABLE_SHAPE;
+        return AllShapes.SCHEMATICANNON_SHAPE;
     }
+
+
+
+
 
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand,
@@ -142,6 +152,31 @@ public class PedalsBlock extends HorizontalKineticBlock implements ProperWaterlo
                 .isEmpty();
     }
 
+
+//    @Override
+//    public void updateEntityAfterFallOn(BlockGetter reader, Entity entity) {
+//        BlockPos pos = entity.blockPosition();
+//        if (entity instanceof Player || !(entity instanceof LivingEntity) || !canBePickedUp(entity)
+//                || isSeatOccupied(entity.level, pos)) {
+//            if (entity.isSuppressingBounce()) {
+//                super.updateEntityAfterFallOn(reader, entity);
+//                return;
+//            }
+//
+//            Vec3 vec3 = entity.getDeltaMovement();
+//            if (vec3.y < 0.0D) {
+//                double d0 = entity instanceof LivingEntity ? 1.0D : 0.8D;
+//                entity.setDeltaMovement(vec3.x, -vec3.y * (double) 0.66F * d0, vec3.z);
+//            }
+//
+//            return;
+//        }
+//        if (reader.getBlockState(pos)
+//                .getBlock() != this)
+//            return;
+//        sitDown(entity.level, pos, entity);
+//    }
+
     public static Optional<Entity> getLeashed(Level level, Player player) {
         List<Entity> entities = player.level.getEntities((Entity) null, player.getBoundingBox()
                 .inflate(10), e -> true);
@@ -166,10 +201,10 @@ public class PedalsBlock extends HorizontalKineticBlock implements ProperWaterlo
     }
 
     public static void sitDown(Level world, BlockPos pos, Entity entity) {
-        if (world.isClientSide)
-            return;
-        PedalsEntity seat = PedalsEntity.create(world,pos);
-        seat.setPos(pos.getX() + .5f, pos.getY(), pos.getZ() + .5f);
+        if (world.isClientSide) return;
+        SeatEntity seat = PedalsEntity.create(world,pos);
+        seat.setPos(pos.getX() + .5d,  pos.getY()+0.7d, pos.getZ() + .5d);
+//        seat.handlePosSet();
         world.addFreshEntity(seat);
         entity.startRiding(seat, true);
         if (entity instanceof TamableAnimal ta)

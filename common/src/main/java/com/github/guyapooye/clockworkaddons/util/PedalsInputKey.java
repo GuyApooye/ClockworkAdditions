@@ -21,7 +21,6 @@ public enum PedalsInputKey {
 
     public static int asInt(@NotNull Set<PedalsInputKey> keys) {
         int i = keys.stream().map(PedalsInputKey::asInt$lambda$0).reduce(0, PedalsInputKey::asInt$lambda$1);
-        System.out.println(i);
         return i;
     }
 

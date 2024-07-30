@@ -5,9 +5,15 @@ import com.github.guyapooye.clockworkaddons.blocks.bearings.flap.KineticFlapBear
 import com.github.guyapooye.clockworkaddons.blocks.bearings.heli.PhysicsBearingBlockEntity;
 import com.github.guyapooye.clockworkaddons.blocks.bearings.heli.archived.BasePhysicsBearingBlockEntity;
 import com.github.guyapooye.clockworkaddons.blocks.kinetics.pedals.PedalsBlockEntity;
+import com.github.guyapooye.clockworkaddons.blocks.kinetics.pedals.PedalsInstance;
+import com.github.guyapooye.clockworkaddons.blocks.kinetics.pedals.PedalsRenderer;
+import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.contraptions.bearing.BearingInstance;
 import com.simibubi.create.content.contraptions.bearing.BearingRenderer;
+import com.simibubi.create.content.kinetics.base.BackHalfShaftInstance;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
+import com.simibubi.create.content.kinetics.crank.HandCrankInstance;
+import com.simibubi.create.content.kinetics.crank.HandCrankRenderer;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 
 import static com.github.guyapooye.clockworkaddons.ClockworkAddons.REGISTRATE;
@@ -32,9 +38,10 @@ public class BlockEntityRegistry {
             .renderer(() -> KineticFlapBearingRenderer::new)
             .register();
     public static BlockEntityEntry<PedalsBlockEntity> PEDALS = REGISTRATE
-            .blockEntity("pedals", PedalsBlockEntity::new)
+            .blockEntity("mechanical_pedals", PedalsBlockEntity::new)
+            .instance(() -> PedalsInstance::new)
             .validBlocks(BlockRegistry.PEDALS)
-            .renderer(() -> KineticBlockEntityRenderer::new)
+            .renderer(() -> PedalsRenderer::new)
             .register();
 
     public static void register() {}
