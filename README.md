@@ -1,1 +1,1 @@
-# ClockworkAddons
+# ClockworkAdditions

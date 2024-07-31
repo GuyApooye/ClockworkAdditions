@@ -14,12 +14,12 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.github.guyapooye.clockworkaddons.fabric.ClockworkAddonsFabric"
+      "com.github.guyapooye.clockworkadditions.fabric.ClockworkAdditionsFabric"
     ]
   },
   "mixins": [
-    "clockworkaddons.mixins.json",
-    "clockworkaddons-common.mixins.json"
+    "clockworkadditions.mixins.json",
+    "clockworkadditions-common.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.15.9",

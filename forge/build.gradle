@@ -3,8 +3,8 @@ plugins {
 }
 loom {
     forge {
-        mixinConfig "clockworkaddons-common.mixins.json"
-        mixinConfig "clockworkaddons.mixins.json"
+        mixinConfig "clockworkadditions-common.mixins.json"
+        mixinConfig "clockworkadditions.mixins.json"
     }
 }
 architectury {
