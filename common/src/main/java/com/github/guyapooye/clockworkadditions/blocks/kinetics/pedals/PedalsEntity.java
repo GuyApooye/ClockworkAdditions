@@ -28,6 +28,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import static java.lang.Math.abs;
+
 public class PedalsEntity extends SeatEntity {
 
     protected Set<PedalsInputKey> prevKeys = new HashSet<>();
@@ -67,15 +69,15 @@ public class PedalsEntity extends SeatEntity {
             }
         } else {
             boolean blockPresent = level.getBlockState(this.blockPosition()).getBlock() instanceof PedalsBlock;
+            BlockEntity be = level.getBlockEntity(this.blockPosition());
             if (this.isVehicle() && blockPresent) {
+                if (passenger instanceof Player) ((Player)passenger).causeFoodExhaustion(abs(((PedalsBlockEntity) be).getSpeed())/8 * AllConfigs.server().kinetics.crankHungerMultiplier.getF());
                 return;
             }
 
             discard();
-            BlockEntity be = level.getBlockEntity(this.blockPosition());
             PedalsBlockEntity var10000 = be instanceof PedalsBlockEntity ? (PedalsBlockEntity)be : null;
             if ((be instanceof PedalsBlockEntity ? (PedalsBlockEntity)be : null) != null) {
-                if (passenger instanceof Player) ((Player)passenger).causeFoodExhaustion(((PedalsBlockEntity) be).getSpeed() * AllConfigs.server().kinetics.crankHungerMultiplier.getF());
                 var10000.updateInput(new HashSet<>());
             }
         }
