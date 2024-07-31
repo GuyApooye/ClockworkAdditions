@@ -15,13 +15,13 @@ license="All Rights Reserved"
 # A list of mods - how many allowed here is determined by the individual mod loader
 [[mods]] #mandatory
 # The modid of the mod
-modId="clockworkaddons" #mandatory
+modId="clockworkadditions" #mandatory
 # The version number of the mod - there's a few well known ${} variables useable here or just hardcode it
 # ${version} will substitute the value of the Implementation-Version as read from the mod's JAR file metadata
 # see the associated build.gradle script for how to populate this completely automatically during a build
 version="${version}" #mandatory
 # A display name for the mod
-displayName="ClockworkAddons" #mandatory
+displayName="ClockworkAdditions" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification <here>
 #updateJSONURL="http://myurl.me/" #optional
 # A URL for the "homepage" for this mod, displayed in the mod UI
@@ -45,7 +45,7 @@ description='''
 
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
-[[dependencies.clockworkaddons]] #optional
+[[dependencies.clockworkadditions]] #optional
    # the modid of the dependency
    modId="forge" #mandatory
    # Does this dependency have to exist - if not, ordering below must be specified
@@ -57,7 +57,7 @@ description='''
    # Side this dependency is applied on - BOTH, CLIENT or SERVER
    side="BOTH"
 # Here's another dependency
-[[dependencies.clockworkaddons]]
+[[dependencies.clockworkadditions]]
    modId="minecraft"
    mandatory=true
    # This version range declares a minimum of the current minecraft version up to but not including the next major version

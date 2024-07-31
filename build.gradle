@@ -9,8 +9,8 @@ architectury {
 }
 
 forgix {
-    group = "com.github.guyapooye.clockworkaddons"
-    mergedJarName = "clockworkaddons"
+    group = "com.github.guyapooye.clockworkadditions"
+    mergedJarName = "clockworkadditions"
 }
 
 subprojects {
