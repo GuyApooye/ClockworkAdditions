@@ -18,9 +18,9 @@ import java.util.stream.Collectors;
 
 @Mixin(LinkedControllerInputPacket.class)
 public abstract class LinkedControllerInputPacketMixin {
-    @Shadow
+    @Shadow(remap = false)
     private Collection<Integer> activatedButtons;
-    @Shadow
+    @Shadow(remap = false)
     private boolean press;
     /**
      * @author GuyApooye

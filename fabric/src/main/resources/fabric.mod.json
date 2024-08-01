@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "id": "clockworkaddons",
+  "id": "clockworkadditions",
   "version": "${version}",
 
-  "name": "ClockworkAddons",
+  "name": "Clockwork Additions",
   "description": "",
   "authors": ["GuyApooye"],
   "contact": {},
