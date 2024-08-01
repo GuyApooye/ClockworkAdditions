@@ -4,8 +4,10 @@
   "package": "com.github.guyapooye.clockworkadditions.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "vs.VSEntityManagerMixin",
-    "clockwork.EncasedFanControllerMixin"
+    "clockwork.EncasedFanControllerMixin",
+    "create.LinkedControllerInputPacketMixin",
+    "create.RedstoneLinkNetworkHandlerMixin",
+    "vs.VSEntityManagerMixin"
   ],
   "client": [
   ],
