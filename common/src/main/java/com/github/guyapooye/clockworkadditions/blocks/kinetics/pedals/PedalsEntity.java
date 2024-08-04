@@ -1,11 +1,13 @@
 package com.github.guyapooye.clockworkadditions.blocks.kinetics.pedals;
 
 import com.github.guyapooye.clockworkadditions.registries.EntityRegistry;
-import com.github.guyapooye.clockworkadditions.util.PedalsInputKey;
+import com.github.guyapooye.clockworkadditions.packets.PedalsDrivingPacket;
+import com.github.guyapooye.clockworkadditions.util.ControlsUtil;
 import com.simibubi.create.content.contraptions.actors.seat.SeatEntity;
 import com.simibubi.create.infrastructure.config.AllConfigs;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.Options;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.KeyMapping;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -20,28 +22,17 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.valkyrienskies.clockwork.platform.SharedValues;
-import org.valkyrienskies.core.api.ships.Ship;
-import org.valkyrienskies.mod.common.VSGameUtilsKt;
-import org.valkyrienskies.mod.common.entity.handling.WorldEntityHandler;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 import static java.lang.Math.abs;
 
 public class PedalsEntity extends SeatEntity {
 
-    protected Set<PedalsInputKey> prevKeys = new HashSet<>();
+    protected Collection<Integer> prevKeys = new HashSet<>();
 
     public PedalsEntity(@Nullable EntityType type, @NotNull Level level) {
         super(type, level);
-    }
-    public void handlePosSet() {
-        final Ship ship = VSGameUtilsKt.getShipManagingPos(level, this.getX(), this.getY(), this.getZ());
-        if (ship != null) {
-            WorldEntityHandler.INSTANCE.moveEntityFromShipyardToWorld(this, ship, this.getX(), this.getY(), this.getZ());
-        }
     }
 //    @Override
 //    public @NotNull Vec3 position() {
@@ -90,21 +81,13 @@ public class PedalsEntity extends SeatEntity {
 //        }
 //        return super.getDismountLocationForPassenger(livingEntity).add(0, 0.5f, 0);
 //    }
-
+    @Environment(EnvType.CLIENT)
     private void checkKeybinds() {
-        Options options = Minecraft.getInstance().options;
-
-        Set<PedalsInputKey> keys = new HashSet<>();
-        if (options.keyUp.isDown()) {
-            keys.add(PedalsInputKey.FORWARD);
-        }
-
-        if (options.keyDown.isDown()) {
-            keys.add(PedalsInputKey.BACKWARD);
-        }
-
-        if (options.keySprint.isDown()) {
-            keys.add(PedalsInputKey.SPRINT);
+        Vector<KeyMapping> controls = ControlsUtil.getControls();
+        Collection<Integer> keys = new HashSet<>();
+        for (int i = 0; i < controls.size(); i++) {
+            if (ControlsUtil.isActuallyPressed(controls.get(i)))
+                keys.add(i);
         }
 
         if (!Objects.equals(keys, this.prevKeys)) {
@@ -114,7 +97,7 @@ public class PedalsEntity extends SeatEntity {
         this.prevKeys = keys;
     }
 
-    private void sendUpdate(Set<PedalsInputKey> keys) {
+    private void sendUpdate(Collection<Integer> keys) {
         SharedValues.getPacketChannel().sendToServer(new PedalsDrivingPacket(this.getId(), keys));
 //        ClockworkPackets.Companion.sendToServer();
     }

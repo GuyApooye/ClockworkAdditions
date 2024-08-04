@@ -33,23 +33,23 @@ public abstract class RedstoneLinkNetworkHandlerMixin {
                     target = "Lnet/minecraft/core/BlockPos;closerThan(Lnet/minecraft/core/Vec3i;D)Z"
             ),
             cancellable = true)
-    private static void clockworkAdditions$wrapCloserThan(IRedstoneLinkable from, IRedstoneLinkable _to, CallbackInfoReturnable<Boolean> cir) {
+    private static void clockworkAdditions$wrapCloserThan(IRedstoneLinkable from, IRedstoneLinkable to, CallbackInfoReturnable<Boolean> cir) {
         Couple<RedstoneLinkNetworkHandler.Frequency> frequencyCouple = from.getNetworkKey();
         boolean isCrystal = frequencyCouple.either(f -> (
                 f.getStack().sameItem(ClockworkItems.WANDERLITE_CRYSTAL.asStack())));
         boolean isCube = frequencyCouple.either(f -> (
                 f.getStack().sameItem(ClockworkItems.WANDERLITE_CUBE.asStack())));
         Ship ship1 = VSGameUtilsKt.getShipManagingPos(clockworkAdditions$harvestedWorld, from.getLocation());
-        Ship ship2 = VSGameUtilsKt.getShipManagingPos(clockworkAdditions$harvestedWorld, new BlockPos(_to.getLocation()));
+        Ship ship2 = VSGameUtilsKt.getShipManagingPos(clockworkAdditions$harvestedWorld, new BlockPos(to.getLocation()));
         Vec3 pos1 = Vec3.atLowerCornerOf(from.getLocation());
-        Vec3 pos2 = Vec3.atLowerCornerOf(_to.getLocation());
+        Vec3 pos2 = Vec3.atLowerCornerOf(to.getLocation());
         if (ship1 != null) {
             pos1 = VectorConversionsMCKt.toMinecraft(ship1.getShipToWorld().transformPosition(VectorConversionsMCKt.toJOML(pos1)));
         }
         if (ship2 != null) {
             pos2 = VectorConversionsMCKt.toMinecraft(ship2.getShipToWorld().transformPosition(VectorConversionsMCKt.toJOML(pos2)));
         }
-        cir.setReturnValue(isCrystal ? from.getLocation().closerThan(_to.getLocation(), AllConfigs.server().logistics.linkRange.get()) : pos1.closerThan(pos2, AllConfigs.server().logistics.linkRange.get()));
+        cir.setReturnValue(isCrystal ? from.getLocation().closerThan(to.getLocation(), AllConfigs.server().logistics.linkRange.get()) : pos1.closerThan(pos2, AllConfigs.server().logistics.linkRange.get()));
     }
 //    /**
 //     * @author GuyApooye

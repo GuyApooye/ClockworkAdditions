@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "clockworkadditions:block/handlebar"
+    },
+    "facing=south": {
+      "model": "clockworkadditions:block/handlebar",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "clockworkadditions:block/handlebar",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "clockworkadditions:block/handlebar",
+      "y": 90
+    }
+  }
+}

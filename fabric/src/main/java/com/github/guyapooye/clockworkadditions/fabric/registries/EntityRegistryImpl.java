@@ -18,7 +18,7 @@ import net.minecraft.world.entity.MobCategory;
 import static com.github.guyapooye.clockworkadditions.ClockworkAdditions.REGISTRATE;
 
 public class EntityRegistryImpl extends EntityRegistry {
-    public static void registerEntities(){
+    static {
          EntityRegistry.PEDALS = register("pedals", PedalsEntity::new, () -> PedalsEntity.Render::new,
                 MobCategory.MISC, 5, Integer.MAX_VALUE, false, true,
                  b -> ((FabricEntityTypeBuilder<?>)b).dimensions(EntityDimensions.fixed(0.25f, 0.35f))
@@ -43,7 +43,6 @@ public class EntityRegistryImpl extends EntityRegistry {
                 .renderer(renderer);
     }
     public static void register() {
-        registerEntities();
     }
 //    static {
 //        System.out.println(PEDALS.get().toString());

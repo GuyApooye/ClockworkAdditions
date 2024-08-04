@@ -6,6 +6,7 @@ import com.github.guyapooye.clockworkadditions.ClockworkAdditions;
 import com.github.guyapooye.clockworkadditions.blocks.bearings.flap.KineticFlapBearingBlock;
 import com.github.guyapooye.clockworkadditions.blocks.bearings.heli.PhysicsBearingBlock;
 import com.github.guyapooye.clockworkadditions.blocks.bearings.heli.archived.BasePhysicsBearingBlock;
+import com.github.guyapooye.clockworkadditions.blocks.kinetics.handlebar.HandlebarBlock;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.pedals.PedalsBlock;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
@@ -67,7 +68,17 @@ public class BlockRegistry {
                     .addLayer(() -> RenderType::cutoutMipped)
                     .blockstate(BlockStateGen.horizontalBlockProvider(true))
                     .simpleItem()
-                    .lang("Kinetic Pedals")
+                    .lang("Mechanical Pedals")
+                    .register();
+    public static final BlockEntry<HandlebarBlock> HANDLEBAR =
+            REGISTRATE.block("handlebar", HandlebarBlock::new)
+                    .initialProperties(SharedProperties::stone)
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .transform(axeOnly())
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .blockstate(BlockStateGen.horizontalBlockProvider(true))
+                    .simpleItem()
+                    .lang("Handlebar")
                     .register();
     public static void register() {}
 }

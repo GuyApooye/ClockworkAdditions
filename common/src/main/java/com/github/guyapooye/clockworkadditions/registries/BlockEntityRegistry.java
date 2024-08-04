@@ -4,6 +4,7 @@ import com.github.guyapooye.clockworkadditions.blocks.bearings.flap.KineticFlapB
 import com.github.guyapooye.clockworkadditions.blocks.bearings.flap.KineticFlapBearingRenderer;
 import com.github.guyapooye.clockworkadditions.blocks.bearings.heli.PhysicsBearingBlockEntity;
 import com.github.guyapooye.clockworkadditions.blocks.bearings.heli.archived.BasePhysicsBearingBlockEntity;
+import com.github.guyapooye.clockworkadditions.blocks.kinetics.handlebar.HandlebarBlockEntity;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.pedals.PedalsBlockEntity;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.pedals.PedalsInstance;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.pedals.PedalsRenderer;
@@ -38,6 +39,7 @@ public class BlockEntityRegistry {
             .validBlocks(BlockRegistry.PEDALS)
             .renderer(() -> PedalsRenderer::new)
             .register();
+    public static BlockEntityEntry<? extends HandlebarBlockEntity> HANDLEBAR;
 
     public static void register() {}
 }

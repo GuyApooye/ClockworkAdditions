@@ -1,6 +1,8 @@
 package com.github.guyapooye.clockworkadditions.registries;
 
-import com.github.guyapooye.clockworkadditions.blocks.kinetics.pedals.PedalsDrivingPacket;
+import com.github.guyapooye.clockworkadditions.packets.PedalsDrivingPacket;
+import com.github.guyapooye.clockworkadditions.packets.handlebar.HandlebarDrivingPacket;
+import com.github.guyapooye.clockworkadditions.packets.handlebar.HandlebarStopDrivingPacket;
 import net.minecraft.network.FriendlyByteBuf;
 import org.valkyrienskies.clockwork.platform.SharedValues;
 import org.valkyrienskies.clockwork.platform.api.network.CWPacket;
@@ -10,7 +12,10 @@ import java.util.function.Function;
 
 public class PacketRegistry {
 
-    public static PacketEntry<PedalsDrivingPacket> PEDALS_DRIVING = PacketEntry.register(PedalsDrivingPacket.class,PedalsDrivingPacket::new);
+    static PacketEntry<PedalsDrivingPacket> PEDALS_DRIVING = PacketEntry.register(PedalsDrivingPacket.class, PedalsDrivingPacket::new);
+
+    static PacketEntry<HandlebarDrivingPacket> HANDLEBAR_DRIVING = PacketEntry.register(HandlebarDrivingPacket.class, HandlebarDrivingPacket::new);
+    static PacketEntry<HandlebarStopDrivingPacket> HANDLEBAR_STOP = PacketEntry.register(HandlebarStopDrivingPacket.class, HandlebarStopDrivingPacket::new);
 
     private record PacketEntry<T extends CWPacket>(Class<T> type, Function<FriendlyByteBuf, T> factory) {
 

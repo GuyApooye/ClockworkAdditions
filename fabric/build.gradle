@@ -40,9 +40,8 @@ dependencies {
     implementation("org.valkyrienskies.core:util:$vs_core_version")
     implementation("org.valkyrienskies.core:impl:$vs_core_version")
 
-
-
     modImplementation("com.simibubi.create:create-fabric-${minecraft_version}:${create_fabric_version}")
+//    modImplementation(include("io.github.fabricators_of_create:Porting-Lib:$port_lib_version+$minecraft_version"))
 
     modImplementation(files("libs/clockwork-1.18.2-fabric.jar"))
 }

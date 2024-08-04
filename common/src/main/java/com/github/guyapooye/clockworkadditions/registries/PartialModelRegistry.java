@@ -9,6 +9,7 @@ public class PartialModelRegistry {
     public static PartialModel PEDALS_CRANK = new PartialModel(ClockworkAdditions.asResource("block/mechanical_pedals/crank"));
     public static PartialModel PEDAL_LEFT = new PartialModel(ClockworkAdditions.asResource("block/mechanical_pedals/pedal_left"));
     public static PartialModel PEDAL_RIGHT = new PartialModel(ClockworkAdditions.asResource("block/mechanical_pedals/pedal_right"));
+    public static PartialModel HANDLEBAR = new PartialModel(ClockworkAdditions.asResource("block/handlebar/handle"));
 
     public static void register() {}
 }

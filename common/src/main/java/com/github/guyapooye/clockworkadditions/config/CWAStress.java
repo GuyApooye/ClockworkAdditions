@@ -20,7 +20,7 @@ public class CWAStress extends ConfigBase implements BlockStressValues.IStressVa
     public void registerAll(ForgeConfigSpec.Builder builder) {
         builder.comment(new String[]{".", CWAStress.Comments.su, CWAStress.Comments.impact}).push("impact");
         BlockStressDefaults.DEFAULT_IMPACTS.forEach((r, i) -> {
-            if (r.getNamespace().equals("vs_clockwork")) {
+            if (r.getNamespace().equals("clockworkadditions")) {
                 this.getImpacts().put(r, builder.define(r.getPath(), i));
             }
 
@@ -28,7 +28,7 @@ public class CWAStress extends ConfigBase implements BlockStressValues.IStressVa
         builder.pop();
         builder.comment(new String[]{".", CWAStress.Comments.su, CWAStress.Comments.capacity}).push("capacity");
         BlockStressDefaults.DEFAULT_CAPACITIES.forEach((r, i) -> {
-            if (r.getNamespace().equals("vs_clockwork")) {
+            if (r.getNamespace().equals("clockworkadditions")) {
                 this.getCapacities().put(r, builder.define(r.getPath(), i));
             }
 
@@ -39,22 +39,22 @@ public class CWAStress extends ConfigBase implements BlockStressValues.IStressVa
     public double getImpact(Block block) {
         block = this.redirectValues(block);
         ResourceLocation key = RegisteredObjects.getKeyOrThrow(block);
-        ForgeConfigSpec.ConfigValue<Double> value = (ForgeConfigSpec.ConfigValue)this.getImpacts().get(key);
-        return value != null ? (Double)value.get() : 0.0;
+        ForgeConfigSpec.ConfigValue<Double> value = this.getImpacts().get(key);
+        return value != null ? value.get() : 0.0;
     }
 
     public double getCapacity(Block block) {
         block = this.redirectValues(block);
         ResourceLocation key = RegisteredObjects.getKeyOrThrow(block);
-        ForgeConfigSpec.ConfigValue<Double> value = (ForgeConfigSpec.ConfigValue)this.getCapacities().get(key);
-        return value != null ? (Double)value.get() : 0.0;
+        ForgeConfigSpec.ConfigValue<Double> value = this.getCapacities().get(key);
+        return value != null ? value.get() : 0.0;
     }
 
     public Couple<Integer> getGeneratedRPM(Block block) {
         block = this.redirectValues(block);
         ResourceLocation key = RegisteredObjects.getKeyOrThrow(block);
-        Supplier<Couple<Integer>> supplier = (Supplier)BlockStressDefaults.GENERATOR_SPEEDS.get(key);
-        return supplier == null ? null : (Couple)supplier.get();
+        Supplier<Couple<Integer>> supplier = BlockStressDefaults.GENERATOR_SPEEDS.get(key);
+        return supplier == null ? null : supplier.get();
     }
 
     public boolean hasImpact(Block block) {
@@ -74,7 +74,7 @@ public class CWAStress extends ConfigBase implements BlockStressValues.IStressVa
     }
 
     public String getName() {
-        return "cwstressValues.v2";
+        return "cwastressValues.v2";
     }
 
     public Map<ResourceLocation, ForgeConfigSpec.ConfigValue<Double>> getImpacts() {

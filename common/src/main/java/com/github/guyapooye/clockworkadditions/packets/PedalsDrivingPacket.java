@@ -1,6 +1,7 @@
-package com.github.guyapooye.clockworkadditions.blocks.kinetics.pedals;
+package com.github.guyapooye.clockworkadditions.packets;
 
-import com.github.guyapooye.clockworkadditions.util.PedalsInputKey;
+import com.github.guyapooye.clockworkadditions.blocks.kinetics.pedals.PedalsBlockEntity;
+import com.github.guyapooye.clockworkadditions.blocks.kinetics.pedals.PedalsEntity;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
@@ -9,15 +10,17 @@ import org.jetbrains.annotations.NotNull;
 import org.valkyrienskies.clockwork.platform.api.network.C2SCWPacket;
 import org.valkyrienskies.clockwork.platform.api.network.ServerNetworkContext;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Objects;
 import java.util.Set;
 
 public class PedalsDrivingPacket implements C2SCWPacket {
     private final int seatId;
     @NotNull
-    private final Set<PedalsInputKey> pressedKeys;
+    private final Collection<Integer> pressedKeys;
 
-    public PedalsDrivingPacket(int seatId, @NotNull Set<PedalsInputKey> pressedKeys) {
+    public PedalsDrivingPacket(int seatId, @NotNull Collection<Integer> pressedKeys) {
         super();
         this.seatId = seatId;
         this.pressedKeys = pressedKeys;
@@ -26,7 +29,10 @@ public class PedalsDrivingPacket implements C2SCWPacket {
     public PedalsDrivingPacket(@NotNull FriendlyByteBuf buffer) {
         super();
         this.seatId = buffer.readInt();
-        this.pressedKeys = PedalsInputKey.fromInt(buffer.readInt());
+        pressedKeys = new ArrayList<>();
+        int size = buffer.readVarInt();
+        for (int i = 0; i < size; i++)
+            pressedKeys.add(buffer.readVarInt());
     }
 
     public void handle(@NotNull ServerNetworkContext context) {
@@ -36,7 +42,8 @@ public class PedalsDrivingPacket implements C2SCWPacket {
 
     public void write(@NotNull FriendlyByteBuf buffer) {
         buffer.writeInt(this.seatId);
-        buffer.writeInt(PedalsInputKey.asInt(this.pressedKeys));
+        buffer.writeVarInt(pressedKeys.size());
+        pressedKeys.forEach(buffer::writeVarInt);
     }
 
     private static void handle$lambda$0(ServerNetworkContext $context, PedalsDrivingPacket this$0) {

@@ -1,7 +1,6 @@
 package com.github.guyapooye.clockworkadditions.blocks.kinetics.pedals;
 
 import com.github.guyapooye.clockworkadditions.registries.BlockRegistry;
-import com.github.guyapooye.clockworkadditions.util.PedalsInputKey;
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.Block;
@@ -14,7 +13,7 @@ import java.util.*;
 public class PedalsBlockEntity extends GeneratingKineticBlockEntity {
 
     @NotNull
-    private Set<PedalsInputKey> pressedKeys = new HashSet<>();
+    private Collection<Integer> pressedKeys = new HashSet<>();
     public float independentAngle;
     public float chasingVelocity;
 
@@ -22,7 +21,7 @@ public class PedalsBlockEntity extends GeneratingKineticBlockEntity {
         super(type, pos, state);
     }
 
-    public final void updateInput(@NotNull Set<PedalsInputKey> pressedKeys) {
+    public final void updateInput(@NotNull Collection<Integer> pressedKeys) {
         if (!Objects.equals(this.pressedKeys, pressedKeys)) {
             this.pressedKeys = pressedKeys;
             updateGeneratedRotation();
@@ -30,16 +29,19 @@ public class PedalsBlockEntity extends GeneratingKineticBlockEntity {
     }
 
     public float getIndependentAngle(float partialTicks) {
+//        System.out.println("independentAngle: "+independentAngle);
+//        System.out.println("chasingVelocity: "+chasingVelocity);
+//        System.out.println("pressedKeys: "+pressedKeys);
         return (independentAngle + partialTicks * chasingVelocity) / 360;
     }
     @Override
     public float getGeneratedSpeed() {
-        int forward = pressedKeys.contains(PedalsInputKey.FORWARD) ? 32 : 0;
-        int backward = pressedKeys.contains(PedalsInputKey.BACKWARD) ? 32 : 0;
-        int sprint = pressedKeys.contains(PedalsInputKey.SPRINT) ? 2 : 1;
-//        System.out.println("FORWARD: "+pressedKeys.contains(PedalsInputKey.FORWARD));
-//        System.out.println("BACKWARD: "+pressedKeys.contains(PedalsInputKey.BACKWARD));
-//        System.out.println("SPRINT: "+pressedKeys.contains(PedalsInputKey.SPRINT));
+        int forward = pressedKeys.contains(0) ? 32 : 0;
+        int backward = pressedKeys.contains(1) ? 32 : 0;
+        int sprint = pressedKeys.contains(6) ? 2 : 1;
+//        System.out.println("FORWARD: "+pressedKeys.contains(InputKey.FORWARD));
+//        System.out.println("BACKWARD: "+pressedKeys.contains(InputKey.BACKWARD));
+//        System.out.println("SPRINT: "+pressedKeys.contains(InputKey.SPRINT));
         int speed = (forward-backward)*sprint;
 //        System.out.println(speed);
         return speed;
@@ -47,14 +49,13 @@ public class PedalsBlockEntity extends GeneratingKineticBlockEntity {
     @Override
     public void tick() {
         super.tick();
-
         float actualSpeed = getSpeed();
         chasingVelocity += ((actualSpeed * 10 / 3f) - chasingVelocity) * .25f;
         independentAngle += chasingVelocity;
     }
 //    @Override
 //    public float calculateAddedStressCapacity() {
-//        float capacity = (pressedKeys.contains(PedalsInputKey.FORWARD) ^ pressedKeys.contains(PedalsInputKey.BACKWARD) ? (pressedKeys.contains(PedalsInputKey.SPRINT) ? (float) 0.5 : 1) : 0);
+//        float capacity = (pressedKeys.contains(InputKey.FORWARD) ^ pressedKeys.contains(InputKey.BACKWARD) ? (pressedKeys.contains(InputKey.SPRINT) ? (float) 0.5 : 1) : 0);
 //        this.lastCapacityProvided = capacity;
 //        return capacity;
 //    }

@@ -10,6 +10,7 @@
     "vs.VSEntityManagerMixin"
   ],
   "client": [
+    "minecraft.EntityRenderDispatcherMixin"
   ],
   "injectors": {
     "defaultRequire": 1

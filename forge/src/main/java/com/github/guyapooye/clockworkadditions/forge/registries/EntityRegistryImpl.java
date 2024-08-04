@@ -18,7 +18,7 @@ import static com.github.guyapooye.clockworkadditions.ClockworkAdditions.REGISTR
 
 public class EntityRegistryImpl extends EntityRegistry{
 
-    public static void registerEntities() {
+    static {
         EntityRegistry.PEDALS = register("pedals", PedalsEntity::new, () -> PedalsEntity.Render::new,
                 MobCategory.MISC, 5, Integer.MAX_VALUE, false, true,
                 b -> ((EntityType.Builder<SeatEntity>) b).sized(0.25f, 0.35f)
@@ -41,7 +41,5 @@ public class EntityRegistryImpl extends EntityRegistry{
                 })
                 .renderer(renderer);
     }
-    public static void register() {
-        registerEntities();
-    }
+    public static void register() {}
 }
