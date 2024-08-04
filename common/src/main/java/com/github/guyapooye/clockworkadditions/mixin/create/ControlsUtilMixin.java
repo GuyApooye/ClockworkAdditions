@@ -1,17 +1,25 @@
-package com.github.guyapooye.clockworkadditions.util;
+package com.github.guyapooye.clockworkadditions.mixin.create;
 
-import com.mojang.blaze3d.platform.InputConstants;
-import com.simibubi.create.AllKeys;
-import io.github.fabricators_of_create.porting_lib.util.KeyBindingHelper;
+import com.simibubi.create.foundation.utility.ControlsUtil;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.Shadow;
 
 import java.util.Vector;
 
-public class ControlsUtil {
+@Mixin(ControlsUtil.class)
+public abstract class ControlsUtilMixin {
+    @Shadow(remap = false)
     private static Vector<KeyMapping> standardControls;
 
+    /**
+     * @author GuyApooye
+     * @reason add keySprint
+     */
+    @Overwrite(remap = false)
     public static Vector<KeyMapping> getControls() {
         if (standardControls == null) {
             Options gameSettings = Minecraft.getInstance().options;
@@ -25,14 +33,5 @@ public class ControlsUtil {
             standardControls.add(gameSettings.keySprint);
         }
         return standardControls;
-    }
-
-    public static boolean isActuallyPressed(KeyMapping kb) {
-        InputConstants.Key key = KeyBindingHelper.getKeyCode(kb);
-        if (key.getType() == InputConstants.Type.MOUSE) {
-            return AllKeys.isMouseButtonDown(key.getValue());
-        } else {
-            return AllKeys.isKeyDown(key.getValue());
-        }
     }
 }

@@ -2,8 +2,8 @@ package com.github.guyapooye.clockworkadditions.blocks.kinetics.pedals;
 
 import com.github.guyapooye.clockworkadditions.registries.EntityRegistry;
 import com.github.guyapooye.clockworkadditions.packets.PedalsDrivingPacket;
-import com.github.guyapooye.clockworkadditions.util.ControlsUtil;
 import com.simibubi.create.content.contraptions.actors.seat.SeatEntity;
+import com.simibubi.create.foundation.utility.ControlsUtil;
 import com.simibubi.create.infrastructure.config.AllConfigs;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
