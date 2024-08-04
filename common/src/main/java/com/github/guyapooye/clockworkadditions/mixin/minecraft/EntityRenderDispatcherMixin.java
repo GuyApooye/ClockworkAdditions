@@ -77,7 +77,6 @@ public abstract class EntityRenderDispatcherMixin {
                                 entity.getVehicle().blockPosition());
                 // If the entity is a passenger and that vehicle is in ship space
                 if (vehicleShip != null) {
-                    EntityShipCollisionUtils
                     VSEntityManager.INSTANCE.getHandler(entity.getVehicle())
                             .applyRenderOnMountedEntity(vehicleShip, entity.getVehicle(), entity, partialTicks,
                                     matrixStack);
