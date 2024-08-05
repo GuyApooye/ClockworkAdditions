@@ -30,7 +30,7 @@ public class HandlebarInstance extends BackHalfShaftInstance<HandlebarBlockEntit
         handle.loadIdentity()
                 .translate(getInstancePosition())
                 .centre()
-                .rotateY(180 + AngleHelper.horizontalAngle(facing)+angle)
+                .rotateY(180 + AngleHelper.horizontalAngle(facing)+angle*70)
                 .unCentre();
     }
 

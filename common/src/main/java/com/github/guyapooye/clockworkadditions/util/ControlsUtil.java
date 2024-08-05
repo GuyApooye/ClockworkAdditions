@@ -1,25 +1,16 @@
-package com.github.guyapooye.clockworkadditions.mixin.create;
+package com.github.guyapooye.clockworkadditions.util;
 
-import com.simibubi.create.foundation.utility.ControlsUtil;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
-import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
 import java.util.Vector;
 
-@Mixin(ControlsUtil.class)
-public abstract class ControlsUtilMixin {
-    @Shadow(remap = false)
+public class ControlsUtil{
     private static Vector<KeyMapping> standardControls;
 
-    /**
-     * @author GuyApooye
-     * @reason add keySprint
-     */
-    @Overwrite(remap = false)
     public static Vector<KeyMapping> getControls() {
         if (standardControls == null) {
             Options gameSettings = Minecraft.getInstance().options;
@@ -33,5 +24,8 @@ public abstract class ControlsUtilMixin {
             standardControls.add(gameSettings.keySprint);
         }
         return standardControls;
+    }
+    public static boolean isActuallyPressed(KeyMapping kb) {
+        return com.simibubi.create.foundation.utility.ControlsUtil.isActuallyPressed(kb);
     }
 }

@@ -1,6 +1,8 @@
 package com.github.guyapooye.clockworkadditions.fabric.blocks.kinetics.handlebar;
 
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.handlebar.HandlebarBlockEntity;
+import com.tterrag.registrate.fabric.EnvExecutor;
+import net.fabricmc.api.EnvType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -24,5 +26,13 @@ public class HandlebarBlockEntityImpl extends HandlebarBlockEntity {
     }
     public boolean playerIsUsingHandle(Player player) {
         return player.getExtraCustomData().contains("IsUsingHandlebar");
+    }
+
+    @Override
+    protected void runWhenOn() {
+        if (level.isClientSide) {
+            EnvExecutor.runWhenOn(EnvType.CLIENT, () -> this::tryToggleActive);
+            prevUser = user;
+        }
     }
 }

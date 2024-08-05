@@ -1,0 +1,13 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"2": "create:block/axis",
+		"5": "create:block/andesite_casing_short",
+		"6": "create:block/smooth_dark_log_top",
+		"7": "create:block/axis_top",
+		"particle": "create:block/axis"
+	},
+	"elements": [
+	]
+}

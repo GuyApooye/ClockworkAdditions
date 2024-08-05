@@ -42,6 +42,7 @@ public class PedalsBlockEntity extends GeneratingKineticBlockEntity {
 //        System.out.println("FORWARD: "+pressedKeys.contains(InputKey.FORWARD));
 //        System.out.println("BACKWARD: "+pressedKeys.contains(InputKey.BACKWARD));
 //        System.out.println("SPRINT: "+pressedKeys.contains(InputKey.SPRINT));
+//        System.out.println(pressedKeys);
         int speed = (forward-backward)*sprint;
 //        System.out.println(speed);
         return speed;
@@ -49,6 +50,7 @@ public class PedalsBlockEntity extends GeneratingKineticBlockEntity {
     @Override
     public void tick() {
         super.tick();
+//        System.out.println(pressedKeys);
         float actualSpeed = getSpeed();
         chasingVelocity += ((actualSpeed * 10 / 3f) - chasingVelocity) * .25f;
         independentAngle += chasingVelocity;

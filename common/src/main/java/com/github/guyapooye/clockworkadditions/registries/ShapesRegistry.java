@@ -15,6 +15,8 @@ public class ShapesRegistry {
     public static VoxelShaper
         PEDALS = shape(0,0,14,16,16,16).add(3,1,2,13,22,14).add(2.5,0,0,13.5,13,6).forDirectional(),
         PEDALS_COLLISION = shape(0,0,14,16,16,16).add(3,1,2,13,22,14).forDirectional();
+    public static VoxelShape
+        HANDLEBAR = shape(5, 0, 5, 11, 6, 11).add(1, 6, 1, 15, 11, 15).build();
     private static Builder shape(VoxelShape shape) {
         return new Builder(shape);
     }

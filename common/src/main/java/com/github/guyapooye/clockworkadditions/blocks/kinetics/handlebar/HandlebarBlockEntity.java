@@ -1,7 +1,12 @@
 package com.github.guyapooye.clockworkadditions.blocks.kinetics.handlebar;
 
+import com.github.guyapooye.clockworkadditions.ClockworkAdditions;
+import com.github.guyapooye.clockworkadditions.registries.BlockRegistry;
+import com.github.guyapooye.clockworkadditions.registries.ConfigRegistry;
 import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
+import com.simibubi.create.content.kinetics.BlockStressValues;
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
+import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.tterrag.registrate.fabric.EnvExecutor;
 import net.fabricmc.api.EnvType;
@@ -11,16 +16,18 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import org.apache.commons.lang3.Conversion;
 
+import javax.annotation.Nullable;
 import java.util.*;
 
-import static java.lang.Math.abs;
-import static java.lang.Math.max;
+import static java.lang.Math.*;
 import static net.minecraft.util.Mth.sign;
 
 public abstract class HandlebarBlockEntity extends GeneratingKineticBlockEntity {
@@ -29,7 +36,9 @@ public abstract class HandlebarBlockEntity extends GeneratingKineticBlockEntity 
     protected boolean deactivatedThisTick;	// used only on server
     public float independentAngle;
     public float maxAngle;
-    public float velocity = 8;
+    public float velocity;
+    public final float configAngle = ConfigRegistry.server().kinetics.handlebar.handleMaxAngle.getF();
+    public float baseSpeed = ConfigRegistry.server().kinetics.handlebar.handleSpeed.get();
     public float sign = 1;
     public float multiplier = 1;
     private Collection<Integer> pressedKeys = new HashSet<>();
@@ -55,13 +64,14 @@ public abstract class HandlebarBlockEntity extends GeneratingKineticBlockEntity 
 //        independentAngle = compound.getFloat("Angle");
     }
     public float getIndependentAngle(float partialTicks) {
-//        System.out.println("independentAngle: "+independentAngle);
-//        System.out.println("sign: "+sign);
-//        System.out.println("maxAngle: "+maxAngle);
-//        System.out.println("multiplier: "+multiplier);
 
 //        updateVars();
-        return (independentAngle+partialTicks*multiplier* velocity)/360;
+        float angle = (independentAngle+partialTicks*velocity)/360;
+//        if (round(maxAngle-(independentAngle+getSpeed())/360*70) == 0) {
+//            angle = maxAngle*360/70;
+////            updateGeneratedRotation();
+//        }
+        return angle;
     }
 
 
@@ -76,28 +86,24 @@ public abstract class HandlebarBlockEntity extends GeneratingKineticBlockEntity 
             startUsing(player);
     }
     public void updateInput(Collection<Integer> keys) {
-        if (!Objects.equals(this.pressedKeys, keys)) {
-            this.pressedKeys = keys;
-            updateGeneratedRotation();
-        }
-//        this.keys = keys;
-//        System.out.println("keys: "+keys);
-//        updateVars();
+//        if (!Objects.equals(this.pressedKeys, keys)) {
+//            this.pressedKeys = keys;
+//            updateGeneratedRotation();
+//        }
+        this.pressedKeys = keys;
+        updateGeneratedRotation();
     }
     public void updateVars() {
         float dummyMax = 0;
-        float dummyMultiplier = 1;
         if (pressedKeys.contains(2)) {
-            dummyMax += 22.5f;
+            dummyMax += ConfigRegistry.server().kinetics.handlebar.handleMaxAngle.getF();
         }
         if (pressedKeys.contains(3)) {
-            dummyMax -= 22.5f;
+            dummyMax -= ConfigRegistry.server().kinetics.handlebar.handleMaxAngle.getF();
         }
-        if (pressedKeys.contains(6)) {
-            dummyMultiplier = 2;
-        }
+        multiplier = pressedKeys.contains(6) ? 2 : 1;
+//        System.out.println(pressedKeys);
         maxAngle = dummyMax;
-        multiplier = dummyMultiplier;
     }
 
     public void pleaseStopUsing(Player player) {
@@ -118,40 +124,35 @@ public abstract class HandlebarBlockEntity extends GeneratingKineticBlockEntity 
     @Override
     public float getGeneratedSpeed() {
         updateVars();
-        System.out.println("sign: "+sign);
-        System.out.println("maxAngle: "+maxAngle);
-        System.out.println("independentAngle: "+independentAngle/360);
-        return velocity;
+        sign = sign(round(maxAngle-independentAngle/360*70));
+        float speed = sign*ConfigRegistry.server().kinetics.handlebar.handleSpeed.get()*multiplier;
+        return speed;
     }
 
     @Environment(EnvType.CLIENT)
-    private void tryToggleActive() {
+    protected void tryToggleActive() {
         if (user == null && Minecraft.getInstance().player.getUUID().equals(prevUser)) {
             HandlebarClientHandler.deactivate();
         } else if (prevUser == null && Minecraft.getInstance().player.getUUID().equals(user)) {
             HandlebarClientHandler.activate(worldPosition);
         }
     }
+    protected abstract void runWhenOn();
 
     @Override
     public void tick() {
         super.tick();
+//        independentAngle += getSpeed();
 
-
-        velocity = 8;
-        sign = sign(maxAngle-independentAngle/360);
-        velocity *= sign*multiplier;
+        float actualSpeed = getSpeed();
+        velocity = actualSpeed;
         independentAngle += velocity;
-//        System.out.println(keys);
-//        System.out.println("independentAngle: "+independentAngle);
-//        System.out.println("operation: "+operation);
-//        System.out.println("maxAngle: "+maxAngle);
-//        System.out.println("angleVelocity: "+angleVelocity);
-
-        if (level.isClientSide) {
-            EnvExecutor.runWhenOn(EnvType.CLIENT, () -> this::tryToggleActive);
-            prevUser = user;
+        if (sign(round(maxAngle-independentAngle/360*70)) == 0 /*|| sign(round(maxAngle-(independentAngle+getSpeed())/360*70)) ==0*/ ) {
+            independentAngle = maxAngle*360/70;
+            updateGeneratedRotation();
         }
+
+        runWhenOn();
 
         if (!level.isClientSide) {
             deactivatedThisTick = false;
@@ -172,11 +173,9 @@ public abstract class HandlebarBlockEntity extends GeneratingKineticBlockEntity 
                 stopUsing(player);
         }
     }
-
-
     public static boolean playerInRange(Player player, Level world, BlockPos pos) {
         //double modifier = world.isRemote ? 0 : 1.0;
-        double reach = 0.7* ReachEntityAttributes.getReachDistance(player, player.isCreative() ? 5 : 4.5);// + modifier;
+        double reach = 0.7* (player.isCreative() ? 5 : 4.5);// + modifier;
         return player.distanceToSqr(Vec3.atCenterOf(pos)) < reach*reach;
     }
 

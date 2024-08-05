@@ -3,9 +3,8 @@ package com.github.guyapooye.clockworkadditions.blocks.kinetics.handlebar;
 import com.github.guyapooye.clockworkadditions.packets.handlebar.HandlebarDrivingPacket;
 import com.github.guyapooye.clockworkadditions.packets.handlebar.HandlebarStopDrivingPacket;
 import com.github.guyapooye.clockworkadditions.registries.BlockRegistry;
+import com.github.guyapooye.clockworkadditions.util.ControlsUtil;
 import com.mojang.blaze3d.platform.InputConstants;
-import com.simibubi.create.*;
-import com.simibubi.create.foundation.utility.ControlsUtil;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -56,10 +55,11 @@ public class HandlebarClientHandler {
         ControlsUtil.getControls()
                 .forEach(kb -> kb.setDown(ControlsUtil.isActuallyPressed(kb)));
         packetCooldown = 0;
-
         if (inBlock()) {
             Collection<Integer> noKeys = new HashSet<>();
+            currentlyPressed = noKeys;
             SharedValues.getPacketChannel().sendToServer(new HandlebarStopDrivingPacket(handlebarPos));
+            SharedValues.getPacketChannel().sendToServer(new HandlebarDrivingPacket(noKeys,handlebarPos));
 //            SharedValues.getPacketChannel().sendToServer(new HandlebarDrivingPacket(noKeys, handlebarPos));
         }
         handlebarPos = null;
@@ -80,7 +80,6 @@ public class HandlebarClientHandler {
 
         Minecraft mc = Minecraft.getInstance();
         LocalPlayer player = mc.player;
-        ItemStack heldItem = player.getMainHandItem();
 
         if (player.isSpectator()) {
             MODE = Mode.IDLE;
@@ -116,32 +115,35 @@ public class HandlebarClientHandler {
             if (ControlsUtil.isActuallyPressed(controls.get(i)))
                 pressedKeys.add(i);
         }
-        Collection<Integer> newKeys = new HashSet<>(pressedKeys);
-        Collection<Integer> releasedKeys = currentlyPressed;
-        newKeys.removeAll(releasedKeys);
-        releasedKeys.removeAll(pressedKeys);
+        Collection<Integer> noKeys = new HashSet<>();
+//        Collection<Integer> newKeys = new HashSet<>(pressedKeys);
+//        Collection<Integer> releasedKeys = currentlyPressed;
+//        newKeys.removeAll(releasedKeys);
+//        releasedKeys.removeAll(pressedKeys);
 
         if (MODE == Mode.ACTIVE) {
             // Released Keys
-            if (!releasedKeys.isEmpty()) {
-                SharedValues.getPacketChannel().sendToServer(new HandlebarDrivingPacket(releasedKeys, handlebarPos));
-//                AllSoundEvents.CONTROLLER_CLICK.playAt(player.level, player.blockPosition(), 1f, .5f, true);
-            }
+//            if (!releasedKeys.isEmpty()) {
+//                SharedValues.getPacketChannel().sendToServer(new HandlebarDrivingPacket(releasedKeys, handlebarPos));
+////                AllSoundEvents.CONTROLLER_CLICK.playAt(player.level, player.blockPosition(), 1f, .5f, true);
+//            }
+//            else SharedValues.getPacketChannel().sendToServer(new HandlebarDrivingPacket(noKeys, handlebarPos));
 
             // Newly Pressed Keys
-            if (!newKeys.isEmpty()) {
-                SharedValues.getPacketChannel().sendToServer(new HandlebarDrivingPacket(newKeys, handlebarPos));
-                packetCooldown = PACKET_RATE;
+//            if (!newKeys.isEmpty()) {
+//                SharedValues.getPacketChannel().sendToServer(new HandlebarDrivingPacket(newKeys, handlebarPos));
+//                packetCooldown = PACKET_RATE;
 //                AllSoundEvents.CONTROLLER_CLICK.playAt(player.level, player.blockPosition(), 1f, .75f, true);
-            }
-
+//            }
+//            else SharedValues.getPacketChannel().sendToServer(new HandlebarDrivingPacket(noKeys, handlebarPos));
+            SharedValues.getPacketChannel().sendToServer(new HandlebarDrivingPacket(currentlyPressed, handlebarPos));
             // Keepalive Pressed Keys
-            if (packetCooldown == 0) {
-                if (!pressedKeys.isEmpty()) {
-                    SharedValues.getPacketChannel().sendToServer(new HandlebarDrivingPacket(pressedKeys, handlebarPos));
-                    packetCooldown = PACKET_RATE;
-                }
-            }
+//            if (packetCooldown == 0) {
+//                if (!pressedKeys.isEmpty()) {
+//                    SharedValues.getPacketChannel().sendToServer(new HandlebarDrivingPacket(pressedKeys, handlebarPos));
+//                    packetCooldown = PACKET_RATE;
+//                } else SharedValues.getPacketChannel().sendToServer(new HandlebarDrivingPacket(noKeys, handlebarPos));
+//            }
         }
 
         currentlyPressed = pressedKeys;

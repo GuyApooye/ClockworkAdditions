@@ -1,5 +1,6 @@
 package com.github.guyapooye.clockworkadditions.config;
 
+import com.github.guyapooye.clockworkadditions.ClockworkAdditions;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.kinetics.BlockStressValues;
 import com.simibubi.create.foundation.config.ConfigBase;
@@ -31,10 +32,13 @@ public class CWAStress extends ConfigBase implements BlockStressValues.IStressVa
             if (r.getNamespace().equals("clockworkadditions")) {
                 this.getCapacities().put(r, builder.define(r.getPath(), i));
             }
-
+//            registerSpecial(builder, "handlebar", 8);
         });
         builder.pop();
     }
+//    public void registerSpecial(ForgeConfigSpec.Builder builder,String path, double value) {
+//        this.getCapacities().put(ClockworkAdditions.asResource(path),builder.define(path, value));
+//    }
 
     public double getImpact(Block block) {
         block = this.redirectValues(block);
@@ -90,7 +94,5 @@ public class CWAStress extends ConfigBase implements BlockStressValues.IStressVa
         static String impact = "Configure the individual stress impact of mechanical blocks. Note that this cost is doubled for every speed increase it receives.";
         static String capacity = "Configure how much stress a source can accommodate for.";
 
-        private Comments() {
-        }
     }
 }

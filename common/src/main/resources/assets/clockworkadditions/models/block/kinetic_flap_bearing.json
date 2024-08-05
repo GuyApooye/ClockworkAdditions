@@ -1,0 +1,7 @@
+{
+  "parent": "clockworkadditions:block/kinetic_flap_bearing/block",
+  "textures": {
+    "side": "create:block/clockwork_bearing_side",
+    "top": "clockworkadditions:block/kinetic_flap_bearing"
+  }
+}

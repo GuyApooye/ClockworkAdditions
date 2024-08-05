@@ -10,7 +10,7 @@ architectury {
 
 forgix {
     group = "com.github.guyapooye.clockworkadditions"
-    mergedJarName = "ClockworkAdditions-${mod_version}"
+    mergedJarName = "ClockworkAdditions-${mod_version}.jar"
 }
 
 subprojects {
