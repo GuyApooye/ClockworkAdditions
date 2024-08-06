@@ -5,7 +5,7 @@ import com.simibubi.create.content.contraptions.glue.SuperGlueEntity;
 import com.simibubi.create.foundation.utility.UniqueLinkedList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -38,7 +38,7 @@ public final class GlueAssembler {
             for(int limit = 100000; 0 < limit; --limit) {
                 if (frontier.isEmpty()) {
                     if (result.isEmpty()) {
-                        throw new AssemblyException(new TextComponent("No blocks found!"));
+                        throw new AssemblyException(Component.literal("No blocks found!"));
                     }
 
                     return result;

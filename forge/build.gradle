@@ -2,9 +2,12 @@ plugins {
     id "com.github.johnrengelman.shadow" version "7.1.2"
 }
 loom {
+    accessWidenerPath = project(":common").loom.accessWidenerPath
     forge {
         mixinConfig "clockworkadditions-common.mixins.json"
         mixinConfig "clockworkadditions.mixins.json"
+        convertAccessWideners.set(true)
+        extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
     }
 }
 architectury {
@@ -34,7 +37,7 @@ dependencies {
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
 
-    modApi("org.valkyrienskies:valkyrienskies-118-forge:$vs2_version") { transitive = false }
+    modApi("org.valkyrienskies:valkyrienskies-120-forge:$vs2_version") { transitive = false }
 
     implementation("org.valkyrienskies.core:api:$vs_core_version") { transitive = false }
     implementation("org.valkyrienskies.core:api-game:$vs_core_version") { transitive = false }
@@ -48,9 +51,10 @@ dependencies {
 
     compileOnly("io.github.llamalad7:mixinextras-common:${mixinextras_version}")
     annotationProcessor(implementation(include("io.github.llamalad7:mixinextras-forge:${mixinextras_version}")))
-    modImplementation(files("libs/clockwork-1.18.2-forge.jar"))
+    modImplementation(files("libs/clockwork-1-20-1-forge.jar"))
 
     implementation("org.joml:joml:1.10.5")
+    implementation("org.joml:joml-primitives:1.10.0")
 
     implementation "thedarkcolour:kotlinforforge:$forge_kotlin_version"
 }

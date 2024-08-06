@@ -17,7 +17,7 @@ import com.simibubi.create.foundation.utility.ServerSpeedProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
@@ -199,7 +199,7 @@ public class BasePhysicsBearingBlockEntity extends GeneratingKineticBlockEntity 
     public void addBehaviours(@NotNull List<BlockEntityBehaviour> behaviours) {
         super.addBehaviours(behaviours);
 
-        ScrollOptionBehaviour<ContraptionController.LockedMode> movementModeBehaviour = new ScrollOptionBehaviour<>(ContraptionController.LockedMode.class, new TextComponent("Locked or Unlocked"), this, this.getMovementModeSlot());
+        ScrollOptionBehaviour<ContraptionController.LockedMode> movementModeBehaviour = new ScrollOptionBehaviour<>(ContraptionController.LockedMode.class, Component.literal("Locked or Unlocked"), this, this.getMovementModeSlot());
         movementModeBehaviour.value = 0;
         ScrollOptionBehaviour<ContraptionController.LockedMode> var10000 = movementModeBehaviour;
         Objects.requireNonNull(var10000);
@@ -902,15 +902,9 @@ public class BasePhysicsBearingBlockEntity extends GeneratingKineticBlockEntity 
             if (!(state.getBlock() instanceof BearingBlock)) {
                 return false;
             } else {
-                Level var10000 = this.level;
-                Objects.requireNonNull(var10000);
-                BlockState attachedState = var10000.getBlockState(this.worldPosition.relative(state.getValue(BearingBlock.FACING)));
-                if (attachedState.getMaterial().isReplaceable()) {
-                    return false;
-                } else {
-                    TooltipHelper.addHint(tooltip, "hint.empty_bearing");
-                    return true;
-                }
+                BlockState attachedState = level.getBlockState(this.worldPosition.relative(state.getValue(BearingBlock.FACING)));
+                TooltipHelper.addHint(tooltip, "hint.empty_bearing");
+                return true;
             }
         }
     }

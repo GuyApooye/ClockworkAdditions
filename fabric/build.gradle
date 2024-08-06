@@ -22,6 +22,7 @@ repositories {
     maven { url = "https://maven.cafeteria.dev/releases" } // Fake Player API
     maven { url = "https://maven.jamieswhiteshirt.com/libs-release" } // Reach Entity Attributes
     maven { url = "https://jitpack.io/" } // Mixin Extras, Fabric ASM
+    maven { url = "https://cursemaven.com" }
 }
 
 dependencies {
@@ -33,19 +34,23 @@ dependencies {
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
 
-    modApi("org.valkyrienskies:valkyrienskies-118-fabric:$vs2_version") { transitive = false }
-
+    modApi("org.valkyrienskies:valkyrienskies-120-fabric:$vs2_version") { transitive = false }
+//    modImplementation(include("io.github.fabricators_of_create:Porting-Lib:${project.port_lib_version}+${project.minecraft_version}-dev.${project.port_lib_hash}"))
     implementation("org.valkyrienskies.core:api:$vs_core_version")
     implementation("org.valkyrienskies.core:api-game:$vs_core_version")
     implementation("org.valkyrienskies.core:util:$vs_core_version")
     implementation("org.valkyrienskies.core:impl:$vs_core_version")
-
+    modImplementation(include("curse.maven:forge-config-api-port-fabric-547434:${project.config_api_id}")) { transitive = false }
     modImplementation("com.simibubi.create:create-fabric-${minecraft_version}:${create_fabric_version}")
 //    modImplementation(include("io.github.fabricators_of_create:Porting-Lib:$port_lib_version+$minecraft_version"))
 
-    modImplementation(files("libs/clockwork-1.18.2-fabric.jar"))
+    modImplementation(files("libs/clockwork-1-20-1-fabric.jar"))
+    implementation("org.joml:joml:1.10.5")
+    implementation("org.joml:joml-primitives:1.10.0")
 }
-
+loom {
+    accessWidenerPath = project(":common").loom.accessWidenerPath
+}
 processResources {
     inputs.property "version", project.version
 

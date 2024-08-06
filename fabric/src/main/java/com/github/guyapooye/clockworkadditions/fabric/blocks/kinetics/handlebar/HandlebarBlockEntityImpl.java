@@ -15,17 +15,17 @@ public class HandlebarBlockEntityImpl extends HandlebarBlockEntity {
     protected void stopUsing(Player player) {
         user = null;
         if (player != null)
-            player.getExtraCustomData().remove("IsUsingHandlebar");
+            player.getCustomData().remove("IsUsingHandlebar");
         deactivatedThisTick = true;
         sendData();
     }
     protected void startUsing(Player player) {
         user = player.getUUID();
-        player.getExtraCustomData().putBoolean("IsUsingHandlebar", true);
+        player.getCustomData().putBoolean("IsUsingHandlebar", true);
         sendData();
     }
     public boolean playerIsUsingHandle(Player player) {
-        return player.getExtraCustomData().contains("IsUsingHandlebar");
+        return player.getCustomData().contains("IsUsingHandlebar");
     }
 
     @Override

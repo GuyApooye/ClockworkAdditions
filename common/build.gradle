@@ -8,15 +8,19 @@ repositories {
     maven { url = "https://maven.cafeteria.dev/releases" } // Fake Player API
     maven { url = "https://maven.jamieswhiteshirt.com/libs-release" } // Reach Entity Attributes
     maven { url = "https://jitpack.io/" } // Mixin Extras, Fabric ASM
+    maven { url = "https://cursemaven.com" }
+}
+loom {
+    accessWidenerPath = file("src/main/resources/clockworkadditions-common.accesswidener")
 }
 
 dependencies {
     // We depend on fabric loader here to use the fabric @Environment annotations and get the mixin dependencies
     // Do NOT use other classes from fabric loader
     modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
-
+    modImplementation(include("curse.maven:forge-config-api-port-fabric-547434:${project.config_api_id}")) { transitive = false }
 //    include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:0.4.0")))
-    modApi("org.valkyrienskies:valkyrienskies-118-common:$vs2_version") { transitive = false }
+    modApi("org.valkyrienskies:valkyrienskies-120-common:$vs2_version") { transitive = false }
 
     modImplementation("org.valkyrienskies.core:api:$vs_core_version")
     modImplementation("org.valkyrienskies.core:api-game:$vs_core_version")
@@ -26,7 +30,7 @@ dependencies {
     modImplementation("com.simibubi.create:create-fabric-${minecraft_version}:${create_fabric_version}")
 //    modImplementation(include("io.github.fabricators_of_create:Porting-Lib:$port_lib_version+$minecraft_version"))
 
-    modImplementation(files("libs/clockwork-1.18.2-fabric.jar"))
+    modImplementation(files("libs/clockwork-1-20-1-fabric.jar"))
 }
 
 publishing {
