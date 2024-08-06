@@ -36,9 +36,9 @@ public abstract class RedstoneLinkNetworkHandlerMixin {
     private static void clockworkAdditions$wrapCloserThan(IRedstoneLinkable from, IRedstoneLinkable to, CallbackInfoReturnable<Boolean> cir) {
         Couple<RedstoneLinkNetworkHandler.Frequency> frequencyCouple = from.getNetworkKey();
         boolean isCrystal = frequencyCouple.either(f -> (
-                f.getStack().sameItem(ClockworkItems.WANDERLITE_CRYSTAL.asStack())));
+                f.getStack().is(ClockworkItems.WANDERLITE_CRYSTAL.asStack().getItem())));
         boolean isCube = frequencyCouple.either(f -> (
-                f.getStack().sameItem(ClockworkItems.WANDERLITE_CUBE.asStack())));
+                f.getStack().is(ClockworkItems.WANDERLITE_CUBE.asStack().getItem())));
         Ship ship1 = VSGameUtilsKt.getShipManagingPos(clockworkAdditions$harvestedWorld, from.getLocation());
         Ship ship2 = VSGameUtilsKt.getShipManagingPos(clockworkAdditions$harvestedWorld, new BlockPos(to.getLocation()));
         Vec3 pos1 = Vec3.atLowerCornerOf(from.getLocation());

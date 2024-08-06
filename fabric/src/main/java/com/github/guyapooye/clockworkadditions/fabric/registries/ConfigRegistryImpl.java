@@ -6,6 +6,7 @@ import com.github.guyapooye.clockworkadditions.config.CWAServer;
 import com.github.guyapooye.clockworkadditions.registries.ConfigRegistry;
 import com.simibubi.create.content.kinetics.BlockStressValues;
 import com.simibubi.create.foundation.config.ConfigBase;
+import fuzs.forgeconfigapiport.api.config.v2.ForgeConfigRegistry;
 import net.minecraftforge.api.ModLoadingContext;
 import net.minecraftforge.api.fml.event.config.ModConfigEvent;
 import net.minecraftforge.fml.config.ModConfig;
@@ -21,7 +22,7 @@ public class ConfigRegistryImpl extends ConfigRegistry {
         server = register(CWAServer::new, ModConfig.Type.SERVER);
 
         for (Map.Entry<ModConfig.Type, ConfigBase> pair : CONFIGS.entrySet())
-            ModLoadingContext.registerConfig(MOD_ID, pair.getKey(), pair.getValue().specification);
+            ForgeConfigRegistry.INSTANCE.register(MOD_ID, pair.getKey(), pair.getValue().specification);
 
         BlockStressValues.registerProvider(MOD_ID, server().kinetics.stressValues);
 

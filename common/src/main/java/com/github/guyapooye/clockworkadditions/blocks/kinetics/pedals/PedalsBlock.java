@@ -71,10 +71,6 @@ public class PedalsBlock extends HorizontalKineticBlock implements ProperWaterlo
         return fluidState(pState);
     }
 
-    @Override
-    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> nonNullList) {
-        super.fillItemCategory(group, nonNullList);
-    }
 
     @Override
     public void fallOn(Level level, BlockState blockState, BlockPos blockPos, Entity entity, float f) {

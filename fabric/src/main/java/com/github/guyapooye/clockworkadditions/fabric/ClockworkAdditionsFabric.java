@@ -6,26 +6,19 @@ import com.github.guyapooye.clockworkadditions.fabric.registries.BlockRegistryIm
 import com.github.guyapooye.clockworkadditions.fabric.registries.ConfigRegistryImpl;
 import com.github.guyapooye.clockworkadditions.fabric.registries.EntityRegistryImpl;
 import com.github.guyapooye.clockworkadditions.fabric.registries.events.ClientEventRegistry;
-import com.github.guyapooye.clockworkadditions.registries.BlockRegistry;
-import io.github.fabricators_of_create.porting_lib.util.ItemGroupUtil;
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 
 import static com.github.guyapooye.clockworkadditions.ClockworkAdditions.*;
 
 public class ClockworkAdditionsFabric implements ModInitializer {
-    private void initializeCreativeModeTab() {
-        CWACreativeModeTab = new CreativeModeTab(ItemGroupUtil.expandArrayAndGetId(),MOD_ID) {
-            @Override
-            public ItemStack makeIcon() {
-                return BlockRegistry.KINETIC_FLAP_BEARING.asStack();
-            }
-        };
-    }
     @Override
     public void onInitialize() {
-        initializeCreativeModeTab();
+        Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, ResourceKey.create(Registries.CREATIVE_MODE_TAB, new ResourceLocation("clockworkadditions")), CWACreativeModeTab);
         ClockworkAdditions.init();
         EntityRegistryImpl.register();
         ConfigRegistryImpl.register();
