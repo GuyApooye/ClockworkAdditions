@@ -59,7 +59,7 @@ public class BlockRegistry {
                     .initialProperties(SharedProperties::stone)
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .transform(axeOnly())
-                    .transform(BlockStressDefaults.setCapacity(8.0))
+                    .transform(BlockStressDefaults.setCapacity(10.0))
                     .transform(BlockStressDefaults.setGeneratorSpeed(PedalsBlock::getSpeedRange))
                     .addLayer(() -> RenderType::cutoutMipped)
                     .blockstate(BlockStateGen.horizontalBlockProvider(true))
