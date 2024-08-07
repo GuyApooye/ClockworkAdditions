@@ -7,8 +7,7 @@ import com.github.guyapooye.clockworkadditions.registries.ConfigRegistry;
 import com.simibubi.create.content.kinetics.BlockStressValues;
 import com.simibubi.create.foundation.config.ConfigBase;
 import fuzs.forgeconfigapiport.api.config.v2.ForgeConfigRegistry;
-import net.minecraftforge.api.ModLoadingContext;
-import net.minecraftforge.api.fml.event.config.ModConfigEvent;
+import fuzs.forgeconfigapiport.api.config.v2.ModConfigEvents;
 import net.minecraftforge.fml.config.ModConfig;
 
 import java.util.Map;
@@ -26,8 +25,8 @@ public class ConfigRegistryImpl extends ConfigRegistry {
 
         BlockStressValues.registerProvider(MOD_ID, server().kinetics.stressValues);
 
-        ModConfigEvent.LOADING.register(ConfigRegistryImpl::onLoad);
-        ModConfigEvent.RELOADING.register(ConfigRegistryImpl::onReload);
+        ModConfigEvents.loading(MOD_ID).register(ConfigRegistryImpl::onLoad);
+        ModConfigEvents.reloading(MOD_ID).register(ConfigRegistryImpl::onReload);
     }
 
     public static void onLoad(ModConfig modConfig) {
