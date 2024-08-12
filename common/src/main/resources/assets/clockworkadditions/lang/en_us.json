@@ -1,0 +1,16 @@
+{
+  "block.clockworkadditions.kinetic_flap_bearing": "Kinetic Flap Bearing",
+  "block.clockworkadditions.mechanical_pedals": "Mechanical Pedals",
+  "block.clockworkadditions.handlebar": "Handlebar",
+  "itemGroup.clockworkadditions" : "Clockwork Additions",
+  "create.contraptions.kinetic_flap_bearing.normal": "Redstone Input acts Normally",
+  "create.contraptions.kinetic_flap_bearing.inverted": "Redstone Input is Inverted",
+  "create.redstone.gyro.unpowered": "All output directions are unpowered",
+  "create.redstone.gyro.tilt": "Redstone output is based on tilt",
+  "create.redstone.gyro.omega": "Redstone output is based on angular velocity",
+  "create.redstone.gyro.both": "Redstone output is based on both tilt and angular velocity",
+  "create.redstone.gyro.pid": "Use PID control to determine redstone output",
+  "create.redstone.gyro.powered": "All output directions are powered",
+  "clockworkadditions.contraptions.kinetic_flap_bearing.redstone_input_mode": "Normal or Inverted",
+  "clockworkadditions.circuits.gyro.output_mode": "Redstone Output Mode"
+}

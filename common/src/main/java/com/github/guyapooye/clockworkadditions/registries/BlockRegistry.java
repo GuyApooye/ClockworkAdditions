@@ -6,15 +6,24 @@ import com.github.guyapooye.clockworkadditions.ClockworkAdditions;
 import com.github.guyapooye.clockworkadditions.blocks.bearings.flap.KineticFlapBearingBlock;
 import com.github.guyapooye.clockworkadditions.blocks.bearings.heli.PhysicsBearingBlock;
 import com.github.guyapooye.clockworkadditions.blocks.bearings.heli.archived.BasePhysicsBearingBlock;
+import com.github.guyapooye.clockworkadditions.blocks.casings.wanderlite.WanderliteCasingBlock;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.handlebar.HandlebarBlock;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.pedals.PedalsBlock;
+import com.github.guyapooye.clockworkadditions.blocks.redstone.gyro.RedstoneGyroBlock;
+import com.simibubi.create.AllSpriteShifts;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.SharedProperties;
+import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.entry.BlockEntry;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.data.loot.BlockLoot;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.dedicated.ServerWatchdog;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 
 import static com.github.guyapooye.clockworkadditions.ClockworkAdditions.REGISTRATE;
@@ -82,5 +91,16 @@ public class BlockRegistry {
                     .simpleItem()
                     .lang("Handlebar")
                     .register();
-    public static void register() {}
+    public static final BlockEntry<WanderliteCasingBlock> WANDERLITE_CASING =
+            REGISTRATE.block("wanderlite_casing", WanderliteCasingBlock::new)
+            .properties(p -> p.color(MaterialColor.TERRACOTTA_PURPLE))
+            .transform(com.simibubi.create.foundation.data.BuilderTransformers.casing(() -> AllSpriteShifts.ANDESITE_CASING))
+            .register();
+    public static final BlockEntry<RedstoneGyroBlock> REDSTONE_GYRO =
+            REGISTRATE.block("redstone_gyro", RedstoneGyroBlock::new)
+                    .properties(p -> p.color(MaterialColor.TERRACOTTA_LIGHT_GRAY))
+                    .simpleItem()
+                    .register();
+    public static void register() {
+    }
 }

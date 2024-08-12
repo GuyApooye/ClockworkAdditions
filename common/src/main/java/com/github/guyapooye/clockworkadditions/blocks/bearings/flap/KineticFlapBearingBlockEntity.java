@@ -1,5 +1,6 @@
 package com.github.guyapooye.clockworkadditions.blocks.bearings.flap;
 
+import com.github.guyapooye.clockworkadditions.ClockworkAdditions;
 import com.simibubi.create.content.contraptions.*;
 import com.simibubi.create.content.contraptions.bearing.BearingBlock;
 import com.simibubi.create.content.contraptions.bearing.IBearingBlockEntity;
@@ -15,6 +16,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -118,7 +120,7 @@ public class KineticFlapBearingBlockEntity extends KineticBlockEntity implements
 
     public void addBehaviours(@NotNull List behaviours) {
         super.addBehaviours(behaviours);
-        this.poweredMode = new ScrollOptionBehaviour<>(PoweredMode.class, new TextComponent("Normal or Inverted"), this, this.getMovementModeSlot());
+        this.poweredMode = new ScrollOptionBehaviour<>(PoweredMode.class, ClockworkAdditions.asTranslatable("contraptions.kinetic_flap_bearing.redstone_input_mode"), this, this.getMovementModeSlot());
         ScrollOptionBehaviour<PoweredMode> var10000 = this.poweredMode;
         var10000.requiresWrench();
         ScrollOptionBehaviour<PoweredMode> var10001 = this.poweredMode;

@@ -8,6 +8,7 @@ import com.simibubi.create.content.kinetics.BlockStressValues;
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
+import com.simibubi.create.foundation.utility.AngleHelper;
 import com.tterrag.registrate.fabric.EnvExecutor;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -37,8 +38,6 @@ public abstract class HandlebarBlockEntity extends GeneratingKineticBlockEntity 
     public float independentAngle;
     public float maxAngle;
     public float velocity;
-    public final float configAngle = ConfigRegistry.server().kinetics.handlebar.handleMaxAngle.getF();
-    public float baseSpeed = ConfigRegistry.server().kinetics.handlebar.handleSpeed.get();
     public float sign = 1;
     public float multiplier = 1;
     private Collection<Integer> pressedKeys = new HashSet<>();
@@ -143,7 +142,6 @@ public abstract class HandlebarBlockEntity extends GeneratingKineticBlockEntity 
     public void tick() {
         super.tick();
 //        independentAngle += getSpeed();
-
         float actualSpeed = getSpeed();
         velocity = actualSpeed;
         independentAngle += velocity;

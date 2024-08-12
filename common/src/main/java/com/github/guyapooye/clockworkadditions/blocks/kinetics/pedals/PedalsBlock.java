@@ -1,6 +1,7 @@
 package com.github.guyapooye.clockworkadditions.blocks.kinetics.pedals;
 
 import com.github.guyapooye.clockworkadditions.registries.BlockEntityRegistry;
+import com.github.guyapooye.clockworkadditions.registries.ConfigRegistry;
 import com.github.guyapooye.clockworkadditions.registries.ShapesRegistry;
 import com.google.common.base.Optional;
 import com.simibubi.create.AllTags;
@@ -179,7 +180,7 @@ public class PedalsBlock extends HorizontalKineticBlock implements ProperWaterlo
     public static void sitDown(Level world, BlockPos pos, Entity entity) {
         if (world.isClientSide) return;
         SeatEntity seat = PedalsEntity.create(world,pos);
-        seat.setPos(pos.getX() + .5d,  pos.getY()+0.5d, pos.getZ() + .5d);
+        seat.setPos(pos.getX() + .5d,  pos.getY()+ (double) ConfigRegistry.server().kinetics.pedalsSeatHightOffset.getF(), pos.getZ() + .5d);
 //        seat.handlePosSet();
         world.addFreshEntity(seat);
         entity.startRiding(seat, true);

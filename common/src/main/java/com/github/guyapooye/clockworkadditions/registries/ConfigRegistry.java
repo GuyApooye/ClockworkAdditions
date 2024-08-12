@@ -28,9 +28,7 @@ public class ConfigRegistry {
         return common;
     }
 
-    public static CWAServer server() {
-        return server;
-    }
+    public static CWAServer server() {return server;}
 
     public static ConfigBase byType(ModConfig.Type type) {
         return CONFIGS.get(type);

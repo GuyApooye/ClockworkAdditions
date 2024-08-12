@@ -2,6 +2,7 @@ package com.github.guyapooye.clockworkadditions;
 
 import com.github.guyapooye.clockworkadditions.registries.*;
 import com.simibubi.create.foundation.data.CreateRegistrate;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import org.jetbrains.annotations.NotNull;
@@ -22,8 +23,10 @@ public class ClockworkAdditions
 		PacketRegistry.register();
 	}
 
-	@NotNull
 	public static ResourceLocation asResource(@NotNull String path) {
-		return new ResourceLocation("clockworkadditions", path);
+		return new ResourceLocation(MOD_ID, path);
+	}
+	public static TranslatableComponent asTranslatable(@NotNull String path) {
+		return new TranslatableComponent(MOD_ID +"."+path);
 	}
 }

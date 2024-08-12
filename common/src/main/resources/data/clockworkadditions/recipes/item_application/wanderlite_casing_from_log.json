@@ -1,0 +1,16 @@
+{
+  "type": "create:item_application",
+  "ingredients": [
+    {
+      "tag": "c:stripped_logs"
+    },
+    {
+      "item": "vs_clockwork:wanderlite_matrix"
+    }
+  ],
+  "results": [
+    {
+      "item": "clockworkadditions:wanderlite_casing"
+    }
+  ]
+}
