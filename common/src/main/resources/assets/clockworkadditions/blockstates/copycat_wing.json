@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "clockworkadditions:block/copycat_wing",
+      "x": 180
+    },
+    "facing=up": {
+      "model": "clockworkadditions:block/copycat_wing"
+    },
+    "facing=north": {
+      "model": "clockworkadditions:block/copycat_wing",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "clockworkadditions:block/copycat_wing",
+      "x": 90,
+      "y": 180
+    },
+    "facing=west": {
+      "model": "clockworkadditions:block/copycat_wing",
+      "x": 90,
+      "y": 270
+    },
+    "facing=east": {
+      "model": "clockworkadditions:block/copycat_wing",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

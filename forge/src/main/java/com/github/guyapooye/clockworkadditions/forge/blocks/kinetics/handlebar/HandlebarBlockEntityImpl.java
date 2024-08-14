@@ -1,4 +1,4 @@
-package com.github.guyapooye.clockworkadditions.forge.handlebar;
+package com.github.guyapooye.clockworkadditions.forge.blocks.kinetics.handlebar;
 
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.handlebar.HandlebarBlockEntity;
 import net.minecraft.core.BlockPos;

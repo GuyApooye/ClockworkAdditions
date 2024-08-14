@@ -141,6 +141,7 @@ public abstract class HandlebarBlockEntity extends GeneratingKineticBlockEntity 
     @Override
     public void tick() {
         super.tick();
+        if (hasSource()) level.destroyBlock(worldPosition, true);
 //        independentAngle += getSpeed();
         float actualSpeed = getSpeed();
         velocity = actualSpeed;

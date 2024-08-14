@@ -22,7 +22,7 @@ import java.util.List;
 @Mixin(ShaftBlock.class)
 public abstract class ShaftBlockMixin {
     @WrapOperation(method = "use", at = @At(value = "INVOKE", target = "Lcom/simibubi/create/content/kinetics/simpleRelays/ShaftBlock;tryEncase(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/phys/BlockHitResult;)Lnet/minecraft/world/InteractionResult;"), remap = false)
-    public InteractionResult abs(ShaftBlock instance, BlockState state, Level level, BlockPos pos, ItemStack heldItem, Player player, InteractionHand hand, BlockHitResult ray, Operation<InteractionResult> original) {
+    public InteractionResult wrapTryEncase(ShaftBlock instance, BlockState state, Level level, BlockPos pos, ItemStack heldItem, Player player, InteractionHand hand, BlockHitResult ray, Operation<InteractionResult> original) {
         List<Block> encasedVariants = EncasingRegistry.getVariants(state.getBlock());
         encasedVariants.addAll(com.github.guyapooye.clockworkadditions.registries.EncasingRegistry.getVariants(state.getBlock()));
         for (Block block : encasedVariants) {

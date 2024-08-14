@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "clockworkadditions:block/copycat_flap",
+      "x": 180
+    },
+    "facing=up": {
+      "model": "clockworkadditions:block/copycat_flap"
+    },
+    "facing=north": {
+      "model": "clockworkadditions:block/copycat_flap",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "clockworkadditions:block/copycat_flap",
+      "x": 90,
+      "y": 180
+    },
+    "facing=west": {
+      "model": "clockworkadditions:block/copycat_flap",
+      "x": 90,
+      "y": 270
+    },
+    "facing=east": {
+      "model": "clockworkadditions:block/copycat_flap",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

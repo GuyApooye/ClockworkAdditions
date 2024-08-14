@@ -1,0 +1,10 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"1": "create:block/copycat_base",
+		"particle": "create:block/copycat_base"
+	},
+	"elements": [
+	]
+}

@@ -8,7 +8,6 @@
     "create.KineticBlockEntityMixin",
     "create.LinkedControllerInputPacketMixin",
     "create.RedstoneLinkNetworkHandlerMixin",
-    "create.ShaftBlockMixin",
     "vs.VSEntityManagerMixin"
   ],
   "client": [

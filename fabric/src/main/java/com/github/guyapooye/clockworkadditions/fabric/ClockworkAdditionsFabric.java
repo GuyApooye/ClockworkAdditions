@@ -2,6 +2,7 @@ package com.github.guyapooye.clockworkadditions.fabric;
 
 import com.github.guyapooye.clockworkadditions.ClockworkAdditions;
 import com.github.guyapooye.clockworkadditions.fabric.registries.BlockEntityRegistryImpl;
+import com.github.guyapooye.clockworkadditions.fabric.registries.BlockRegistryImpl;
 import com.github.guyapooye.clockworkadditions.fabric.registries.ConfigRegistryImpl;
 import com.github.guyapooye.clockworkadditions.fabric.registries.EntityRegistryImpl;
 import com.github.guyapooye.clockworkadditions.fabric.registries.events.ClientEventRegistry;
@@ -28,6 +29,7 @@ public class ClockworkAdditionsFabric implements ModInitializer {
         ClockworkAdditions.init();
         EntityRegistryImpl.register();
         ConfigRegistryImpl.register();
+        BlockRegistryImpl.register();
         BlockEntityRegistryImpl.register();
         ClientEventRegistry.register();
         REGISTRATE.register();

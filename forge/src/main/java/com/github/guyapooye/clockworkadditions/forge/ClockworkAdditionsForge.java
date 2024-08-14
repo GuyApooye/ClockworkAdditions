@@ -2,6 +2,7 @@ package com.github.guyapooye.clockworkadditions.forge;
 
 import com.github.guyapooye.clockworkadditions.ClockworkAdditions;
 import com.github.guyapooye.clockworkadditions.forge.registries.BlockEntityRegistryImpl;
+import com.github.guyapooye.clockworkadditions.forge.registries.BlockRegistryImpl;
 import com.github.guyapooye.clockworkadditions.forge.registries.ConfigRegistryImpl;
 import com.github.guyapooye.clockworkadditions.forge.registries.EntityRegistryImpl;
 import com.github.guyapooye.clockworkadditions.registries.BlockRegistry;
@@ -35,6 +36,7 @@ public class ClockworkAdditionsForge {
 
         initializeCreativeModeTab();
         EntityRegistryImpl.register();
+        BlockRegistryImpl.register();
         BlockEntityRegistryImpl.register();
     }
 }
