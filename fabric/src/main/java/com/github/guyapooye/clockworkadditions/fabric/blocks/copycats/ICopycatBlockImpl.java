@@ -5,8 +5,6 @@ import com.github.guyapooye.clockworkadditions.blocks.copycats.ICopycatBlock;
 import com.simibubi.create.AllBlocks;
 import io.github.fabricators_of_create.porting_lib.block.*;
 import io.github.fabricators_of_create.porting_lib.enchant.EnchantmentBonusBlock;
-import io.github.fabricators_of_create.porting_lib.util.ExplosionResistanceBlock;
-import io.github.fabricators_of_create.porting_lib.util.ValidSpawnBlock;
 import net.fabricmc.fabric.api.block.BlockPickInteractionAware;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

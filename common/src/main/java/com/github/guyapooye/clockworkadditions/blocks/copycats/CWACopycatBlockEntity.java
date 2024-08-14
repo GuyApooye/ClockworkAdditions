@@ -146,7 +146,7 @@ public abstract class CWACopycatBlockEntity extends SmartBlockEntity
             return;
         }
 
-        material = NbtUtils.readBlockState(tag.getCompound("Material"));
+        material = NbtUtils.readBlockState(blockHolderGetter(),tag.getCompound("Material"));
 
         // Validate Material
         if (!clientPacket) {

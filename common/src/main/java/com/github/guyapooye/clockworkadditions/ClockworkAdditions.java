@@ -30,6 +30,8 @@ public class ClockworkAdditions
 		output.accept(BlockRegistry.HANDLEBAR);
 		output.accept(BlockRegistry.PEDALS);
 		output.accept(BlockRegistry.KINETIC_FLAP_BEARING);
+		output.accept(BlockRegistry.COPYCAT_WING);
+		output.accept(BlockRegistry.COPYCAT_FLAP);
 	}
 	public static void init() {
 		PartialModelRegistry.register();
@@ -42,5 +44,8 @@ public class ClockworkAdditions
 	@NotNull
 	public static ResourceLocation asResource(@NotNull String path) {
 		return new ResourceLocation("clockworkadditions", path);
+	}
+	public static Component asTranslatable(String translatable) {
+		return Component.translatable(translatable);
 	}
 }

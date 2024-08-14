@@ -14,6 +14,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
@@ -21,7 +22,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.valkyrienskies.clockwork.util.blocktype.ConnectedWingAlike;
 
-import java.util.Random;
 import java.util.function.Supplier;
 
 public class CopycatWingalikeModel extends CopycatModel {
@@ -35,7 +35,7 @@ public class CopycatWingalikeModel extends CopycatModel {
         super(originalModel);
     }
 
-    protected void emitBlockQuadsInner(BlockAndTintGetter blockView, BlockState state, BlockPos pos, Supplier<Random> randomSupplier, RenderContext context, BlockState material, CopycatModel.CullFaceRemovalData cullFaceRemovalData, CopycatModel.OcclusionData occlusionData) {
+    protected void emitBlockQuadsInner(BlockAndTintGetter blockView, BlockState state, BlockPos pos, Supplier<RandomSource> randomSupplier, RenderContext context, BlockState material, CullFaceRemovalData cullFaceRemovalData, OcclusionData occlusionData) {
         Direction facing = state.getOptionalValue(ConnectedWingAlike.Companion.getFACING()).orElse(Direction.SOUTH);
         BakedModel model = getModelOf(material);
         Vec3 normal = Vec3.atLowerCornerOf(facing.getNormal());

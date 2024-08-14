@@ -84,7 +84,7 @@ public class BlockRegistry {
                     .register();
     public static final BlockEntry<RedstoneGyroBlock> REDSTONE_GYRO =
             REGISTRATE.block("redstone_gyro", RedstoneGyroBlock::new)
-                    .properties(p -> p.color(MaterialColor.TERRACOTTA_LIGHT_GRAY))
+                    .properties(p -> p.mapColor(MapColor.TERRACOTTA_LIGHT_GRAY))
                     .simpleItem()
                     .register();
     public static BlockEntry<? extends CopycatWingBlock> COPYCAT_WING;
