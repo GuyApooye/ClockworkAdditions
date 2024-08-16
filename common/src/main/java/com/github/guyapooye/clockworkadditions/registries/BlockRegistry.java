@@ -5,6 +5,7 @@ import com.github.guyapooye.clockworkadditions.blocks.bearings.heli.PhysicsBeari
 import com.github.guyapooye.clockworkadditions.blocks.bearings.heli.archived.BasePhysicsBearingBlock;
 import com.github.guyapooye.clockworkadditions.blocks.copycats.wingalikes.CopycatFlapBlock;
 import com.github.guyapooye.clockworkadditions.blocks.copycats.wingalikes.CopycatWingBlock;
+import com.github.guyapooye.clockworkadditions.blocks.kinetics.cv_joint.CVJointBlock;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.handlebar.HandlebarBlock;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.pedals.PedalsBlock;
 import com.github.guyapooye.clockworkadditions.blocks.redstone.gyro.RedstoneGyroBlock;
@@ -86,6 +87,15 @@ public class BlockRegistry {
             REGISTRATE.block("redstone_gyro", RedstoneGyroBlock::new)
                     .properties(p -> p.mapColor(MapColor.TERRACOTTA_LIGHT_GRAY))
                     .simpleItem()
+                    .register();
+    public static final BlockEntry<CVJointBlock> CV_JOINT =
+            REGISTRATE.block("cv_joint", CVJointBlock::new)
+                    .initialProperties(SharedProperties::stone)
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .blockstate(BlockStateGen.horizontalBlockProvider(true))
+                    .simpleItem()
+                    .lang("CV Joint")
                     .register();
     public static BlockEntry<? extends CopycatWingBlock> COPYCAT_WING;
     public static BlockEntry<? extends CopycatFlapBlock> COPYCAT_FLAP;

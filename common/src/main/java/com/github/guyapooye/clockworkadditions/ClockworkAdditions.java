@@ -32,6 +32,7 @@ public class ClockworkAdditions
 		output.accept(BlockRegistry.KINETIC_FLAP_BEARING);
 		output.accept(BlockRegistry.COPYCAT_WING);
 		output.accept(BlockRegistry.COPYCAT_FLAP);
+		output.accept(BlockRegistry.CV_JOINT);
 	}
 	public static void init() {
 		PartialModelRegistry.register();

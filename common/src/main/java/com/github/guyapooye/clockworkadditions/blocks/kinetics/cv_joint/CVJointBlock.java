@@ -1,0 +1,107 @@
+package com.github.guyapooye.clockworkadditions.blocks.kinetics.cv_joint;
+
+import com.github.guyapooye.clockworkadditions.registries.BlockEntityRegistry;
+import com.github.guyapooye.clockworkadditions.registries.ShapesRegistry;
+import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
+import com.simibubi.create.foundation.block.IBE;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.IntArrayTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+
+import java.util.function.Function;
+
+import static com.simibubi.create.foundation.block.ProperWaterloggedBlock.WATERLOGGED;
+
+public class CVJointBlock extends DirectionalKineticBlock implements IBE<CVJointBlockEntity> {
+
+    @Override
+    public Direction.Axis getRotationAxis(BlockState state) {
+        return state.getValue(FACING).getAxis();
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
+        return ShapesRegistry.CV_JOINT.get(state.getValue(FACING));
+
+    }
+
+    public CVJointBlock(Properties properties) {
+        super(properties);
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
+        super.createBlockStateDefinition(pBuilder.add(WATERLOGGED));
+    }
+
+    @Override
+    public boolean hasShaftTowards(LevelReader world, BlockPos pos, BlockState state, Direction face) {
+        return face == state.getValue(FACING).getOpposite();
+    }
+
+    @Override
+    public Class<CVJointBlockEntity> getBlockEntityClass() {
+        return CVJointBlockEntity.class;
+    }
+
+    @Override
+    public BlockEntityType<? extends CVJointBlockEntity> getBlockEntityType() {
+        return BlockEntityRegistry.CV_JOINT.get();
+    }
+
+    @Override
+    public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
+        CompoundTag tag = stack.getTag();
+        int[] boundPosArr = null;
+        if (tag != null)
+            boundPosArr = stack.getTag().getIntArray("BoundPosition");
+        if (boundPosArr == null) {
+            stack.addTagElement("BoundPosition", new IntArrayTag(new int[]{pos.getX(), pos.getY(), pos.getZ()}));
+            stack.addTagElement("Enchantments", new ListTag() {{ add(new CompoundTag()); }});
+        } else {
+            BlockPos targ = new BlockPos(boundPosArr[0], boundPosArr[1], boundPosArr[2]);
+            CVJointBlockEntity targBE = getBlockEntity(worldIn, targ);
+            CVJointBlockEntity destBE = getBlockEntity(worldIn, pos);
+            if (targBE != null && destBE != null) {
+                destBE.target = targ;
+                targBE.target = pos;
+                destBE.attachKinetics();
+                targBE.attachKinetics();
+                stack.removeTagKey("BoundPosition");
+                stack.removeTagKey("Enchantments");
+            } else {
+                stack.addTagElement("BoundPosition", new IntArrayTag(new int[]{pos.getX(), pos.getY(), pos.getZ()}));
+            }
+        }
+    }
+
+    @Override
+    public InteractionResult use(BlockState blockState, Level level, BlockPos pos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+        ItemStack item = player.getItemInHand(interactionHand);
+        if (item.is(asItem()) && !player.isCrouching()) {
+            item.addTagElement("BoundPosition", new IntArrayTag(new int[]{pos.getX(), pos.getY(), pos.getZ()}));
+            item.addTagElement("Enchantments", new ListTag() {{ add(new CompoundTag()); }});
+            return InteractionResult.CONSUME;
+        }
+        return InteractionResult.PASS;
+    }
+}
