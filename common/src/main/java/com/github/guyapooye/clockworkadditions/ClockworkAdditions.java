@@ -36,6 +36,7 @@ public class ClockworkAdditions
 	public static void init() {
 		PartialModelRegistry.register();
 		BlockRegistry.register();
+		EntityRegistry.register();
 		BlockEntityRegistry.register();
 		PacketRegistry.register();
 

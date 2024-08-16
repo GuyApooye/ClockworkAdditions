@@ -14,7 +14,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.github.guyapooye.clockworkadditions.fabric.ClockworkAdditionsFabric"
+      "com.github.guyapooye.clockworkadditions.ClockworkAdditionsFabric"
     ]
   },
   "mixins": [
