@@ -12,7 +12,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 
 import java.util.function.Supplier;
 
@@ -30,7 +30,7 @@ public class BuilderTransformersImpl extends BuilderTransformers {
                         .getExistingFile(p.mcLoc("air"))))
                 .initialProperties(SharedProperties::softMetal)
                 .properties(p -> p.noOcclusion()
-                        .color(MaterialColor.NONE))
+                        .mapColor(MapColor.NONE))
                 .addLayer(() -> RenderType::solid)
                 .addLayer(() -> RenderType::cutout)
                 .addLayer(() -> RenderType::cutoutMipped)
