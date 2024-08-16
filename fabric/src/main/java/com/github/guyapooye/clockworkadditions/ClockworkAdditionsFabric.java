@@ -1,11 +1,7 @@
-package com.github.guyapooye.clockworkadditions.fabric;
+package com.github.guyapooye.clockworkadditions;
 
-import com.github.guyapooye.clockworkadditions.ClockworkAdditions;
-import com.github.guyapooye.clockworkadditions.fabric.registries.BlockEntityRegistryImpl;
-import com.github.guyapooye.clockworkadditions.fabric.registries.BlockRegistryImpl;
-import com.github.guyapooye.clockworkadditions.fabric.registries.ConfigRegistryImpl;
-import com.github.guyapooye.clockworkadditions.fabric.registries.EntityRegistryImpl;
-import com.github.guyapooye.clockworkadditions.fabric.registries.events.ClientEventRegistry;
+import com.github.guyapooye.clockworkadditions.registries.ConfigRegistryImpl;
+import com.github.guyapooye.clockworkadditions.registries.events.ClientEventRegistry;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -20,10 +16,7 @@ public class ClockworkAdditionsFabric implements ModInitializer {
     public void onInitialize() {
         Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, ResourceKey.create(Registries.CREATIVE_MODE_TAB, new ResourceLocation("clockworkadditions")), CWACreativeModeTab);
         ClockworkAdditions.init();
-        EntityRegistryImpl.register();
         ConfigRegistryImpl.register();
-        BlockRegistryImpl.register();
-        BlockEntityRegistryImpl.register();
         ClientEventRegistry.register();
         REGISTRATE.register();
     }

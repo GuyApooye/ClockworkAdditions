@@ -9,7 +9,7 @@ import java.util.function.Supplier;
 
 public class PlatformUtilImpl {
     public static CompoundTag getPlayerCustomData(Player player) {
-        return player.getExtraCustomData();
+        return player.getCustomData();
     }
     public static void runWhenOn(Enum e, Supplier<Runnable> supplier) {
         EnvExecutor.runWhenOn((EnvType) e, supplier);

@@ -1,10 +1,6 @@
-package com.github.guyapooye.clockworkadditions.forge;
+package com.github.guyapooye.clockworkadditions;
 
-import com.github.guyapooye.clockworkadditions.ClockworkAdditions;
-import com.github.guyapooye.clockworkadditions.forge.registries.BlockEntityRegistryImpl;
-import com.github.guyapooye.clockworkadditions.forge.registries.BlockRegistryImpl;
-import com.github.guyapooye.clockworkadditions.forge.registries.ConfigRegistryImpl;
-import com.github.guyapooye.clockworkadditions.forge.registries.EntityRegistryImpl;
+import com.github.guyapooye.clockworkadditions.registries.ConfigRegistryImpl;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -30,9 +26,5 @@ public class ClockworkAdditionsForge {
 
         ModLoadingContext modLoadingContext = ModLoadingContext.get();
         ConfigRegistryImpl.register(modLoadingContext);
-
-        EntityRegistryImpl.register();
-        BlockRegistryImpl.register();
-        BlockEntityRegistryImpl.register();
     }
 }
