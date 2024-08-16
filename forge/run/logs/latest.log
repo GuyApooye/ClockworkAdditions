@@ -1,0 +1,254 @@
+[20:00:00] [main/INFO] (Launcher) ModLauncher running: args [--launchTarget, forgeclientuserdev, --version, MOD_DEV, --assetIndex, 1.18.2-1.18, --assetsDir, C:\Users\nirm\.gradle\caches\fabric-loom\assets, --gameDir, ., --fml.forgeVersion, 40.2.15, --fml.mcVersion, 1.18.2, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20220404.173914, -mixin.config, clockworkadditions.mixins.json, -mixin.config, clockworkadditions-common.mixins.json, --mixin.config, clockworkadditions-common.mixins.json]
+[20:00:00] [main/INFO] (Launcher) ModLauncher 9.1.3+9.1.3+main.9b69c82a starting: java version 19 by Oracle Corporation
+[20:00:00] [main/INFO] (mixin) SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/C:/Users/nirm/.gradle/caches/modules-2/files-2.1/dev.architectury/mixin-patched/0.8.5.11/dd886ad7af30604cbd9aa0f1eb9fb95b079013ca/mixin-patched-0.8.5.11.jar%2321!/ Service=ModLauncher Env=CLIENT
+[20:00:00] [main/WARN] (ModFileParser) Mod file C:\Users\nirm\.gradle\caches\modules-2\files-2.1\net.minecraftforge\javafmllanguage\1.18.2-40.2.15\63e5d22f26e67c8be054f9d309542f4b0640ea71\javafmllanguage-1.18.2-40.2.15.jar is missing mods.toml file
+[20:00:00] [main/WARN] (ModFileParser) Mod file C:\Users\nirm\.gradle\caches\modules-2\files-2.1\net.minecraftforge\lowcodelanguage\1.18.2-40.2.15\a9a25265b1caaef3717de3a751b94921b8c9db01\lowcodelanguage-1.18.2-40.2.15.jar is missing mods.toml file
+[20:00:00] [main/WARN] (ModFileParser) Mod file C:\Users\nirm\.gradle\caches\modules-2\files-2.1\net.minecraftforge\mclanguage\1.18.2-40.2.15\5dc0bfa7f33d50b0e94a39c6c469e389d24d74a3\mclanguage-1.18.2-40.2.15.jar is missing mods.toml file
+[20:00:00] [main/WARN] (ModFileParser) Mod file C:\Users\nirm\.gradle\caches\modules-2\files-2.1\net.minecraftforge\fmlcore\1.18.2-40.2.15\e69bfa2628a875138f2c1d83cad4c1f28144fab5\fmlcore-1.18.2-40.2.15.jar is missing mods.toml file
+[20:00:00] [main/INFO] (ModDiscoverer) Found mod file javafmllanguage-1.18.2-40.2.15.jar of type LANGPROVIDER with provider net.minecraftforge.fml.loading.moddiscovery.MinecraftLocator@4b9be679
+[20:00:00] [main/INFO] (ModDiscoverer) Found mod file lowcodelanguage-1.18.2-40.2.15.jar of type LANGPROVIDER with provider net.minecraftforge.fml.loading.moddiscovery.MinecraftLocator@4b9be679
+[20:00:00] [main/INFO] (ModDiscoverer) Found mod file mclanguage-1.18.2-40.2.15.jar of type LANGPROVIDER with provider net.minecraftforge.fml.loading.moddiscovery.MinecraftLocator@4b9be679
+[20:00:00] [main/INFO] (ModDiscoverer) Found mod file fmlcore-1.18.2-40.2.15.jar of type LIBRARY with provider net.minecraftforge.fml.loading.moddiscovery.MinecraftLocator@4b9be679
+[20:00:00] [main/INFO] (ModDiscoverer) Found mod file forge-1.18.2-40.2.15-minecraft-merged-1.18.2-loom.mappings.1_18_2.layered+hash.1101543159-v2-forge-1.18.2-40.2.15.jar of type MOD with provider net.minecraftforge.fml.loading.moddiscovery.MinecraftLocator@4b9be679
+[20:00:00] [main/INFO] (ModDiscoverer) Found mod file main of type MOD with provider net.minecraftforge.fml.loading.moddiscovery.MinecraftLocator@4b9be679
+[20:00:00] [main/INFO] (ModDiscoverer) Found mod file  of type MOD with provider net.minecraftforge.fml.loading.moddiscovery.MinecraftLocator@4b9be679
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file mixinextras-forge-0.3.5.jar of type GAMELIBRARY with provider net.minecraftforge.fml.loading.moddiscovery.ClasspathLocator@1179c778
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file valkyrienskies-118-forge-2.1.1-beta.6+1705b550dd.jar of type MOD with provider net.minecraftforge.fml.loading.moddiscovery.ClasspathLocator@1179c778
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file create-1.18.2-0.5.1.f-332-slim.jar of type MOD with provider net.minecraftforge.fml.loading.moddiscovery.ClasspathLocator@1179c778
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file flywheel-forge-1.18.2-0.6.10-105.jar of type MOD with provider net.minecraftforge.fml.loading.moddiscovery.ClasspathLocator@1179c778
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file clockwork-1.18.2-forge-71193cb2ad14.jar of type MOD with provider net.minecraftforge.fml.loading.moddiscovery.ClasspathLocator@1179c778
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file 3578073382896111698.jar of type MOD with provider net.minecraftforge.fml.loading.moddiscovery.ClasspathLocator@1179c778
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file mixinextras-forge-0.3.5.jar of type GAMELIBRARY with provider net.minecraftforge.fml.loading.moddiscovery.ClasspathLocator@1179c778
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file kotlinforforge-3.12.0-all.jar of type LIBRARY with provider net.minecraftforge.fml.loading.moddiscovery.ClasspathLocator@1179c778
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file valkyrienskies-118-forge-2.1.1-beta.6+1705b550dd.jar of type MOD with provider net.minecraftforge.fml.loading.moddiscovery.ClasspathLocator@1179c778
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file create-1.18.2-0.5.1.f-332-slim.jar of type MOD with provider net.minecraftforge.fml.loading.moddiscovery.ClasspathLocator@1179c778
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file Registrate-MC1.18.2-1.1.3.jar of type GAMELIBRARY with provider net.minecraftforge.fml.loading.moddiscovery.ClasspathLocator@1179c778
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file flywheel-forge-1.18.2-0.6.10-105.jar of type MOD with provider net.minecraftforge.fml.loading.moddiscovery.ClasspathLocator@1179c778
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file clockwork-1.18.2-forge-71193cb2ad14.jar of type MOD with provider net.minecraftforge.fml.loading.moddiscovery.ClasspathLocator@1179c778
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file 3578073382896111698.jar of type MOD with provider net.minecraftforge.fml.loading.moddiscovery.ClasspathLocator@1179c778
+[20:00:01] [main/WARN] (JarSelector) Attempted to select a dependency jar for JarJar which was passed in as source: mixinextras. Using Mod File: C:\Users\nirm\.gradle\caches\modules-2\files-2.1\io.github.llamalad7\mixinextras-forge\0.3.5\f2663a1104ece46c821fa4f8b50a6c7738b68413\mixinextras-forge-0.3.5.jar
+[20:00:01] [main/INFO] (JarInJarDependencyLocator) Found 26 dependencies adding them to mods collection
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file classmate-1.5.1.jar of type GAMELIBRARY with provider net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator@71878833
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file joml-primitives-1.10.0.jar of type GAMELIBRARY with provider net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator@71878833
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file json-schema-validator-1.0.71.jar of type GAMELIBRARY with provider net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator@71878833
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file jackson-module-parameter-names-2.14.0.jar of type GAMELIBRARY with provider net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator@71878833
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file kfflang-3.12.0.jar of type LANGPROVIDER with provider net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator@71878833
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file jackson-kotlin-dsl-1.2.0.jar of type GAMELIBRARY with provider net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator@71878833
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file jackson-core-2.14.0.jar of type GAMELIBRARY with provider net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator@71878833
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file zjsonpatch-0.4.11.jar of type GAMELIBRARY with provider net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator@71878833
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file jackson-dataformat-cbor-2.14.0.jar of type GAMELIBRARY with provider net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator@71878833
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file javax.inject-1.jar of type GAMELIBRARY with provider net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator@71878833
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file jackson-annotations-2.14.0.jar of type GAMELIBRARY with provider net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator@71878833
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file jackson-module-kotlin-2.14.0-rubyfork.jar of type GAMELIBRARY with provider net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator@71878833
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file kffmod-3.12.0.jar of type MOD with provider net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator@71878833
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file kfflib-3.12.0.jar of type GAMELIBRARY with provider net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator@71878833
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file util-1.1.0+e26d9059c0.jar of type GAMELIBRARY with provider net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator@71878833
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file api-1.1.0+e26d9059c0.jar of type GAMELIBRARY with provider net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator@71878833
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file commons-collections4-4.3.jar of type GAMELIBRARY with provider net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator@71878833
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file jsonschema-module-jackson-4.25.0.jar of type GAMELIBRARY with provider net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator@71878833
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file itu-1.7.0.jar of type GAMELIBRARY with provider net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator@71878833
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file jackson-databind-2.14.0.jar of type GAMELIBRARY with provider net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator@71878833
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file jsonschema-generator-4.25.0.jar of type GAMELIBRARY with provider net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator@71878833
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file MixinExtras-0.3.5.jar of type GAMELIBRARY with provider net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator@71878833
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file cloth-config-forge-6.3.81.jar of type MOD with provider net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator@71878833
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file dagger-2.43.2.jar of type GAMELIBRARY with provider net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator@71878833
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file commons-math3-3.6.1.jar of type GAMELIBRARY with provider net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator@71878833
+[20:00:01] [main/INFO] (ModDiscoverer) Found mod file joml-1.10.4.jar of type GAMELIBRARY with provider net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator@71878833
+[20:00:02] [main/INFO] (mixin) Compatibility level set to JAVA_17
+[20:00:02] [main/INFO] (LaunchServiceHandler) Launching target 'forgeclientuserdev' with arguments [--version, MOD_DEV, --gameDir, ., --assetsDir, C:\Users\nirm\.gradle\caches\fabric-loom\assets, --assetIndex, 1.18.2-1.18]
+[20:00:02] [main/INFO] (unprotect) Found 6391 Minecraft classes
+[20:00:02] [main/INFO] (mixin) Remapping refMap flywheel.refmap.json using RemapperChain (Architectury Patched)
+[20:00:02] [main/INFO] (mixin) Remapping refMap flywheel.refmap.json using RemapperChain (Architectury Patched)
+[20:00:02] [main/INFO] (mixin) Remapping refMap create.refmap.json using RemapperChain (Architectury Patched)
+[20:00:02] [main/INFO] (mixin) Remapping refMap clockwork-common-refmap.json using RemapperChain (Architectury Patched)
+[20:00:02] [main/INFO] (mixin) Remapping refMap clockwork-forge-refmap.json using RemapperChain (Architectury Patched)
+[20:00:02] [main/INFO] (mixin) Remapping refMap valkyrienskies-118-common-refmap.json using RemapperChain (Architectury Patched)
+[20:00:02] [main/INFO] (mixin) Remapping refMap valkyrienskies-refmap.json using RemapperChain (Architectury Patched)
+[20:00:03] [main/WARN] (mixin) Error loading class: de/bluecolored/bluemap/core/map/hires/HiresTileModel (java.lang.ClassNotFoundException: de.bluecolored.bluemap.core.map.hires.HiresTileModel)
+[20:00:03] [main/WARN] (mixin) Error loading class: de/bluecolored/bluemap/core/map/BmMap (java.lang.ClassNotFoundException: de.bluecolored.bluemap.core.map.BmMap)
+[20:00:03] [main/WARN] (mixin) Error loading class: de/bluecolored/bluemap/core/map/hires/HiresModelManager (java.lang.ClassNotFoundException: de.bluecolored.bluemap.core.map.hires.HiresModelManager)
+[20:00:03] [main/WARN] (mixin) Error loading class: de/bluecolored/bluemap/core/mca/MCAWorld (java.lang.ClassNotFoundException: de.bluecolored.bluemap.core.mca.MCAWorld)
+[20:00:03] [main/WARN] (mixin) Error loading class: rbasamoyai/createbigcannons/cannon_control/contraption/PitchOrientedContraptionEntity (java.lang.ClassNotFoundException: rbasamoyai.createbigcannons.cannon_control.contraption.PitchOrientedContraptionEntity)
+[20:00:03] [main/WARN] (mixin) Error loading class: dev/ftb/mods/ftbchunks/data/ClaimedChunkManager (java.lang.ClassNotFoundException: dev.ftb.mods.ftbchunks.data.ClaimedChunkManager)
+[20:00:03] [main/WARN] (mixin) Error loading class: com/jamieswhiteshirt/reachentityattributes/ReachEntityAttributes (java.lang.ClassNotFoundException: com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes)
+[20:00:03] [main/WARN] (mixin) Error loading class: com/sonicether/soundphysics/SoundPhysics (java.lang.ClassNotFoundException: com.sonicether.soundphysics.SoundPhysics)
+[20:00:03] [main/WARN] (mixin) Error loading class: dan200/computercraft/shared/peripheral/speaker/SpeakerPosition (java.lang.ClassNotFoundException: dan200.computercraft.shared.peripheral.speaker.SpeakerPosition)
+[20:00:03] [main/WARN] (mixin) Error loading class: dan200/computercraft/shared/turtle/core/TurtleBrain (java.lang.ClassNotFoundException: dan200.computercraft.shared.turtle.core.TurtleBrain)
+[20:00:03] [main/WARN] (mixin) Error loading class: dan200/computercraft/shared/turtle/core/TurtleMoveCommand (java.lang.ClassNotFoundException: dan200.computercraft.shared.turtle.core.TurtleMoveCommand)
+[20:00:03] [main/WARN] (mixin) Error loading class: dan200/computercraft/shared/peripheral/modem/wireless/WirelessNetwork (java.lang.ClassNotFoundException: dan200.computercraft.shared.peripheral.modem.wireless.WirelessNetwork)
+[20:00:03] [main/WARN] (mixin) Error loading class: blusunrize/immersiveengineering/common/gui/BlockEntityInventory (java.lang.ClassNotFoundException: blusunrize.immersiveengineering.common.gui.BlockEntityInventory)
+[20:00:03] [main/WARN] (mixin) Error loading class: net/dries007/tfc/world/TFCChunkGenerator (java.lang.ClassNotFoundException: net.dries007.tfc.world.TFCChunkGenerator)
+[20:00:03] [main/WARN] (mixin) Error loading class: cofh/core/block/entity/TileCoFH (java.lang.ClassNotFoundException: cofh.core.block.entity.TileCoFH)
+[20:00:03] [main/WARN] (mixin) Error loading class: li/cil/tis3d/common/entity/InfraredPacketEntity (java.lang.ClassNotFoundException: li.cil.tis3d.common.entity.InfraredPacketEntity)
+[20:00:03] [main/WARN] (mixin) Error loading class: me/desht/modularrouters/container/ContainerModularRouter (java.lang.ClassNotFoundException: me.desht.modularrouters.container.ContainerModularRouter)
+[20:00:03] [main/WARN] (mixin) Error loading class: mekanism/common/lib/radiation/RadiationManager (java.lang.ClassNotFoundException: mekanism.common.lib.radiation.RadiationManager)
+[20:00:03] [main/WARN] (mixin) @Mixin target mekanism.common.lib.radiation.RadiationManager was not found valkyrienskies-forge.mixins.json:compat.mekanism.MixinRadiationManager
+[20:00:03] [main/WARN] (mixin) Error loading class: me/jellysquid/mods/sodium/client/render/chunk/RenderSectionManager (java.lang.ClassNotFoundException: me.jellysquid.mods.sodium.client.render.chunk.RenderSectionManager)
+[20:00:03] [main/WARN] (mixin) @Mixin target me.jellysquid.mods.sodium.client.render.chunk.RenderSectionManager was not found valkyrienskies-forge.mixins.json:compat.sodium.MixinRenderSectionManager
+[20:00:03] [main/WARN] (mixin) Error loading class: li/cil/tis3d/client/renderer/tileentity/CasingTileEntityRenderer (java.lang.ClassNotFoundException: li.cil.tis3d.client.renderer.tileentity.CasingTileEntityRenderer)
+[20:00:03] [main/WARN] (mixin) Error loading class: li/cil/tis3d/client/renderer/RenderContextImpl (java.lang.ClassNotFoundException: li.cil.tis3d.client.renderer.RenderContextImpl)
+[20:00:03] [main/INFO] (MixinExtras|Service) Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.3.5).
+[20:00:10] [Render thread/WARN] (Minecraft) Assets URL 'union:/C:/Users/nirm/.gradle/caches/fabric-loom/minecraftMaven/net/minecraft/forge-1.18.2-40.2.15-minecraft-merged/1.18.2-loom.mappings.1_18_2.layered+hash.1101543159-v2-forge-1.18.2-40.2.15/forge-1.18.2-40.2.15-minecraft-merged-1.18.2-loom.mappings.1_18_2.layered+hash.1101543159-v2-forge-1.18.2-40.2.15.jar%2371!/assets/.mcassetsroot' uses unexpected schema
+[20:00:10] [Render thread/WARN] (Minecraft) Assets URL 'union:/C:/Users/nirm/.gradle/caches/fabric-loom/minecraftMaven/net/minecraft/forge-1.18.2-40.2.15-minecraft-merged/1.18.2-loom.mappings.1_18_2.layered+hash.1101543159-v2-forge-1.18.2-40.2.15/forge-1.18.2-40.2.15-minecraft-merged-1.18.2-loom.mappings.1_18_2.layered+hash.1101543159-v2-forge-1.18.2-40.2.15.jar%2371!/data/.mcassetsroot' uses unexpected schema
+[20:00:10] [Render thread/INFO] (Minecraft) Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[20:00:10] [Render thread/INFO] (Minecraft) Setting user: Dev
+[20:00:11] [Render thread/INFO] (Minecraft) Backend library: LWJGL version 3.3.2+13
+[20:00:15] [Render thread/FATAL] (ModLoader) File D:\Guy\Coding\ClockworkAdditions\forge\build\resources\main constructed 2 mods: [BROKEN, clockworkadditions], but had 1 mods specified: [clockworkadditions]
+[20:00:15] [Render thread/FATAL] (ModLoader) Failed to initialize mod containers
+net.minecraftforge.fml.ModLoadingException: mods.toml missing metadata for modid nodeslib
+	at net.minecraftforge.fml.ModLoader.lambda$buildModContainerFromTOML$29(ModLoader.java:254) ~[fmlcore-1.18.2-40.2.15.jar%2375!/:?]
+	at java.util.Optional.orElseThrow(Optional.java:403) ~[?:?]
+	at net.minecraftforge.fml.ModLoader.buildModContainerFromTOML(ModLoader.java:254) ~[fmlcore-1.18.2-40.2.15.jar%2375!/:?]
+	at net.minecraftforge.fml.ModLoader.lambda$buildMods$26(ModLoader.java:234) ~[fmlcore-1.18.2-40.2.15.jar%2375!/:?]
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197) ~[?:?]
+	at java.util.HashMap$EntrySpliterator.forEachRemaining(HashMap.java:1858) ~[?:?]
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509) ~[?:?]
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499) ~[?:?]
+	at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:921) ~[?:?]
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[?:?]
+	at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:682) ~[?:?]
+	at net.minecraftforge.fml.ModLoader.buildMods(ModLoader.java:236) ~[fmlcore-1.18.2-40.2.15.jar%2375!/:?]
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197) ~[?:?]
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197) ~[?:?]
+	at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1625) ~[?:?]
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509) ~[?:?]
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499) ~[?:?]
+	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:575) ~[?:?]
+	at java.util.stream.AbstractPipeline.evaluateToArrayNode(AbstractPipeline.java:260) ~[?:?]
+	at java.util.stream.ReferencePipeline.toArray(ReferencePipeline.java:616) ~[?:?]
+	at java.util.stream.ReferencePipeline.toArray(ReferencePipeline.java:622) ~[?:?]
+	at java.util.stream.ReferencePipeline.toList(ReferencePipeline.java:627) ~[?:?]
+	at net.minecraftforge.fml.ModLoader.gatherAndInitializeMods(ModLoader.java:154) ~[fmlcore-1.18.2-40.2.15.jar%2375!/:?]
+	at net.minecraftforge.client.loading.ClientModLoader.lambda$begin$1(ClientModLoader.java:92) ~[forge-1.18.2-40.2.15-minecraft-merged-1.18.2-loom.mappings.1_18_2.layered+hash.1101543159-v2-forge-1.18.2-40.2.15.jar%2370%2377!/:?]
+	at net.minecraftforge.client.loading.ClientModLoader.lambda$createRunnableWithCatch$4(ClientModLoader.java:112) ~[forge-1.18.2-40.2.15-minecraft-merged-1.18.2-loom.mappings.1_18_2.layered+hash.1101543159-v2-forge-1.18.2-40.2.15.jar%2370%2377!/:?]
+	at net.minecraftforge.client.loading.ClientModLoader.begin(ClientModLoader.java:92) ~[forge-1.18.2-40.2.15-minecraft-merged-1.18.2-loom.mappings.1_18_2.layered+hash.1101543159-v2-forge-1.18.2-40.2.15.jar%2370%2377!/:?]
+	at net.minecraft.client.Minecraft.<init>(Minecraft.java:459) ~[forge-1.18.2-40.2.15-minecraft-merged-1.18.2-loom.mappings.1_18_2.layered+hash.1101543159-v2-forge-1.18.2-40.2.15.jar%2371!/:?]
+	at net.minecraft.client.main.Main.main(Main.java:169) ~[forge-1.18.2-40.2.15-minecraft-merged-1.18.2-loom.mappings.1_18_2.layered+hash.1101543159-v2-forge-1.18.2-40.2.15.jar%2371!/:?]
+	at jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:578) ~[?:?]
+	at net.minecraftforge.fml.loading.targets.ForgeClientUserdevLaunchHandler.lambda$launchService$0(ForgeClientUserdevLaunchHandler.java:24) ~[fmlloader-1.18.2-40.2.15.jar%230!/:?]
+	at cpw.mods.modlauncher.LaunchServiceHandlerDecorator.launch(LaunchServiceHandlerDecorator.java:37) [modlauncher-9.1.3.jar%235!/:?]
+	at cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:53) [modlauncher-9.1.3.jar%235!/:?]
+	at cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:71) [modlauncher-9.1.3.jar%235!/:?]
+	at cpw.mods.modlauncher.Launcher.run(Launcher.java:106) [modlauncher-9.1.3.jar%235!/:?]
+	at cpw.mods.modlauncher.Launcher.main(Launcher.java:77) [modlauncher-9.1.3.jar%235!/:?]
+	at cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:26) [modlauncher-9.1.3.jar%235!/:?]
+	at cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:23) [modlauncher-9.1.3.jar%235!/:?]
+	at cpw.mods.bootstraplauncher.BootstrapLauncher.main(BootstrapLauncher.java:149) [bootstraplauncher-1.0.0.jar:1.0.0+1.0.0+main.26de0917]
+	at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+	at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:219) [architectury-transformer-5.2.75-runtime.jar:5.2.75]
+[20:00:16] [Render thread/ERROR] (ModLoader) Cowardly refusing to send event net.minecraftforge.client.event.sound.SoundLoadEvent to a broken mod state
+[20:00:16] [Render thread/ERROR] (ModLoader) Cowardly refusing to send event net.minecraftforge.client.event.ColorHandlerEvent$Block to a broken mod state
+[20:00:16] [Render thread/ERROR] (ModLoader) Cowardly refusing to send event net.minecraftforge.client.event.ColorHandlerEvent$Item to a broken mod state
+[20:00:17] [Render thread/ERROR] (ModLoader) Cowardly refusing to send event net.minecraftforge.client.event.RenderLevelStageEvent$RegisterStageEvent to a broken mod state
+[20:00:17] [Render thread/ERROR] (ModLoader) Cowardly refusing to send event net.minecraftforge.client.event.ParticleFactoryRegisterEvent to a broken mod state
+[20:00:17] [Render thread/INFO] (Minecraft) Narrator library for x64 successfully loaded
+[20:00:18] [Render thread/INFO] (ForgeGameTestHooks) Enabled Gametest Namespaces: []
+[20:00:18] [Render thread/ERROR] (ModLoader) Cowardly refusing to send event net.minecraftforge.event.RegisterGameTestsEvent to a broken mod state
+[20:00:18] [Render thread/ERROR] (ModLoader) Cowardly refusing to send event net.minecraftforge.client.event.RegisterClientReloadListenersEvent to a broken mod state
+[20:00:18] [Render thread/ERROR] (ModLoader) Cowardly refusing to send event net.minecraftforge.client.event.EntityRenderersEvent$RegisterLayerDefinitions to a broken mod state
+[20:00:18] [Render thread/ERROR] (ModLoader) Cowardly refusing to send event net.minecraftforge.client.event.EntityRenderersEvent$RegisterRenderers to a broken mod state
+[20:00:18] [Render thread/INFO] (Minecraft) Reloading ResourceManager: Default
+[20:00:18] [Render thread/INFO] (mixin) Instancing error handler class org.valkyrienskies.mod.mixin.ValkyrienMixinErrorHandler
+[20:00:18] [Render thread/FATAL] (mixin) Mixin apply failed valkyrienskies-common.mixins.json:mod_compat.create.client.trackOutlines.MixinTrackBlockOutline -> com.simibubi.create.content.trains.track.TrackBlockOutline: org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionException Invalid descriptor on valkyrienskies-common.mixins.json:mod_compat.create.client.trackOutlines.MixinTrackBlockOutline->@Inject::harvest(Lnet/minecraft/client/renderer/LevelRenderer;Lnet/minecraft/client/Camera;Lnet/minecraft/world/phys/HitResult;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable;)V! Expected (Lnet/minecraftforge/client/event/DrawSelectionEvent$HighlightBlock;Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;)V but found (Lnet/minecraft/client/renderer/LevelRenderer;Lnet/minecraft/client/Camera;Lnet/minecraft/world/phys/HitResult;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable;)V [INJECT Applicator Phase -> valkyrienskies-common.mixins.json:mod_compat.create.client.trackOutlines.MixinTrackBlockOutline -> Apply Injections ->  -> Inject -> valkyrienskies-common.mixins.json:mod_compat.create.client.trackOutlines.MixinTrackBlockOutline->@Inject::harvest(Lnet/minecraft/client/renderer/LevelRenderer;Lnet/minecraft/client/Camera;Lnet/minecraft/world/phys/HitResult;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable;)V]
+org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionException: Invalid descriptor on valkyrienskies-common.mixins.json:mod_compat.create.client.trackOutlines.MixinTrackBlockOutline->@Inject::harvest(Lnet/minecraft/client/renderer/LevelRenderer;Lnet/minecraft/client/Camera;Lnet/minecraft/world/phys/HitResult;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable;)V! Expected (Lnet/minecraftforge/client/event/DrawSelectionEvent$HighlightBlock;Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;)V but found (Lnet/minecraft/client/renderer/LevelRenderer;Lnet/minecraft/client/Camera;Lnet/minecraft/world/phys/HitResult;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable;)V [INJECT Applicator Phase -> valkyrienskies-common.mixins.json:mod_compat.create.client.trackOutlines.MixinTrackBlockOutline -> Apply Injections ->  -> Inject -> valkyrienskies-common.mixins.json:mod_compat.create.client.trackOutlines.MixinTrackBlockOutline->@Inject::harvest(Lnet/minecraft/client/renderer/LevelRenderer;Lnet/minecraft/client/Camera;Lnet/minecraft/world/phys/HitResult;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable;)V]
+	at org.spongepowered.asm.mixin.injection.callback.CallbackInjector.inject(CallbackInjector.java:517) ~[mixin-patched-0.8.5.11.jar:?]
+	at org.spongepowered.asm.mixin.injection.callback.CallbackInjector.inject(CallbackInjector.java:447) ~[mixin-patched-0.8.5.11.jar:?]
+	at org.spongepowered.asm.mixin.injection.code.Injector.inject(Injector.java:276) ~[mixin-patched-0.8.5.11.jar:?]
+	at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.inject(InjectionInfo.java:445) ~[mixin-patched-0.8.5.11.jar:?]
+	at org.spongepowered.asm.mixin.transformer.MixinTargetContext.applyInjections(MixinTargetContext.java:1355) ~[mixin-patched-0.8.5.11.jar:?]
+	at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.applyInjections(MixinApplicatorStandard.java:1051) ~[mixin-patched-0.8.5.11.jar:?]
+	at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.applyMixin(MixinApplicatorStandard.java:400) ~[mixin-patched-0.8.5.11.jar:?]
+	at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.apply(MixinApplicatorStandard.java:325) ~[mixin-patched-0.8.5.11.jar:?]
+	at org.spongepowered.asm.mixin.transformer.TargetClassContext.apply(TargetClassContext.java:383) ~[mixin-patched-0.8.5.11.jar:?]
+	at org.spongepowered.asm.mixin.transformer.TargetClassContext.applyMixins(TargetClassContext.java:365) ~[mixin-patched-0.8.5.11.jar:?]
+	at org.spongepowered.asm.mixin.transformer.MixinProcessor.applyMixins(MixinProcessor.java:363) ~[mixin-patched-0.8.5.11.jar:?]
+	at org.spongepowered.asm.mixin.transformer.MixinTransformer.transformClass(MixinTransformer.java:250) ~[mixin-patched-0.8.5.11.jar:?]
+	at org.spongepowered.asm.service.modlauncher.MixinTransformationHandler.processClass(MixinTransformationHandler.java:131) ~[mixin-patched-0.8.5.11.jar:?]
+	at org.spongepowered.asm.launch.MixinLaunchPluginLegacy.processClass(MixinLaunchPluginLegacy.java:131) ~[mixin-patched-0.8.5.11.jar:?]
+	at cpw.mods.modlauncher.serviceapi.ILaunchPluginService.processClassWithFlags(ILaunchPluginService.java:156) ~[modlauncher-9.1.3.jar:9.1.3+9.1.3+main.9b69c82a]
+	at cpw.mods.modlauncher.LaunchPluginHandler.offerClassNodeToPlugins(LaunchPluginHandler.java:88) ~[modlauncher-9.1.3.jar:?]
+	at cpw.mods.modlauncher.ClassTransformer.transform(ClassTransformer.java:120) ~[modlauncher-9.1.3.jar:?]
+	at cpw.mods.modlauncher.TransformingClassLoader.maybeTransformClassBytes(TransformingClassLoader.java:50) ~[modlauncher-9.1.3.jar:?]
+	at cpw.mods.cl.ModuleClassLoader.readerToClass(ModuleClassLoader.java:113) ~[securejarhandler-1.0.8.jar:?]
+	at cpw.mods.cl.ModuleClassLoader.lambda$findClass$15(ModuleClassLoader.java:219) ~[securejarhandler-1.0.8.jar:?]
+	at cpw.mods.cl.ModuleClassLoader.loadFromModule(ModuleClassLoader.java:229) ~[securejarhandler-1.0.8.jar:?]
+	at cpw.mods.cl.ModuleClassLoader.findClass(ModuleClassLoader.java:219) ~[securejarhandler-1.0.8.jar:?]
+	at cpw.mods.cl.ModuleClassLoader.loadClass(ModuleClassLoader.java:135) ~[securejarhandler-1.0.8.jar:?]
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:521) ~[?:?]
+	at net.minecraft.client.renderer.GameRenderer.handler$zkm000$create$bigShapePick(GameRenderer.java:2512) ~[forge-1.18.2-40.2.15-minecraft-merged-1.18.2-loom.mappings.1_18_2.layered+hash.1101543159-v2-forge-1.18.2-40.2.15.jar%2371!/:?]
+	at net.minecraft.client.renderer.GameRenderer.pick(GameRenderer.java:673) ~[forge-1.18.2-40.2.15-minecraft-merged-1.18.2-loom.mappings.1_18_2.layered+hash.1101543159-v2-forge-1.18.2-40.2.15.jar%2371!/:?]
+	at net.minecraft.client.Minecraft.tick(Minecraft.java:1626) ~[forge-1.18.2-40.2.15-minecraft-merged-1.18.2-loom.mappings.1_18_2.layered+hash.1101543159-v2-forge-1.18.2-40.2.15.jar%2371!/:?]
+	at net.minecraft.client.Minecraft.runTick(Minecraft.java:1021) ~[forge-1.18.2-40.2.15-minecraft-merged-1.18.2-loom.mappings.1_18_2.layered+hash.1101543159-v2-forge-1.18.2-40.2.15.jar%2371!/:?]
+	at net.minecraft.client.Minecraft.run(Minecraft.java:665) ~[forge-1.18.2-40.2.15-minecraft-merged-1.18.2-loom.mappings.1_18_2.layered+hash.1101543159-v2-forge-1.18.2-40.2.15.jar%2371!/:?]
+	at net.minecraft.client.main.Main.main(Main.java:205) ~[forge-1.18.2-40.2.15-minecraft-merged-1.18.2-loom.mappings.1_18_2.layered+hash.1101543159-v2-forge-1.18.2-40.2.15.jar%2371!/:?]
+	at jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:578) ~[?:?]
+	at net.minecraftforge.fml.loading.targets.ForgeClientUserdevLaunchHandler.lambda$launchService$0(ForgeClientUserdevLaunchHandler.java:24) ~[fmlloader-1.18.2-40.2.15.jar%230!/:?]
+	at cpw.mods.modlauncher.LaunchServiceHandlerDecorator.launch(LaunchServiceHandlerDecorator.java:37) [modlauncher-9.1.3.jar%235!/:?]
+	at cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:53) [modlauncher-9.1.3.jar%235!/:?]
+	at cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:71) [modlauncher-9.1.3.jar%235!/:?]
+	at cpw.mods.modlauncher.Launcher.run(Launcher.java:106) [modlauncher-9.1.3.jar%235!/:?]
+	at cpw.mods.modlauncher.Launcher.main(Launcher.java:77) [modlauncher-9.1.3.jar%235!/:?]
+	at cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:26) [modlauncher-9.1.3.jar%235!/:?]
+	at cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:23) [modlauncher-9.1.3.jar%235!/:?]
+	at cpw.mods.bootstraplauncher.BootstrapLauncher.main(BootstrapLauncher.java:149) [bootstraplauncher-1.0.0.jar:1.0.0+1.0.0+main.26de0917]
+	at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+	at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:219) [architectury-transformer-5.2.75-runtime.jar:5.2.75]
+[20:00:18] [Worker-Main-16/ERROR] (ModLoader) Cowardly refusing to send event net.minecraftforge.client.event.ModelRegistryEvent to a broken mod state
+[20:00:18] [Worker-Main-18/ERROR] (ModLoader) Cowardly refusing to send event net.minecraftforge.client.event.TextureStitchEvent$Pre to a broken mod state
+[20:00:18] [Worker-Main-23/ERROR] (ModLoader) Cowardly refusing to send event net.minecraftforge.client.event.TextureStitchEvent$Pre to a broken mod state
+[20:00:18] [Worker-Main-20/ERROR] (ModLoader) Cowardly refusing to send event net.minecraftforge.client.event.TextureStitchEvent$Pre to a broken mod state
+[20:00:19] [Render thread/ERROR] (Minecraft) Unreported exception thrown!
+org.spongepowered.asm.mixin.transformer.throwables.MixinTransformerError: An unexpected critical error was encountered
+	at org.spongepowered.asm.mixin.transformer.MixinProcessor.applyMixins(MixinProcessor.java:392) ~[mixin-patched-0.8.5.11.jar:?]
+	at org.spongepowered.asm.mixin.transformer.MixinTransformer.transformClass(MixinTransformer.java:250) ~[mixin-patched-0.8.5.11.jar:?]
+	at org.spongepowered.asm.service.modlauncher.MixinTransformationHandler.processClass(MixinTransformationHandler.java:131) ~[mixin-patched-0.8.5.11.jar:?]
+	at org.spongepowered.asm.launch.MixinLaunchPluginLegacy.processClass(MixinLaunchPluginLegacy.java:131) ~[mixin-patched-0.8.5.11.jar:?]
+	at cpw.mods.modlauncher.serviceapi.ILaunchPluginService.processClassWithFlags(ILaunchPluginService.java:156) ~[modlauncher-9.1.3.jar:9.1.3+9.1.3+main.9b69c82a]
+	at cpw.mods.modlauncher.LaunchPluginHandler.offerClassNodeToPlugins(LaunchPluginHandler.java:88) ~[modlauncher-9.1.3.jar:?]
+	at cpw.mods.modlauncher.ClassTransformer.transform(ClassTransformer.java:120) ~[modlauncher-9.1.3.jar:?]
+	at cpw.mods.modlauncher.TransformingClassLoader.maybeTransformClassBytes(TransformingClassLoader.java:50) ~[modlauncher-9.1.3.jar:?]
+	at cpw.mods.cl.ModuleClassLoader.readerToClass(ModuleClassLoader.java:113) ~[securejarhandler-1.0.8.jar:?]
+	at cpw.mods.cl.ModuleClassLoader.lambda$findClass$15(ModuleClassLoader.java:219) ~[securejarhandler-1.0.8.jar:?]
+	at cpw.mods.cl.ModuleClassLoader.loadFromModule(ModuleClassLoader.java:229) ~[securejarhandler-1.0.8.jar:?]
+	at cpw.mods.cl.ModuleClassLoader.findClass(ModuleClassLoader.java:219) ~[securejarhandler-1.0.8.jar:?]
+	at cpw.mods.cl.ModuleClassLoader.loadClass(ModuleClassLoader.java:135) ~[securejarhandler-1.0.8.jar:?]
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:521) ~[?:?]
+	at net.minecraft.client.renderer.GameRenderer.handler$zkm000$create$bigShapePick(GameRenderer.java:2512) ~[forge-1.18.2-40.2.15-minecraft-merged-1.18.2-loom.mappings.1_18_2.layered+hash.1101543159-v2-forge-1.18.2-40.2.15.jar%2371!/:?]
+	at net.minecraft.client.renderer.GameRenderer.pick(GameRenderer.java:673) ~[forge-1.18.2-40.2.15-minecraft-merged-1.18.2-loom.mappings.1_18_2.layered+hash.1101543159-v2-forge-1.18.2-40.2.15.jar%2371!/:?]
+	at net.minecraft.client.Minecraft.tick(Minecraft.java:1626) ~[forge-1.18.2-40.2.15-minecraft-merged-1.18.2-loom.mappings.1_18_2.layered+hash.1101543159-v2-forge-1.18.2-40.2.15.jar%2371!/:?]
+	at net.minecraft.client.Minecraft.runTick(Minecraft.java:1021) ~[forge-1.18.2-40.2.15-minecraft-merged-1.18.2-loom.mappings.1_18_2.layered+hash.1101543159-v2-forge-1.18.2-40.2.15.jar%2371!/:?]
+	at net.minecraft.client.Minecraft.run(Minecraft.java:665) ~[forge-1.18.2-40.2.15-minecraft-merged-1.18.2-loom.mappings.1_18_2.layered+hash.1101543159-v2-forge-1.18.2-40.2.15.jar%2371!/:?]
+	at net.minecraft.client.main.Main.main(Main.java:205) ~[forge-1.18.2-40.2.15-minecraft-merged-1.18.2-loom.mappings.1_18_2.layered+hash.1101543159-v2-forge-1.18.2-40.2.15.jar%2371!/:?]
+	at jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:578) ~[?:?]
+	at net.minecraftforge.fml.loading.targets.ForgeClientUserdevLaunchHandler.lambda$launchService$0(ForgeClientUserdevLaunchHandler.java:24) ~[fmlloader-1.18.2-40.2.15.jar%230!/:?]
+	at cpw.mods.modlauncher.LaunchServiceHandlerDecorator.launch(LaunchServiceHandlerDecorator.java:37) [modlauncher-9.1.3.jar%235!/:?]
+	at cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:53) [modlauncher-9.1.3.jar%235!/:?]
+	at cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:71) [modlauncher-9.1.3.jar%235!/:?]
+	at cpw.mods.modlauncher.Launcher.run(Launcher.java:106) [modlauncher-9.1.3.jar%235!/:?]
+	at cpw.mods.modlauncher.Launcher.main(Launcher.java:77) [modlauncher-9.1.3.jar%235!/:?]
+	at cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:26) [modlauncher-9.1.3.jar%235!/:?]
+	at cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:23) [modlauncher-9.1.3.jar%235!/:?]
+	at cpw.mods.bootstraplauncher.BootstrapLauncher.main(BootstrapLauncher.java:149) [bootstraplauncher-1.0.0.jar:1.0.0+1.0.0+main.26de0917]
+	at net.fabricmc.devlaunchinjector.Main.main(Main.java:86) [dev-launch-injector-0.2.1+build.8.jar:?]
+	at dev.architectury.transformer.TransformerRuntime.main(TransformerRuntime.java:219) [architectury-transformer-5.2.75-runtime.jar:5.2.75]
+Caused by: org.spongepowered.asm.mixin.throwables.MixinApplyError: Mixin [valkyrienskies-common.mixins.json:mod_compat.create.client.trackOutlines.MixinTrackBlockOutline] from phase [DEFAULT] in config [valkyrienskies-common.mixins.json] FAILED during APPLY
+	at org.spongepowered.asm.mixin.transformer.MixinProcessor.handleMixinError(MixinProcessor.java:636) ~[mixin-patched-0.8.5.11.jar:?]
+	at org.spongepowered.asm.mixin.transformer.MixinProcessor.handleMixinApplyError(MixinProcessor.java:588) ~[mixin-patched-0.8.5.11.jar:?]
+	at org.spongepowered.asm.mixin.transformer.MixinProcessor.applyMixins(MixinProcessor.java:379) ~[mixin-patched-0.8.5.11.jar:?]
+	... 32 more
+Caused by: org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionException: Invalid descriptor on valkyrienskies-common.mixins.json:mod_compat.create.client.trackOutlines.MixinTrackBlockOutline->@Inject::harvest(Lnet/minecraft/client/renderer/LevelRenderer;Lnet/minecraft/client/Camera;Lnet/minecraft/world/phys/HitResult;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable;)V! Expected (Lnet/minecraftforge/client/event/DrawSelectionEvent$HighlightBlock;Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;)V but found (Lnet/minecraft/client/renderer/LevelRenderer;Lnet/minecraft/client/Camera;Lnet/minecraft/world/phys/HitResult;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable;)V [INJECT Applicator Phase -> valkyrienskies-common.mixins.json:mod_compat.create.client.trackOutlines.MixinTrackBlockOutline -> Apply Injections ->  -> Inject -> valkyrienskies-common.mixins.json:mod_compat.create.client.trackOutlines.MixinTrackBlockOutline->@Inject::harvest(Lnet/minecraft/client/renderer/LevelRenderer;Lnet/minecraft/client/Camera;Lnet/minecraft/world/phys/HitResult;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable;)V]
+	at org.spongepowered.asm.mixin.injection.callback.CallbackInjector.inject(CallbackInjector.java:517) ~[mixin-patched-0.8.5.11.jar:?]
+	at org.spongepowered.asm.mixin.injection.callback.CallbackInjector.inject(CallbackInjector.java:447) ~[mixin-patched-0.8.5.11.jar:?]
+	at org.spongepowered.asm.mixin.injection.code.Injector.inject(Injector.java:276) ~[mixin-patched-0.8.5.11.jar:?]
+	at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.inject(InjectionInfo.java:445) ~[mixin-patched-0.8.5.11.jar:?]
+	at org.spongepowered.asm.mixin.transformer.MixinTargetContext.applyInjections(MixinTargetContext.java:1355) ~[mixin-patched-0.8.5.11.jar:?]
+	at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.applyInjections(MixinApplicatorStandard.java:1051) ~[mixin-patched-0.8.5.11.jar:?]
+	at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.applyMixin(MixinApplicatorStandard.java:400) ~[mixin-patched-0.8.5.11.jar:?]
+	at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.apply(MixinApplicatorStandard.java:325) ~[mixin-patched-0.8.5.11.jar:?]
+	at org.spongepowered.asm.mixin.transformer.TargetClassContext.apply(TargetClassContext.java:383) ~[mixin-patched-0.8.5.11.jar:?]
+	at org.spongepowered.asm.mixin.transformer.TargetClassContext.applyMixins(TargetClassContext.java:365) ~[mixin-patched-0.8.5.11.jar:?]
+	at org.spongepowered.asm.mixin.transformer.MixinProcessor.applyMixins(MixinProcessor.java:363) ~[mixin-patched-0.8.5.11.jar:?]
+	... 32 more

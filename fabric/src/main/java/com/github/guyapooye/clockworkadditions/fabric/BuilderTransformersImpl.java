@@ -2,8 +2,6 @@ package com.github.guyapooye.clockworkadditions.fabric;
 
 import com.github.guyapooye.clockworkadditions.BuilderTransformers;
 import com.github.guyapooye.clockworkadditions.blocks.copycats.ICopycatBlock;
-import com.github.guyapooye.clockworkadditions.fabric.blocks.copycats.ICopycatBlockImpl;
-import com.simibubi.create.content.decoration.copycat.CopycatBlock;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.kinetics.base.RotatedPillarKineticBlock;
 import com.simibubi.create.foundation.data.SharedProperties;

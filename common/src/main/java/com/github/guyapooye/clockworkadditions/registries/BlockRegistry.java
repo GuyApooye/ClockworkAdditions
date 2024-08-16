@@ -14,8 +14,10 @@ import com.github.guyapooye.clockworkadditions.blocks.redstone.gyro.RedstoneGyro
 import com.simibubi.create.AllTags;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.foundation.data.BlockStateGen;
+import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.entry.BlockEntry;
+import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MaterialColor;
@@ -91,8 +93,16 @@ public class BlockRegistry {
                     .properties(p -> p.color(MaterialColor.TERRACOTTA_LIGHT_GRAY))
                     .simpleItem()
                     .register();
-    public static BlockEntry<? extends CopycatWingBlock> COPYCAT_WING;
-    public static BlockEntry<? extends CopycatFlapBlock> COPYCAT_FLAP;
+    public static final BlockEntry<? extends CopycatWingBlock> COPYCAT_WING = registerCopycatWing();
+    public static final BlockEntry<? extends CopycatFlapBlock> COPYCAT_FLAP = registerCopycatFlap();
+    @ExpectPlatform
+    public static BlockEntry<? extends CopycatWingBlock> registerCopycatWing() {
+        throw new AssertionError();
+    }
+    @ExpectPlatform
+    public static BlockEntry<? extends CopycatFlapBlock> registerCopycatFlap() {
+        throw new AssertionError();
+    }
     public static void register() {
     }
 }

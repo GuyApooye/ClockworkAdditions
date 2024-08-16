@@ -2,8 +2,6 @@ package com.github.guyapooye.clockworkadditions.forge;
 
 import com.github.guyapooye.clockworkadditions.BuilderTransformers;
 import com.github.guyapooye.clockworkadditions.blocks.copycats.ICopycatBlock;
-import com.github.guyapooye.clockworkadditions.forge.blocks.copycats.ICopycatBlockImpl;
-import com.simibubi.create.content.decoration.copycat.CopycatBlock;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.kinetics.base.RotatedPillarKineticBlock;
 import com.simibubi.create.foundation.data.SharedProperties;
@@ -20,7 +18,7 @@ import java.util.function.Supplier;
 
 public class BuilderTransformersImpl extends BuilderTransformers {
     public static <B extends RotatedPillarKineticBlock, P> BlockBuilder<B, P> encasedBase(BlockBuilder<B, P> b,
-                                                                                           Supplier<ItemLike> drop) {
+                                                                                          Supplier<ItemLike> drop) {
         return b.initialProperties(SharedProperties::stone)
                 .properties(BlockBehaviour.Properties::noOcclusion)
                 .transform(BlockStressDefaults.setNoImpact())

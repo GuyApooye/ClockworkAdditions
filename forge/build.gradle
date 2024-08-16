@@ -1,24 +1,44 @@
-plugins {
-    id "com.github.johnrengelman.shadow" version "7.1.2"
-}
-loom {
-    forge {
-        mixinConfig "clockworkadditions-common.mixins.json"
-        mixinConfig "clockworkadditions.mixins.json"
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        // Make sure this version matches the one included in Kotlin for Forge
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10'
+        // OPTIONAL Gradle plugin for Kotlin Serialization
+        classpath 'org.jetbrains.kotlin:kotlin-serialization:1.6.10'
     }
 }
+
+plugins {
+    id "com.github.johnrengelman.shadow" version "7.1.2"
+    id "com.matthewprenger.cursegradle"
+    id "com.modrinth.minotaur"
+}
+
+
 architectury {
     platformSetupLoomIde()
     forge()
 }
+loom {
+//    accessWidenerPath = project(":common").loom.accessWidenerPath
+    forge {
+        mixinConfig "clockworkadditions.mixins.json"
+        mixinConfig "clockworkadditions-common.mixins.json"
+//        convertAccessWideners.set(true)
+//        extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
+    }
+}
 
 configurations {
     common
-    shadowCommon // Don't use shadow from the shadow plugin since it *excludes* files.
+    shadowCommon // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
     compileClasspath.extendsFrom common
-    runtimeClasspath.extendsFrom common
-    developmentForge.extendsFrom common
+            runtimeClasspath.extendsFrom common
+            developmentForge.extendsFrom common
 }
+
 repositories {
     maven { // Create Forge and Registrate Forge
         url = "https://maven.tterrag.com/"
@@ -44,13 +64,11 @@ dependencies {
 //    modImplementation("com.getitemfromblock.create_tweaked_controllers")
     modImplementation("com.simibubi.create:create-${minecraft_version}:${create_forge_version}:slim") { transitive = false }
     modImplementation("com.tterrag.registrate:Registrate:${registrate_forge_version}")
-    modImplementation("com.jozufozu.flywheel:flywheel-forge-${flywheel_forge_minecraft_version}:${flywheel_forge_version}")
+    modImplementation("com.jozufozu.flywheel:flywheel-forge-${minecraft_version}:${flywheel_forge_version}")
 
     compileOnly("io.github.llamalad7:mixinextras-common:${mixinextras_version}")
     annotationProcessor(implementation(include("io.github.llamalad7:mixinextras-forge:${mixinextras_version}")))
     modImplementation(files("libs/clockwork-1.18.2-forge.jar"))
-
-    implementation("org.joml:joml:1.10.5")
 
     implementation "thedarkcolour:kotlinforforge:$forge_kotlin_version"
 }
@@ -59,49 +77,41 @@ processResources {
     inputs.property "version", project.version
 
     filesMatching("META-INF/mods.toml") {
-        expand "version": project.version
+        expand "version": project.version, "vs2_version": project.vs2_version.substring(0, project.vs2_version.indexOf('+'))
     }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    // Minecraft 1.18 (1.18-pre2) upwards uses Java 17.
+    it.options.release = 17
 }
 
 shadowJar {
     exclude "fabric.mod.json"
+    exclude "architectury.common.json"
 
     configurations = [project.configurations.shadowCommon]
-    archiveClassifier = "dev-shadow"
+    archiveClassifier.set "dev-shadow"
 }
 
 remapJar {
-    inputFile.set(shadowJar.archiveFile)
-    dependsOn shadowJar
-    archiveClassifier.set(null)
+    input.set shadowJar.archiveFile
+            dependsOn shadowJar
+    archiveClassifier.set null
 }
 
 jar {
-    archiveClassifier.set("dev")
+    archiveClassifier.set "dev"
 }
 
 sourcesJar {
     def commonSources = project(":common").sourcesJar
     dependsOn commonSources
-    from commonSources.archiveFile.map { zipTree(it) }
+            from commonSources.archiveFile.map { zipTree(it) }
 }
 
 components.java {
     withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
         skip()
-    }
-}
-
-publishing {
-    publications {
-        mavenForge(MavenPublication) {
-            artifactId = rootProject.archives_base_name + "-" + project.name
-            from components.java
-        }
-    }
-
-    // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-    repositories {
-        // Add repositories to publish to here.
     }
 }

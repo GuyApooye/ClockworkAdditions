@@ -6,6 +6,7 @@ import com.github.guyapooye.clockworkadditions.blocks.bearings.heli.PhysicsBeari
 import com.github.guyapooye.clockworkadditions.blocks.bearings.heli.archived.BasePhysicsBearingBlockEntity;
 import com.github.guyapooye.clockworkadditions.blocks.copycats.CWACopycatBlockEntity;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.handlebar.HandlebarBlockEntity;
+import com.github.guyapooye.clockworkadditions.blocks.kinetics.handlebar.HandlebarInstance;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.pedals.PedalsBlockEntity;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.pedals.PedalsInstance;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.pedals.PedalsRenderer;
@@ -41,12 +42,19 @@ public class BlockEntityRegistry {
             .validBlocks(BlockRegistry.PEDALS)
             .renderer(() -> PedalsRenderer::new)
             .register();
-    public static BlockEntityEntry<? extends HandlebarBlockEntity> HANDLEBAR;
+    public static final BlockEntityEntry<? extends HandlebarBlockEntity> HANDLEBAR = REGISTRATE
+            .blockEntity("handlebar", HandlebarBlockEntity::new)
+            .instance(() -> HandlebarInstance::new)
+            .validBlocks(BlockRegistry.HANDLEBAR)
+            .register();;
     public static final BlockEntityEntry<RedstoneGyroBlockEntity> REDSTONE_GYRO = REGISTRATE
             .blockEntity("redstone_gyro", RedstoneGyroBlockEntity::new)
             .validBlocks(BlockRegistry.REDSTONE_GYRO)
             .register();
-    public static BlockEntityEntry<? extends CWACopycatBlockEntity> COPYCAT;
+    public static final BlockEntityEntry<? extends CWACopycatBlockEntity> COPYCAT = REGISTRATE
+            .blockEntity("copycat", CWACopycatBlockEntity::new)
+            .validBlocks(BlockRegistry.COPYCAT_WING,BlockRegistry.COPYCAT_FLAP)
+            .register();
 
     public static void register() {}
 }
