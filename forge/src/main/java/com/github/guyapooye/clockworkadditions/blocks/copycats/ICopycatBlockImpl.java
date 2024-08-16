@@ -29,7 +29,7 @@ import net.minecraftforge.common.extensions.IForgeBlock;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public interface ICopycatBlockImpl extends ICopycatBlock{
+public interface ICopycatBlockImpl extends ICopycatBlock, IForgeBlock{
 
     default boolean canSustainPlant(BlockState arg, BlockGetter arg2, BlockPos arg3, Direction arg4, IPlantable iPlantable) {
         return false;
