@@ -81,7 +81,7 @@ public class CVJointBlock extends DirectionalKineticBlock implements IBE<CVJoint
             BlockPos targ = new BlockPos(boundPosArr[0], boundPosArr[1], boundPosArr[2]);
             CVJointBlockEntity targBE = getBlockEntity(worldIn, targ);
             CVJointBlockEntity destBE = getBlockEntity(worldIn, pos);
-            if (targBE != null && destBE != null) {
+            if (targBE != null && destBE != null && !targ.equals(pos)) {
                 destBE.target = targ;
                 targBE.target = pos;
                 destBE.attachKinetics();
@@ -95,13 +95,36 @@ public class CVJointBlock extends DirectionalKineticBlock implements IBE<CVJoint
     }
 
     @Override
-    public InteractionResult use(BlockState blockState, Level level, BlockPos pos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
-        ItemStack item = player.getItemInHand(interactionHand);
-        if (item.is(asItem()) && !player.isCrouching()) {
-            item.addTagElement("BoundPosition", new IntArrayTag(new int[]{pos.getX(), pos.getY(), pos.getZ()}));
-            item.addTagElement("Enchantments", new ListTag() {{ add(new CompoundTag()); }});
+    public InteractionResult use(BlockState blockState, Level worldIn, BlockPos pos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+        ItemStack stack = player.getItemInHand(interactionHand);
+        if (!stack.is(asItem()) || player.isCrouching()) {
+            return InteractionResult.PASS;
+        }
+        CompoundTag tag = stack.getTag();
+        int[] boundPosArr = null;
+        if (tag != null)
+            boundPosArr = stack.getTag().getIntArray("BoundPosition");
+        if (boundPosArr == null) {
+            stack.addTagElement("BoundPosition", new IntArrayTag(new int[]{pos.getX(), pos.getY(), pos.getZ()}));
+            stack.addTagElement("Enchantments", new ListTag() {{
+                add(new CompoundTag());
+            }});
             return InteractionResult.CONSUME;
         }
-        return InteractionResult.PASS;
+        BlockPos targ = new BlockPos(boundPosArr[0], boundPosArr[1], boundPosArr[2]);
+        CVJointBlockEntity targBE = getBlockEntity(worldIn, targ);
+        CVJointBlockEntity destBE = getBlockEntity(worldIn, pos);
+        if (targBE != null && destBE != null && !targ.equals(pos)) {
+            destBE.target = targ;
+            targBE.target = pos;
+            destBE.attachKinetics();
+            targBE.attachKinetics();
+            stack.removeTagKey("BoundPosition");
+            stack.removeTagKey("Enchantments");
+            return InteractionResult.CONSUME;
+        } else {
+            stack.addTagElement("BoundPosition", new IntArrayTag(new int[]{pos.getX(), pos.getY(), pos.getZ()}));
+            return InteractionResult.CONSUME;
+        }
     }
 }

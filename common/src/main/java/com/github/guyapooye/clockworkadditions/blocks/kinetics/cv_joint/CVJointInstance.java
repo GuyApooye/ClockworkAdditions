@@ -19,6 +19,7 @@ import net.minecraft.core.Vec3i;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.Vec3;
 import org.joml.*;
+import org.valkyrienskies.mod.common.util.VectorConversionsMCKt;
 
 import java.lang.Math;
 
@@ -42,18 +43,37 @@ public class CVJointInstance extends SingleRotatingInstance<CVJointBlockEntity> 
     @Override
     public void beginFrame() {
 
-        if (blockEntity.target == null) return;
-        CVJointBlockEntity other = BlockRegistry.CV_JOINT.get().getBlockEntity(blockEntity.getLevel(), blockEntity.target);
-        if (other == null) return;
+        boolean disconnect = false;
+
+        CVJointBlockEntity other = null;
+        if (blockEntity.target == null) disconnect = true;
+        else {
+            other = BlockRegistry.CV_JOINT.get().getBlockEntity(world, blockEntity.target);
+            if (other == null) disconnect = true;
+        }
 
         float angle = KineticBlockEntityRenderer.getAngleForTe(blockEntity, blockEntity.getBlockPos(), axis);
         if (facing.getAxisDirection() == Direction.AxisDirection.POSITIVE) angle *= -1;
 
-        Vector3d dif = other.getWorldspace().sub(blockEntity.getWorldspace());
+        if (disconnect) {
+            rod
+                    .loadIdentity()
+                    .translate(getInstancePosition())
+                    .centre()
+                    .rotateY(AngleHelper.horizontalAngle(facing))
+                    .rotateX(AngleHelper.verticalAngle(facing) + 180)
+                    .rotateZRadians(angle)
+                    .unCentre()
+            ;
+            connector.setEmptyTransform();
+            return;
+        }
+
+        Vector3d dif = blockEntity.getShipToWorldClient(world).invert(new Matrix4d()).transformPosition(other.getWorldSpaceClient(world))
+                .sub(VectorConversionsMCKt.toJOML(blockEntity.getBlockPos().getCenter()));
         double len = dif.length();
         Vector3d dir = dif.div(len, new Vector3d());
-        Vec3i __ = facing.getNormal();
-        Vector3d startDir = new Vector3d(__.getX(), __.getY(), __.getZ());
+        Vector3d startDir = VectorConversionsMCKt.toJOMLD(facing.getNormal());
         Vector3d bendAxis = startDir.cross(dir, new Vector3d()).normalize();
         double bendAmount = Math.acos(startDir.dot(dir));
 

@@ -2,24 +2,26 @@ package com.github.guyapooye.clockworkadditions.blocks.kinetics.cv_joint;
 
 import com.github.guyapooye.clockworkadditions.mixin.create.KineticBlockEntityMixin;
 import com.github.guyapooye.clockworkadditions.registries.BlockRegistry;
+import com.mojang.authlib.minecraft.client.MinecraftClient;
 import com.simibubi.create.content.kinetics.KineticNetwork;
 import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.foundation.utility.Lang;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import org.joml.Vector3d;
-import org.joml.Vector3f;
-import org.joml.Vector3i;
-import org.joml.Vector4d;
+import org.joml.*;
+import org.valkyrienskies.core.api.ships.ClientShip;
 import org.valkyrienskies.core.api.ships.ServerShip;
 import org.valkyrienskies.core.api.ships.Ship;
 import org.valkyrienskies.core.apigame.VSCore;
 import org.valkyrienskies.mod.common.VSGameUtilsKt;
+import org.valkyrienskies.mod.common.util.VectorConversionsMCKt;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,11 +66,29 @@ public class CVJointBlockEntity extends KineticBlockEntity {
         return result;
     }
 
-    public Vector3d getWorldspace() {
+    public Matrix4dc getShipToWorld() {
+        VSGameUtilsKt.getShipManagingPos(level, getBlockPos());
         Ship ship = VSGameUtilsKt.getShipManagingPos(level, getBlockPos());
+        if (ship == null) return new Matrix4d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        return ship.getShipToWorld();
+    }
+
+    public Matrix4dc getShipToWorldClient(Level level) {
+        VSGameUtilsKt.getShipManagingPos(level, getBlockPos());
+        ClientShip ship = (ClientShip) VSGameUtilsKt.getShipManagingPos(level, getBlockPos());
+
+        if (ship == null) return new Matrix4d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        return ship.getRenderTransform().getShipToWorld();
+    }
+
+    public Vector3d getWorldSpace() {
         BlockPos pos = getBlockPos();
-        if (ship == null) return new Vector3d(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
-        return ship.getShipToWorld().transformPosition(new Vector3d(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5));
+        return getShipToWorld().transformPosition(new Vector3d(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5));
+    }
+
+    public Vector3d getWorldSpaceClient(Level level) {
+        BlockPos pos = getBlockPos();
+        return getShipToWorldClient(level).transformPosition(new Vector3d(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5));
     }
 
     @Override
@@ -78,7 +98,7 @@ public class CVJointBlockEntity extends KineticBlockEntity {
         CVJointBlockEntity other = BlockRegistry.CV_JOINT.get().getBlockEntity(level, target);
         if (other == null) return;
         if (renderConnector == other.renderConnector) renderConnector = !other.renderConnector;
-        if (getWorldspace().sub(other.getWorldspace()).lengthSquared() > 9) {
+        if (getWorldSpace().sub(other.getWorldSpace()).lengthSquared() > 9) {
             target = null;
             other.target = null;
             detachKinetics();
