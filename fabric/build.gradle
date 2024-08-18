@@ -44,9 +44,7 @@ dependencies {
     modImplementation("com.simibubi.create:create-fabric-${minecraft_version}:${create_fabric_version}")
 //    modImplementation(include("io.github.fabricators_of_create:Porting-Lib:$port_lib_version+$minecraft_version"))
 
-    modImplementation(files("libs/clockwork-1-20-1-fabric.jar"))
-    implementation("org.joml:joml:1.10.5")
-    implementation("org.joml:joml-primitives:1.10.0")
+    modImplementation(files("libs/clockwork-1.20.1-fabric.jar"))
 }
 loom {
     accessWidenerPath = project(":common").loom.accessWidenerPath

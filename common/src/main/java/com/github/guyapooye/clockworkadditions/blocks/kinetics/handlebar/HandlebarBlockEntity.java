@@ -3,6 +3,7 @@ package com.github.guyapooye.clockworkadditions.blocks.kinetics.handlebar;
 import com.github.guyapooye.clockworkadditions.ClockworkAdditions;
 import com.github.guyapooye.clockworkadditions.registries.BlockRegistry;
 import com.github.guyapooye.clockworkadditions.registries.ConfigRegistry;
+import com.github.guyapooye.clockworkadditions.util.PlatformUtil;
 import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
 import com.simibubi.create.content.kinetics.BlockStressValues;
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
@@ -10,6 +11,7 @@ import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.utility.AngleHelper;
 import com.tterrag.registrate.fabric.EnvExecutor;
+import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
@@ -31,7 +33,7 @@ import java.util.*;
 import static java.lang.Math.*;
 import static net.minecraft.util.Mth.sign;
 
-public abstract class HandlebarBlockEntity extends GeneratingKineticBlockEntity {
+public class HandlebarBlockEntity extends GeneratingKineticBlockEntity {
     protected UUID user;
     protected UUID prevUser;	// used only on client
     protected boolean deactivatedThisTick;	// used only on server
@@ -115,11 +117,21 @@ public abstract class HandlebarBlockEntity extends GeneratingKineticBlockEntity 
                 stopUsing((Player) playerEntity);
     }
 
-    protected abstract void startUsing(Player player);
-
-    protected abstract void stopUsing(Player player);
-
-    public abstract boolean playerIsUsingHandle(Player player);
+    private void stopUsing(Player player) {
+        user = null;
+        if (player != null)
+            PlatformUtil.getPlayerCustomData(player).remove("IsUsingHandlebar");
+        deactivatedThisTick = true;
+        sendData();
+    }
+    private void startUsing(Player player) {
+        user = player.getUUID();
+        PlatformUtil.getPlayerCustomData(player).putBoolean("IsUsingHandlebar", true);
+        sendData();
+    }
+    public static boolean playerIsUsingHandle(Player player) {
+        return PlatformUtil.getPlayerCustomData(player).contains("IsUsingHandlebar");
+    }
     @Override
     public float getGeneratedSpeed() {
         updateVars();
@@ -136,7 +148,6 @@ public abstract class HandlebarBlockEntity extends GeneratingKineticBlockEntity 
             HandlebarClientHandler.activate(worldPosition);
         }
     }
-    protected abstract void runWhenOn();
 
     @Override
     public void tick() {
@@ -150,9 +161,10 @@ public abstract class HandlebarBlockEntity extends GeneratingKineticBlockEntity 
             independentAngle = maxAngle*360/70;
             updateGeneratedRotation();
         }
-
-        runWhenOn();
-
+        if (level.isClientSide) {
+            PlatformUtil.runWhenOn(EnvType.CLIENT,() -> this::tryToggleActive);
+            prevUser = user;
+        }
         if (!level.isClientSide) {
             deactivatedThisTick = false;
 

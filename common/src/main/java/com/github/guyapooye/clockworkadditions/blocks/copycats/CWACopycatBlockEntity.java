@@ -3,6 +3,7 @@ package com.github.guyapooye.clockworkadditions.blocks.copycats;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.contraptions.ITransformableBlockEntity;
 import com.simibubi.create.content.contraptions.StructureTransform;
+import com.simibubi.create.content.decoration.copycat.CopycatBlockEntity;
 import com.simibubi.create.content.redstone.RoseQuartzLampBlock;
 import com.simibubi.create.content.schematics.requirement.ISpecialBlockEntityItemRequirement;
 import com.simibubi.create.content.schematics.requirement.ItemRequirement;
@@ -22,8 +23,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 import java.util.List;
 
-public abstract class CWACopycatBlockEntity extends SmartBlockEntity
-        implements ISpecialBlockEntityItemRequirement, ITransformableBlockEntity, IPartialSafeNBT {
+public class CWACopycatBlockEntity extends CopycatBlockEntity {
 
     protected BlockState material;
     protected ItemStack consumedItem;
