@@ -70,28 +70,7 @@ public class CVJointBlock extends DirectionalKineticBlock implements IBE<CVJoint
 
     @Override
     public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
-        CompoundTag tag = stack.getTag();
-        int[] boundPosArr = null;
-        if (tag != null)
-            boundPosArr = stack.getTag().getIntArray("BoundPosition");
-        if (boundPosArr == null) {
-            stack.addTagElement("BoundPosition", new IntArrayTag(new int[]{pos.getX(), pos.getY(), pos.getZ()}));
-            stack.addTagElement("Enchantments", new ListTag() {{ add(new CompoundTag()); }});
-        } else {
-            BlockPos targ = new BlockPos(boundPosArr[0], boundPosArr[1], boundPosArr[2]);
-            CVJointBlockEntity targBE = getBlockEntity(worldIn, targ);
-            CVJointBlockEntity destBE = getBlockEntity(worldIn, pos);
-            if (targBE != null && destBE != null && !targ.equals(pos)) {
-                destBE.target = targ;
-                targBE.target = pos;
-                destBE.attachKinetics();
-                targBE.attachKinetics();
-                stack.removeTagKey("BoundPosition");
-                stack.removeTagKey("Enchantments");
-            } else {
-                stack.addTagElement("BoundPosition", new IntArrayTag(new int[]{pos.getX(), pos.getY(), pos.getZ()}));
-            }
-        }
+        link(stack, worldIn, pos);
     }
 
     @Override
@@ -100,6 +79,10 @@ public class CVJointBlock extends DirectionalKineticBlock implements IBE<CVJoint
         if (!stack.is(asItem()) || player.isCrouching()) {
             return InteractionResult.PASS;
         }
+        return link(stack, worldIn, pos);
+    }
+
+    public InteractionResult link(ItemStack stack, Level worldIn, BlockPos pos) {
         CompoundTag tag = stack.getTag();
         int[] boundPosArr = null;
         if (tag != null)
@@ -115,10 +98,7 @@ public class CVJointBlock extends DirectionalKineticBlock implements IBE<CVJoint
         CVJointBlockEntity targBE = getBlockEntity(worldIn, targ);
         CVJointBlockEntity destBE = getBlockEntity(worldIn, pos);
         if (targBE != null && destBE != null && !targ.equals(pos)) {
-            destBE.target = targ;
-            targBE.target = pos;
-            destBE.attachKinetics();
-            targBE.attachKinetics();
+            destBE.attach(targ);
             stack.removeTagKey("BoundPosition");
             stack.removeTagKey("Enchantments");
             return InteractionResult.CONSUME;

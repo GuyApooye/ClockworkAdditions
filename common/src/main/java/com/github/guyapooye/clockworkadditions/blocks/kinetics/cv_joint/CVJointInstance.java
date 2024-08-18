@@ -75,6 +75,7 @@ public class CVJointInstance extends SingleRotatingInstance<CVJointBlockEntity> 
         Vector3d dir = dif.div(len, new Vector3d());
         Vector3d startDir = VectorConversionsMCKt.toJOMLD(facing.getNormal());
         Vector3d bendAxis = startDir.cross(dir, new Vector3d()).normalize();
+        if (dir.equals(startDir)) bendAxis.set(1);
         double bendAmount = Math.acos(startDir.dot(dir));
 
         Vector4d

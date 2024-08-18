@@ -7,9 +7,11 @@ import com.simibubi.create.content.kinetics.KineticNetwork;
 import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.foundation.utility.Lang;
+import com.simibubi.create.foundation.utility.NBTHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
@@ -40,14 +42,14 @@ public class CVJointBlockEntity extends KineticBlockEntity {
     @Override
     protected void read(CompoundTag compound, boolean clientPacket) {
         super.read(compound, clientPacket);
-        int[] target = compound.getIntArray("target");
+        target = NbtUtils.readBlockPos(compound.getCompound("target"));
     }
 
     @Override
     protected void write(CompoundTag compound, boolean clientPacket) {
         super.write(compound, clientPacket);
         if (target == null) return;
-        compound.putIntArray("target", new int[]{target.getX(), target.getY(), target.getZ()});
+        compound.put("target", NbtUtils.writeBlockPos(target));
     }
 
     @Override
@@ -91,12 +93,47 @@ public class CVJointBlockEntity extends KineticBlockEntity {
         return getShipToWorldClient(level).transformPosition(new Vector3d(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5));
     }
 
+    public void detach() {
+        target = null;
+        if (source != null && !source.equals(getBlockPos().subtract(getBlockState().getValue(FACING).getNormal()))) {
+            detachKinetics();
+            removeSource();
+            requestModelDataUpdate();
+        }
+    }
+
+    public void attach(BlockPos pos) {
+        if (pos.equals(target)) return;
+        if (target != null) {
+            CVJointBlockEntity old = BlockRegistry.CV_JOINT.get().getBlockEntity(level, target);
+            if (old != null) {
+                old.detach();
+            }
+            detach();
+        }
+        target = pos;
+        CVJointBlockEntity targ = BlockRegistry.CV_JOINT.get().getBlockEntity(level, target);
+        if (targ == null) return;
+        detach();
+        target = pos;
+        attachKinetics();
+        targ.attach(getBlockPos());
+
+    }
+
     @Override
     public void tick() {
         super.tick();
-        if (target == null) return;
+        if (target == null) {
+            detach();
+            return;
+        }
         CVJointBlockEntity other = BlockRegistry.CV_JOINT.get().getBlockEntity(level, target);
-        if (other == null) return;
+        if (other == null) {
+            if (level.isLoaded(target))
+                detach();
+            return;
+        };
         if (renderConnector == other.renderConnector) renderConnector = !other.renderConnector;
         if (getWorldSpace().sub(other.getWorldSpace()).lengthSquared() > 9) {
             target = null;
@@ -104,5 +141,10 @@ public class CVJointBlockEntity extends KineticBlockEntity {
             detachKinetics();
             other.detachKinetics();
         }
+    }
+
+    @Override
+    protected boolean isNoisy() {
+        return true;
     }
 }
