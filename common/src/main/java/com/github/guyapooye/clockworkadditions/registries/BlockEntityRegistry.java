@@ -5,9 +5,9 @@ import com.github.guyapooye.clockworkadditions.blocks.bearings.flap.KineticFlapB
 import com.github.guyapooye.clockworkadditions.blocks.bearings.heli.PhysicsBearingBlockEntity;
 import com.github.guyapooye.clockworkadditions.blocks.bearings.heli.archived.BasePhysicsBearingBlockEntity;
 import com.github.guyapooye.clockworkadditions.blocks.copycats.CWACopycatBlockEntity;
-import com.github.guyapooye.clockworkadditions.blocks.kinetics.cv_joint.CVJointBlockEntity;
-import com.github.guyapooye.clockworkadditions.blocks.kinetics.cv_joint.CVJointInstance;
-import com.github.guyapooye.clockworkadditions.blocks.kinetics.cv_joint.CVJointRenderer;
+import com.github.guyapooye.clockworkadditions.blocks.kinetics.cvjoint.CVJointBlockEntity;
+import com.github.guyapooye.clockworkadditions.blocks.kinetics.cvjoint.CVJointInstance;
+import com.github.guyapooye.clockworkadditions.blocks.kinetics.cvjoint.CVJointRenderer;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.handlebar.HandlebarBlockEntity;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.handlebar.HandlebarInstance;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.pedals.PedalsBlockEntity;

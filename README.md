@@ -5,5 +5,3 @@ TODO:
 Gyroscope/Rotation Sensor
 
 Wanderlite Casing
-
-Copycat Wing and Copycat Flap

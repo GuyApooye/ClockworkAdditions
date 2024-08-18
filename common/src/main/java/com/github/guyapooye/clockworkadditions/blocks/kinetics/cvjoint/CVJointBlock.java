@@ -1,4 +1,4 @@
-package com.github.guyapooye.clockworkadditions.blocks.kinetics.cv_joint;
+package com.github.guyapooye.clockworkadditions.blocks.kinetics.cvjoint;
 
 import com.github.guyapooye.clockworkadditions.registries.BlockEntityRegistry;
 import com.github.guyapooye.clockworkadditions.registries.ShapesRegistry;
@@ -13,21 +13,17 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-
-import java.util.function.Function;
 
 import static com.simibubi.create.foundation.block.ProperWaterloggedBlock.WATERLOGGED;
 

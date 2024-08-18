@@ -1,29 +1,22 @@
-package com.github.guyapooye.clockworkadditions.blocks.kinetics.cv_joint;
+package com.github.guyapooye.clockworkadditions.blocks.kinetics.cvjoint;
 
 import com.github.guyapooye.clockworkadditions.registries.BlockRegistry;
 import com.github.guyapooye.clockworkadditions.registries.PartialModelRegistry;
-import com.ibm.icu.text.MessagePattern;
 import com.jozufozu.flywheel.api.Instancer;
 import com.jozufozu.flywheel.api.Material;
 import com.jozufozu.flywheel.api.MaterialManager;
 import com.jozufozu.flywheel.api.instance.DynamicInstance;
 import com.jozufozu.flywheel.core.materials.model.ModelData;
-import com.simibubi.create.AllPartialModels;
-import com.simibubi.create.content.kinetics.base.BackHalfShaftInstance;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
 import com.simibubi.create.content.kinetics.base.SingleRotatingInstance;
 import com.simibubi.create.content.kinetics.base.flwdata.RotatingData;
 import com.simibubi.create.foundation.utility.AngleHelper;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Vec3i;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.phys.Vec3;
 import org.joml.*;
 import org.valkyrienskies.mod.common.util.VectorConversionsMCKt;
 
 import java.lang.Math;
-
-import static com.simibubi.create.content.kinetics.base.DirectionalKineticBlock.FACING;
 
 public class CVJointInstance extends SingleRotatingInstance<CVJointBlockEntity> implements DynamicInstance {
 

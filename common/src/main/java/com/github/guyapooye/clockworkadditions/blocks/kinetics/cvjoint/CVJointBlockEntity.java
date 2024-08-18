@@ -1,31 +1,20 @@
-package com.github.guyapooye.clockworkadditions.blocks.kinetics.cv_joint;
+package com.github.guyapooye.clockworkadditions.blocks.kinetics.cvjoint;
 
-import com.github.guyapooye.clockworkadditions.mixin.create.KineticBlockEntityMixin;
 import com.github.guyapooye.clockworkadditions.registries.BlockRegistry;
-import com.mojang.authlib.minecraft.client.MinecraftClient;
-import com.simibubi.create.content.kinetics.KineticNetwork;
 import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
-import com.simibubi.create.foundation.utility.Lang;
-import com.simibubi.create.foundation.utility.NBTHelper;
+import kotlin.Triple;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.joml.*;
 import org.valkyrienskies.core.api.ships.ClientShip;
-import org.valkyrienskies.core.api.ships.ServerShip;
 import org.valkyrienskies.core.api.ships.Ship;
-import org.valkyrienskies.core.apigame.VSCore;
 import org.valkyrienskies.mod.common.VSGameUtilsKt;
-import org.valkyrienskies.mod.common.util.VectorConversionsMCKt;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.simibubi.create.content.kinetics.base.DirectionalKineticBlock.FACING;
@@ -87,7 +76,6 @@ public class CVJointBlockEntity extends KineticBlockEntity {
         BlockPos pos = getBlockPos();
         return getShipToWorld().transformPosition(new Vector3d(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5));
     }
-
     public Vector3d getWorldSpaceClient(Level level) {
         BlockPos pos = getBlockPos();
         return getShipToWorldClient(level).transformPosition(new Vector3d(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5));

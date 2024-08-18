@@ -5,18 +5,18 @@ import com.github.guyapooye.clockworkadditions.blocks.bearings.heli.PhysicsBeari
 import com.github.guyapooye.clockworkadditions.blocks.bearings.heli.archived.BasePhysicsBearingBlock;
 import com.github.guyapooye.clockworkadditions.blocks.copycats.wingalikes.CopycatFlapBlock;
 import com.github.guyapooye.clockworkadditions.blocks.copycats.wingalikes.CopycatWingBlock;
-import com.github.guyapooye.clockworkadditions.blocks.kinetics.cv_joint.CVJointBlock;
+import com.github.guyapooye.clockworkadditions.blocks.kinetics.cvjoint.CVJointBlock;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.handlebar.HandlebarBlock;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.pedals.PedalsBlock;
 import com.github.guyapooye.clockworkadditions.blocks.redstone.gyro.RedstoneGyroBlock;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.foundation.data.BlockStateGen;
-import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 
@@ -96,8 +96,7 @@ public class BlockRegistry {
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .addLayer(() -> RenderType::cutoutMipped)
                     .blockstate(BlockStateGen.horizontalBlockProvider(true))
-                    .simpleItem()
-                    .lang("CV Joint")
+                    .lang("Constant Velocity Joint")
                     .register();
     public static final BlockEntry<? extends CopycatWingBlock> COPYCAT_WING = registerCopycatWing();
     public static final BlockEntry<? extends CopycatFlapBlock> COPYCAT_FLAP = registerCopycatFlap();
