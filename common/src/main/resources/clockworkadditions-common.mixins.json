@@ -10,8 +10,6 @@
     "create.RedstoneLinkNetworkHandlerMixin",
     "vs.VSEntityManagerMixin"
   ],
-  "client": [
-  ],
   "injectors": {
     "defaultRequire": 1
   }

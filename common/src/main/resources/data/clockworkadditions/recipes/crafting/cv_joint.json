@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#",
+        "D",
+        "#"
+    ],
+    "key": {
+        "#": {
+            "item": "create:andesite_alloy"
+        },
+        "D": {
+            "item": "minecraft:dried_kelp"
+        }
+    },
+    "result": {
+        "item": "clockworkadditions:cv_joint",
+        "count": 2
+    }
+}
