@@ -2,9 +2,12 @@ package com.github.guyapooye.clockworkadditions.registries;
 
 import com.github.guyapooye.clockworkadditions.blocks.bearings.flap.KineticFlapBearingBlockEntity;
 import com.github.guyapooye.clockworkadditions.blocks.bearings.flap.KineticFlapBearingRenderer;
-import com.github.guyapooye.clockworkadditions.blocks.bearings.heli.PhysicsBearingBlockEntity;
-import com.github.guyapooye.clockworkadditions.blocks.bearings.heli.archived.BasePhysicsBearingBlockEntity;
+import com.github.guyapooye.clockworkadditions.blocks.bearings.alternator.AlternatorBearingBlockEntity;
+import com.github.guyapooye.clockworkadditions.blocks.bearings.alternator.archived.BasePhysicsBearingBlockEntity;
 import com.github.guyapooye.clockworkadditions.blocks.copycats.CWACopycatBlockEntity;
+import com.github.guyapooye.clockworkadditions.blocks.kinetics.cvjoint.CVJointBlockEntity;
+import com.github.guyapooye.clockworkadditions.blocks.kinetics.cvjoint.CVJointInstance;
+import com.github.guyapooye.clockworkadditions.blocks.kinetics.cvjoint.CVJointRenderer;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.handlebar.HandlebarBlockEntity;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.handlebar.HandlebarInstance;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.pedals.PedalsBlockEntity;
@@ -25,11 +28,9 @@ public class BlockEntityRegistry {
             .renderer(() -> BearingRenderer::new)
             .register();
 
-    public static final BlockEntityEntry<PhysicsBearingBlockEntity> HELI_PHYS_BEARING = REGISTRATE
-            .blockEntity("heli_physics_bearing", PhysicsBearingBlockEntity::new)
-            .instance(() -> BearingInstance::new)
-            .validBlocks(BlockRegistry.HELI_PHYSICS_BEARING)
-            .renderer(() -> BearingRenderer::new)
+    public static final BlockEntityEntry<AlternatorBearingBlockEntity> ALTERNATOR_BEARING = REGISTRATE
+            .blockEntity("kinetic_alternator", AlternatorBearingBlockEntity::new)
+            .validBlocks(BlockRegistry.ALTERNATOR_BEARING)
             .register();
     public static final BlockEntityEntry<KineticFlapBearingBlockEntity> KINETIC_FLAP_BEARING = REGISTRATE
             .blockEntity("kinetic_flap_bearing", KineticFlapBearingBlockEntity::new)
@@ -50,6 +51,12 @@ public class BlockEntityRegistry {
     public static final BlockEntityEntry<RedstoneGyroBlockEntity> REDSTONE_GYRO = REGISTRATE
             .blockEntity("redstone_gyro", RedstoneGyroBlockEntity::new)
             .validBlocks(BlockRegistry.REDSTONE_GYRO)
+            .register();
+    public static final BlockEntityEntry<CVJointBlockEntity> CV_JOINT = REGISTRATE
+            .blockEntity("cv_joint", CVJointBlockEntity::new)
+            .instance(() -> CVJointInstance::new)
+            .validBlocks(BlockRegistry.CV_JOINT)
+            .renderer(() -> CVJointRenderer::new)
             .register();
     public static final BlockEntityEntry<? extends CWACopycatBlockEntity> COPYCAT = REGISTRATE
             .blockEntity("copycat", CWACopycatBlockEntity::new)
