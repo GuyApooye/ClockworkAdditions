@@ -9,12 +9,15 @@ import com.jozufozu.flywheel.api.MaterialManager;
 import com.jozufozu.flywheel.api.instance.DynamicInstance;
 import com.jozufozu.flywheel.core.materials.model.ModelData;
 import com.mojang.math.Matrix3f;
+import com.mojang.math.Matrix4f;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
 import com.simibubi.create.content.kinetics.base.SingleRotatingInstance;
 import com.simibubi.create.content.kinetics.base.flwdata.RotatingData;
 import com.simibubi.create.foundation.utility.AngleHelper;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.Direction;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.joml.Matrix4d;
 import org.joml.Vector3d;
@@ -71,27 +74,14 @@ public class CVJointInstance extends SingleRotatingInstance<CVJointBlockEntity> 
             connector2.setEmptyTransform();
             return;
         }
-        org.joml.Vector3d dif = blockEntity.getShipToWorldClient((ClientLevel) world).invert(new Matrix4d()).transformPosition(other.getWorldSpaceClient((ClientLevel) world))
-                .sub(VectorConversionsMCKt.toJOMLD(blockEntity.getBlockPos()).add(NumberUtil.blockPosOffset));
-        double len = dif.length();
-        org.joml.Vector3d dir = dif.div(len, new org.joml.Vector3d());
-        org.joml.Vector3d startDir = VectorConversionsMCKt.toJOMLD(facing.getNormal());
-        org.joml.Vector3d bendAxis = startDir.cross(dir, new Vector3d()).normalize();
-        if (dir.equals(startDir)) bendAxis.set(1);
-        double bendAmount = Math.acos(startDir.dot(dir));
-
-        Vector4d
-                bmx = new Vector4d(1, 0, 0, 0).rotateAxis(bendAmount, bendAxis.x, bendAxis.y, bendAxis.z),
-                bmy = new Vector4d(0, 1, 0, 0).rotateAxis(bendAmount, bendAxis.x, bendAxis.y, bendAxis.z),
-                bmz = new Vector4d(0, 0, 1, 0).rotateAxis(bendAmount, bendAxis.x, bendAxis.y, bendAxis.z);
-        Matrix4d bendMat = new Matrix4d(new Matrix4d(bmx, bmy, bmz, new Vector4d(0, 0, 0, 1)));
-
+        Matrix4f bendMat = getMatrix(blockEntity,other,world,facing);
+        double len = getLength(blockEntity,other,world);
         rod
                 .loadIdentity()
                 .translate(getInstancePosition())
                 .centre()
                 .transform(
-                        VectorConversionsMCKt.toMinecraft(bendMat),
+                        bendMat,
                         new com.mojang.math.Matrix3f())
                 .rotateY(AngleHelper.horizontalAngle(facing))
                 .rotateX(AngleHelper.verticalAngle(facing) + 180)
@@ -103,8 +93,8 @@ public class CVJointInstance extends SingleRotatingInstance<CVJointBlockEntity> 
                 .translate(getInstancePosition())
                 .centre()
                 .transform(
-                        VectorConversionsMCKt.toMinecraft(bendMat),
-                        new Matrix3f(VectorConversionsMCKt.toMinecraft(new Matrix4d(0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,0,0,0))))
+                        bendMat,
+                        new com.mojang.math.Matrix3f())
                 .rotateY(AngleHelper.horizontalAngle(facing))
                 .rotateX(AngleHelper.verticalAngle(facing) + 180)
                 .rotateZRadians(angle)
@@ -121,14 +111,35 @@ public class CVJointInstance extends SingleRotatingInstance<CVJointBlockEntity> 
                 .translate(getInstancePosition())
                 .centre()
                 .transform(
-                        VectorConversionsMCKt.toMinecraft(bendMat),
-                        new Matrix3f(VectorConversionsMCKt.toMinecraft(new Matrix4d(0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,0,0,0))))
+                        bendMat,
+                        new com.mojang.math.Matrix3f())
                 .rotateY(AngleHelper.horizontalAngle(facing))
                 .rotateX(AngleHelper.verticalAngle(facing) + 180)
                 .rotateZRadians(angle)
                 .unCentre()
                 .translateZ(-len/2)
         ;
+    }
+    protected static Matrix4f getMatrix(CVJointBlockEntity blockEntity, CVJointBlockEntity other, Level world, Direction facing) {
+        org.joml.Vector3d dif = blockEntity.getShipToWorldClient(world).invert(new Matrix4d()).transformPosition(other.getWorldSpaceClient(world))
+                .sub(VectorConversionsMCKt.toJOMLD(blockEntity.getBlockPos()).add(NumberUtil.blockPosOffset));
+        double len = dif.length();
+        org.joml.Vector3d dir = dif.div(len, new org.joml.Vector3d());
+        org.joml.Vector3d startDir = VectorConversionsMCKt.toJOMLD(facing.getNormal());
+        org.joml.Vector3d bendAxis = startDir.cross(dir, new Vector3d()).normalize();
+        if (dir.equals(startDir)) bendAxis.set(1);
+        double bendAmount = Math.acos(startDir.dot(dir));
+
+        Vector4d
+                bmx = new Vector4d(1, 0, 0, 0).rotateAxis(bendAmount, bendAxis.x, bendAxis.y, bendAxis.z),
+                bmy = new Vector4d(0, 1, 0, 0).rotateAxis(bendAmount, bendAxis.x, bendAxis.y, bendAxis.z),
+                bmz = new Vector4d(0, 0, 1, 0).rotateAxis(bendAmount, bendAxis.x, bendAxis.y, bendAxis.z);
+        Matrix4d bendMat = new Matrix4d(new Matrix4d(bmx, bmy, bmz, new Vector4d(0, 0, 0, 1)));
+        return VectorConversionsMCKt.toMinecraft(bendMat);
+    }
+    protected static double getLength(CVJointBlockEntity blockEntity, CVJointBlockEntity other, Level world) {
+        return blockEntity.getShipToWorldClient(world).invert(new Matrix4d()).transformPosition(other.getWorldSpaceClient(world))
+                .sub(VectorConversionsMCKt.toJOMLD(blockEntity.getBlockPos()).add(NumberUtil.blockPosOffset)).length();
     }
 
     @Override

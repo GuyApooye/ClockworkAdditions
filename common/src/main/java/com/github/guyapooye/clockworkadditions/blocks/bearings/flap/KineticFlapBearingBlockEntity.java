@@ -396,15 +396,22 @@ public class KineticFlapBearingBlockEntity extends KineticBlockEntity implements
 
         return speed;
     }
-
     @Override
     public float getInterpolatedAngle(float partialTicks) {
-        if (isVirtual())
-            return Mth.lerp(partialTicks + .5f, prevForcedAngle, bearingAngle);
-        if (flap == null || flap.isStalled())
-            partialTicks = 0;
-        float angularSpeed = getAngularSpeed();
-        return Mth.lerp(partialTicks, bearingAngle, bearingAngle + angularSpeed);
+        if (this.isVirtual()) {
+            return Mth.lerp(partialTicks, this.prevForcedAngle, this.bearingAngle);
+        } else {
+            if (this.flap != null) {
+                ControlledContraptionEntity var10000 = this.flap;
+                Intrinsics.checkNotNull(var10000);
+                if (!var10000.isStalled()) {
+                    return Mth.lerp(partialTicks, this.bearingAngle, this.bearingAngle + this.getFlapSpeed());
+                }
+            }
+
+            partialTicks = 0.0F;
+            return Mth.lerp(partialTicks, this.bearingAngle, this.bearingAngle + this.getFlapSpeed());
+        }
     }
 
     public boolean isWoodenTop() {

@@ -1,6 +1,7 @@
 package com.github.guyapooye.clockworkadditions.registries;
 
 import com.github.guyapooye.clockworkadditions.blocks.bearings.flap.KineticFlapBearingBlockEntity;
+import com.github.guyapooye.clockworkadditions.blocks.bearings.flap.KineticFlapBearingInstance;
 import com.github.guyapooye.clockworkadditions.blocks.bearings.flap.KineticFlapBearingRenderer;
 import com.github.guyapooye.clockworkadditions.blocks.bearings.alternator.AlternatorBearingBlockEntity;
 import com.github.guyapooye.clockworkadditions.blocks.bearings.alternator.archived.BasePhysicsBearingBlockEntity;
@@ -34,6 +35,7 @@ public class BlockEntityRegistry {
             .register();
     public static final BlockEntityEntry<KineticFlapBearingBlockEntity> KINETIC_FLAP_BEARING = REGISTRATE
             .blockEntity("kinetic_flap_bearing", KineticFlapBearingBlockEntity::new)
+            .instance(() -> KineticFlapBearingInstance::new)
             .validBlocks(BlockRegistry.KINETIC_FLAP_BEARING)
             .renderer(() -> KineticFlapBearingRenderer::new)
             .register();
