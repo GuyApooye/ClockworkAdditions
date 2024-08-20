@@ -2,6 +2,7 @@ plugins {
     id "architectury-plugin" version "3.4-SNAPSHOT"
     id "dev.architectury.loom" version "1.5-SNAPSHOT" apply false
     id "io.github.pacifistmc.forgix" version "1.2.6"
+    id "io.freefair.lombok" version "8.10"
 }
 
 architectury {
@@ -10,7 +11,7 @@ architectury {
 
 forgix {
     group = "com.github.guyapooye.clockworkadditions"
-    mergedJarName = "ClockworkAdditions-${mod_version}.jar"
+    mergedJarName = "ClockworkAdditions-${mod_version}-forge-and-fabric.jar"
 }
 
 subprojects {
@@ -33,6 +34,7 @@ allprojects {
     apply plugin: "java"
     apply plugin: "architectury-plugin"
     apply plugin: "maven-publish"
+    apply plugin: "io.freefair.lombok"
 
     archivesBaseName = rootProject.archives_base_name
     version = rootProject.mod_version
@@ -49,6 +51,13 @@ allprojects {
         // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
         // See https://docs.gradle.org/current/userguide/declaring_repositories.html
         // for more information about repositories.
+    }
+    dependencies {
+        compileOnly 'org.projectlombok:lombok:1.18.34'
+        annotationProcessor 'org.projectlombok:lombok:1.18.34'
+
+        testCompileOnly 'org.projectlombok:lombok:1.18.34'
+        testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
     }
 
     tasks.withType(JavaCompile) {
