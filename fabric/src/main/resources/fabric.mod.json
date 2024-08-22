@@ -8,7 +8,7 @@
   "authors": ["GuyApooye"],
   "contact": {},
 
-  "license": "All Rights Reserved",
+  "license": "LGPL v2.1",
   "icon": "icon.png",
 
   "environment": "*",
