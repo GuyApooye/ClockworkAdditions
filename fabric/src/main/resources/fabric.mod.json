@@ -8,7 +8,7 @@
   "authors": ["GuyApooye"],
   "contact": {},
 
-  "license": "LGPL v2.1",
+  "license": "MIT",
   "icon": "icon.png",
 
   "environment": "*",
