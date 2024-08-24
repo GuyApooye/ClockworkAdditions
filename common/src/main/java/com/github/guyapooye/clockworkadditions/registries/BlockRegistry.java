@@ -2,13 +2,13 @@ package com.github.guyapooye.clockworkadditions.registries;
 
 import com.github.guyapooye.clockworkadditions.ClockworkAdditions;
 import com.github.guyapooye.clockworkadditions.blocks.bearings.flap.KineticFlapBearingBlock;
-import com.github.guyapooye.clockworkadditions.blocks.bearings.alternator.AlternatorBearingBlock;
-import com.github.guyapooye.clockworkadditions.blocks.bearings.alternator.archived.BasePhysicsBearingBlock;
 import com.github.guyapooye.clockworkadditions.blocks.copycats.wingalikes.CopycatFlapBlock;
 import com.github.guyapooye.clockworkadditions.blocks.copycats.wingalikes.CopycatWingBlock;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.cvjoint.CVJointBlock;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.handlebar.HandlebarBlock;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.pedals.PedalsBlock;
+import com.github.guyapooye.clockworkadditions.blocks.phys.alternator.AlternatorBearingBlock;
+import com.github.guyapooye.clockworkadditions.blocks.phys.alternator.archived.BasePhysicsBearingBlock;
 import com.github.guyapooye.clockworkadditions.blocks.redstone.gyro.RedstoneGyroBlock;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;

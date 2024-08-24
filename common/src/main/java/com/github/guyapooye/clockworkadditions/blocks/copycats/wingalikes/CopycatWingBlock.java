@@ -1,70 +1,56 @@
 package com.github.guyapooye.clockworkadditions.blocks.copycats.wingalikes;
 
-import com.github.guyapooye.clockworkadditions.blocks.copycats.ICopycatBlock;
-import kotlin.NoWhenBranchMatchedException;
+import com.simibubi.create.content.decoration.copycat.CopycatBlock;
+import com.simibubi.create.content.decoration.copycat.CopycatPanelBlock;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.BlockAndTintGetter;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.GrassColor;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.joml.Vector3d;
-import org.valkyrienskies.clockwork.util.blocktype.ConnectedWingAlike;
+import org.valkyrienskies.clockwork.ClockworkShapes;
 import org.valkyrienskies.core.api.ships.Wing;
 import org.valkyrienskies.mod.common.block.WingBlock;
+import org.valkyrienskies.mod.common.util.VectorConversionsMCKt;
 
-public abstract class CopycatWingBlock extends ConnectedWingAlike implements WingBlock, ICopycatBlock {
+public class CopycatWingBlock extends CopycatPanelBlock implements WingBlock {
     public CopycatWingBlock(@Nullable BlockBehaviour.Properties properties) {
         super(properties);
     }
 
-    @Nullable
-    public BlockState getNewState(BlockState state, Level level, BlockPos pos) {
-        Direction facing = state.getValue(ConnectedWingAlike.Companion.getFACING());
-        BlockState north = level.getBlockState(pos.north());
-        BlockState south = level.getBlockState(pos.south());
-        BlockState east = level.getBlockState(pos.east());
-        BlockState west = level.getBlockState(pos.west());
-        BlockState up = level.getBlockState(pos.above());
-        BlockState down = level.getBlockState(pos.below());
 
-        return switch (WhenMappings.$EnumSwitchMapping$0[facing.ordinal()]) {
-            case 1, 2 ->
-                    state.setValue(ConnectedWingAlike.Companion.getNORTH(), false)
-                            .setValue(ConnectedWingAlike.Companion.getSOUTH(), false)
-                            .setValue(ConnectedWingAlike.Companion.getEAST(), east.getBlock() instanceof CopycatWingBlock && east.getValue(ConnectedWingAlike.Companion.getFACING()) == facing)
-                            .setValue(ConnectedWingAlike.Companion.getWEST(), west.getBlock() instanceof CopycatWingBlock && west.getValue(ConnectedWingAlike.Companion.getFACING()) == facing)
-                            .setValue(ConnectedWingAlike.Companion.getUP(), up.getBlock() instanceof CopycatWingBlock && up.getValue(ConnectedWingAlike.Companion.getFACING()) == facing)
-                            .setValue(ConnectedWingAlike.Companion.getDOWN(), down.getBlock() instanceof CopycatWingBlock && down.getValue(ConnectedWingAlike.Companion.getFACING()) == facing)
-                            .setValue(ConnectedWingAlike.Companion.getFACING(), Direction.NORTH);
-            case 3, 4 ->
-                    state.setValue(ConnectedWingAlike.Companion.getNORTH(), north.getBlock() instanceof CopycatWingBlock && north.getValue(ConnectedWingAlike.Companion.getFACING()) == facing)
-                            .setValue(ConnectedWingAlike.Companion.getSOUTH(), south.getBlock() instanceof CopycatWingBlock && south.getValue(ConnectedWingAlike.Companion.getFACING()) == facing)
-                            .setValue(ConnectedWingAlike.Companion.getEAST(), false)
-                            .setValue(ConnectedWingAlike.Companion.getWEST(), false)
-                            .setValue(ConnectedWingAlike.Companion.getUP(), up.getBlock() instanceof CopycatWingBlock && up.getValue(ConnectedWingAlike.Companion.getFACING()) == facing)
-                            .setValue(ConnectedWingAlike.Companion.getDOWN(), down.getBlock() instanceof CopycatWingBlock && down.getValue(ConnectedWingAlike.Companion.getFACING()) == facing)
-                            .setValue( ConnectedWingAlike.Companion.getFACING(), Direction.EAST);
-            case 5, 6 ->
-                    state.setValue(ConnectedWingAlike.Companion.getNORTH(), north.getBlock() instanceof CopycatWingBlock && north.getValue(ConnectedWingAlike.Companion.getFACING()) == facing)
-                            .setValue(ConnectedWingAlike.Companion.getSOUTH(), south.getBlock() instanceof CopycatWingBlock && south.getValue(ConnectedWingAlike.Companion.getFACING()) == facing)
-                            .setValue(ConnectedWingAlike.Companion.getEAST(), east.getBlock() instanceof CopycatWingBlock && east.getValue(ConnectedWingAlike.Companion.getFACING()) == facing)
-                            .setValue(ConnectedWingAlike.Companion.getWEST(), west.getBlock() instanceof CopycatWingBlock && west.getValue(ConnectedWingAlike.Companion.getFACING()) == facing)
-                            .setValue(ConnectedWingAlike.Companion.getUP(), false)
-                            .setValue(ConnectedWingAlike.Companion.getDOWN(), false)
-                            .setValue(ConnectedWingAlike.Companion.getFACING(), Direction.UP);
-            default -> throw new NoWhenBranchMatchedException();
-        };
+    @Environment(EnvType.CLIENT)
+    public static BlockColor wrappedColor() {
+        return new CopycatBlock.WrappedBlockColor();
     }
+
+    @Environment(EnvType.CLIENT)
+    public static class WrappedBlockColor implements BlockColor {
+
+        @Override
+        public int getColor(BlockState pState, @javax.annotation.Nullable BlockAndTintGetter pLevel, @javax.annotation.Nullable BlockPos pPos,
+                            int pTintIndex) {
+            if (pLevel == null || pPos == null)
+                return GrassColor.get(0.5D, 1.0D);
+            return Minecraft.getInstance()
+                    .getBlockColors()
+                    .getColor(getMaterial(pLevel, pPos), pLevel, pPos, pTintIndex);
+        }
+
+    }
+
     @Override
-    public InteractionResult use(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, Player player, @NotNull InteractionHand hand,
-                                 BlockHitResult ray) {
-        return ICopycatBlock.super.use(state,level,pos,player,hand,ray);
+    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+        return ClockworkShapes.INSTANCE.getWING().get(pState.getValue(FACING).getAxis());
     }
 
     @NotNull
@@ -73,39 +59,7 @@ public abstract class CopycatWingBlock extends ConnectedWingAlike implements Win
         double wingDrag = 150.0;
         double wingBreakingForce = 10.0;
         double wingCamberAttackingBias = Math.toRadians(10.0);
-        Direction var10000 = blockState.getValue(ConnectedWingAlike.Companion.getFACING());
 
-        return switch (WhenMappings.$EnumSwitchMapping$0[var10000.ordinal()]) {
-            case 1, 2 ->
-                    new Wing(new Vector3d(0.0, 0.0, 1.0), wingPower, wingDrag, wingBreakingForce, wingCamberAttackingBias);
-            case 3, 4 ->
-                    new Wing(new Vector3d(1.0, 0.0, 0.0), wingPower, wingDrag, wingBreakingForce, wingCamberAttackingBias);
-            case 5, 6 ->
-                    new Wing(new Vector3d(0.0, 1.0, 0.0), wingPower, wingDrag, wingBreakingForce, wingCamberAttackingBias);
-            default -> throw new NoWhenBranchMatchedException();
-        };
-    }
-
-
-
-    public static class WhenMappings {
-        // $FF: synthetic field
-        public static final int[] $EnumSwitchMapping$0;
-
-        static {
-            int[] var0 = new int[Direction.values().length];
-
-            try {
-                var0[Direction.NORTH.ordinal()] = 1;
-                var0[Direction.SOUTH.ordinal()] = 2;
-                var0[Direction.EAST.ordinal()] = 3;
-                var0[Direction.WEST.ordinal()] = 4;
-                var0[Direction.UP.ordinal()] = 5;
-                var0[Direction.DOWN.ordinal()] = 6;
-            } catch (NoSuchFieldError ignored) {
-            }
-
-            $EnumSwitchMapping$0 = var0;
-        }
+        return new Wing(VectorConversionsMCKt.toJOMLD(blockState.getValue(FACING).getNormal()).absolute(), wingPower, wingDrag, wingBreakingForce, wingCamberAttackingBias);
     }
 }

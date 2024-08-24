@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "clockwork.EncasedFanControllerMixin",
+    "create.AllBlockEntityTypesMixin",
     "create.KineticBlockEntityMixin",
     "create.LinkedControllerInputPacketMixin",
     "create.RedstoneLinkNetworkHandlerMixin",

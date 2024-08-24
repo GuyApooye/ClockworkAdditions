@@ -8,6 +8,7 @@ import kotlin.Triple;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
+import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -16,6 +17,7 @@ import org.valkyrienskies.core.api.ships.ClientShip;
 import org.valkyrienskies.core.api.ships.Ship;
 import org.valkyrienskies.mod.common.VSGameUtilsKt;
 
+import java.lang.Math;
 import java.util.List;
 
 import static com.simibubi.create.content.kinetics.base.DirectionalKineticBlock.FACING;
@@ -124,7 +126,7 @@ public class CVJointBlockEntity extends KineticBlockEntity {
             return;
         };
         if (renderConnector == other.renderConnector) renderConnector = !other.renderConnector;
-        if (getWorldSpace().sub(other.getWorldSpace()).length() > ConfigRegistry.server().extendables.cvJointMaxLength.get()) {
+        if (getWorldSpace().sub(other.getWorldSpace()).lengthSquared() > Mth.square(ConfigRegistry.server().extendables.cvJointMaxLength.get())) {
             target = null;
             other.target = null;
             detachKinetics();

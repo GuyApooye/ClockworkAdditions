@@ -1,6 +1,5 @@
 package com.github.guyapooye.clockworkadditions.blocks.copycats;
 
-import com.github.guyapooye.clockworkadditions.blocks.copycats.CWACopycatBlockEntity;
 import com.simibubi.create.content.decoration.copycat.CopycatModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntityType;

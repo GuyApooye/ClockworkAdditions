@@ -3,9 +3,6 @@ package com.github.guyapooye.clockworkadditions.registries;
 import com.github.guyapooye.clockworkadditions.blocks.bearings.flap.KineticFlapBearingBlockEntity;
 import com.github.guyapooye.clockworkadditions.blocks.bearings.flap.KineticFlapBearingInstance;
 import com.github.guyapooye.clockworkadditions.blocks.bearings.flap.KineticFlapBearingRenderer;
-import com.github.guyapooye.clockworkadditions.blocks.bearings.alternator.AlternatorBearingBlockEntity;
-import com.github.guyapooye.clockworkadditions.blocks.bearings.alternator.archived.BasePhysicsBearingBlockEntity;
-import com.github.guyapooye.clockworkadditions.blocks.copycats.CWACopycatBlockEntity;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.cvjoint.CVJointBlockEntity;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.cvjoint.CVJointInstance;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.cvjoint.CVJointRenderer;
@@ -14,6 +11,8 @@ import com.github.guyapooye.clockworkadditions.blocks.kinetics.handlebar.Handleb
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.pedals.PedalsBlockEntity;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.pedals.PedalsInstance;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.pedals.PedalsRenderer;
+import com.github.guyapooye.clockworkadditions.blocks.phys.alternator.AlternatorBearingBlockEntity;
+import com.github.guyapooye.clockworkadditions.blocks.phys.alternator.archived.BasePhysicsBearingBlockEntity;
 import com.github.guyapooye.clockworkadditions.blocks.redstone.gyro.RedstoneGyroBlockEntity;
 import com.simibubi.create.content.contraptions.bearing.BearingInstance;
 import com.simibubi.create.content.contraptions.bearing.BearingRenderer;
@@ -59,10 +58,6 @@ public class BlockEntityRegistry {
             .instance(() -> CVJointInstance::new)
             .validBlocks(BlockRegistry.CV_JOINT)
             .renderer(() -> CVJointRenderer::new)
-            .register();
-    public static final BlockEntityEntry<? extends CWACopycatBlockEntity> COPYCAT = REGISTRATE
-            .blockEntity("copycat", CWACopycatBlockEntity::new)
-            .validBlocks(BlockRegistry.COPYCAT_WING,BlockRegistry.COPYCAT_FLAP)
             .register();
 
     public static void register() {}
