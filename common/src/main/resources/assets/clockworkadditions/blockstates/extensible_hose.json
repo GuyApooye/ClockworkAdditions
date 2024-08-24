@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "clockworkadditions:block/extensible_hose/block",
+      "x": 90
+    },
+    "facing=east": {
+      "model": "clockworkadditions:block/extensible_hose/block",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "clockworkadditions:block/extensible_hose/block"
+    },
+    "facing=south": {
+      "model": "clockworkadditions:block/extensible_hose/block",
+      "y": 180
+    },
+    "facing=up": {
+      "model": "clockworkadditions:block/extensible_hose/block",
+      "x": 270
+    },
+    "facing=west": {
+      "model": "clockworkadditions:block/extensible_hose/block",
+      "y": 270
+    }
+  }
+}

@@ -33,6 +33,7 @@ public class ClockworkAdditions
 		output.accept(BlockRegistry.COPYCAT_WING);
 		output.accept(BlockRegistry.COPYCAT_FLAP);
 		output.accept(BlockRegistry.CV_JOINT);
+		output.accept(BlockRegistry.EXTENSIBLE_HOSE);
 	}
 	public static void init() {
 		PartialModelRegistry.register();

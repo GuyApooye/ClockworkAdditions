@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#",
+        "D",
+        "#"
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:copper_ingot"
+        },
+        "D": {
+            "item": "minecraft:dried_kelp_block"
+        }
+    },
+    "result": {
+        "item": "clockworkadditions:extensible_hose",
+        "count": 2
+    }
+}
