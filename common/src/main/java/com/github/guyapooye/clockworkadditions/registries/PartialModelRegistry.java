@@ -13,6 +13,8 @@ public class PartialModelRegistry {
     public static PartialModel CV_JOINT_BASE = new PartialModel(ClockworkAdditions.asResource("block/cv_joint/base"));
     public static PartialModel CV_JOINT_CONNECTOR = new PartialModel(ClockworkAdditions.asResource("block/cv_joint/connector"));
     public static PartialModel CV_JOINT_ROD = new PartialModel(ClockworkAdditions.asResource("block/cv_joint/rod"));
+    public static PartialModel EXTENSIBLE_HOSE_CONNECTOR = new PartialModel(ClockworkAdditions.asResource("block/extensible_hose/connector"));
+    public static PartialModel EXTENSIBLE_HOSE_HOSE = new PartialModel(ClockworkAdditions.asResource("block/extensible_hose/hose"));
 
     public static void register() {}
 }

@@ -5,7 +5,8 @@ import com.github.guyapooye.clockworkadditions.blocks.bearings.heli.PhysicsBeari
 import com.github.guyapooye.clockworkadditions.blocks.bearings.heli.archived.BasePhysicsBearingBlock;
 import com.github.guyapooye.clockworkadditions.blocks.copycats.wingalikes.CopycatFlapBlock;
 import com.github.guyapooye.clockworkadditions.blocks.copycats.wingalikes.CopycatWingBlock;
-import com.github.guyapooye.clockworkadditions.blocks.kinetics.cvjoint.CVJointBlock;
+import com.github.guyapooye.clockworkadditions.blocks.fluid.extensible_hose.ExtensibleHoseBlock;
+import com.github.guyapooye.clockworkadditions.blocks.kinetics.cv_joint.CVJointBlock;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.handlebar.HandlebarBlock;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.pedals.PedalsBlock;
 import com.github.guyapooye.clockworkadditions.blocks.redstone.gyro.RedstoneGyroBlock;
@@ -14,9 +15,7 @@ import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.entry.BlockEntry;
-import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 
@@ -96,18 +95,20 @@ public class BlockRegistry {
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .addLayer(() -> RenderType::cutoutMipped)
                     .blockstate(BlockStateGen.horizontalBlockProvider(true))
-                    .lang("Constant Velocity Joint")
+                    .simpleItem()
+                    .lang("CV Joint")
                     .register();
-    public static final BlockEntry<? extends CopycatWingBlock> COPYCAT_WING = registerCopycatWing();
-    public static final BlockEntry<? extends CopycatFlapBlock> COPYCAT_FLAP = registerCopycatFlap();
-    @ExpectPlatform
-    public static BlockEntry<? extends CopycatWingBlock> registerCopycatWing() {
-        throw new AssertionError();
-    }
-    @ExpectPlatform
-    public static BlockEntry<? extends CopycatFlapBlock> registerCopycatFlap() {
-        throw new AssertionError();
-    }
+    public static final BlockEntry<ExtensibleHoseBlock> EXTENSIBLE_HOSE =
+            REGISTRATE.block("extensible_hose", ExtensibleHoseBlock::new)
+                    .initialProperties(SharedProperties::stone)
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .blockstate(BlockStateGen.horizontalBlockProvider(true))
+                    .simpleItem()
+                    .lang("Extensible Hose")
+                    .register();
+    public static BlockEntry<? extends CopycatWingBlock> COPYCAT_WING;
+    public static BlockEntry<? extends CopycatFlapBlock> COPYCAT_FLAP;
     public static void register() {
     }
 }

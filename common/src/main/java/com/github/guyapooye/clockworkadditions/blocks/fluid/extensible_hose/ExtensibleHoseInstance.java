@@ -1,44 +1,39 @@
-package com.github.guyapooye.clockworkadditions.blocks.kinetics.cv_joint;
+package com.github.guyapooye.clockworkadditions.blocks.fluid.extensible_hose;
 
 import com.github.guyapooye.clockworkadditions.registries.BlockRegistry;
 import com.github.guyapooye.clockworkadditions.registries.PartialModelRegistry;
-import com.ibm.icu.text.MessagePattern;
-import com.jozufozu.flywheel.api.Instancer;
 import com.jozufozu.flywheel.api.Material;
 import com.jozufozu.flywheel.api.MaterialManager;
 import com.jozufozu.flywheel.api.instance.DynamicInstance;
+import com.jozufozu.flywheel.backend.instancing.blockentity.BlockEntityInstance;
 import com.jozufozu.flywheel.core.materials.model.ModelData;
-import com.simibubi.create.AllPartialModels;
-import com.simibubi.create.content.kinetics.base.BackHalfShaftInstance;
-import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
-import com.simibubi.create.content.kinetics.base.SingleRotatingInstance;
-import com.simibubi.create.content.kinetics.base.flwdata.RotatingData;
 import com.simibubi.create.foundation.utility.AngleHelper;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Vec3i;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.phys.Vec3;
 import org.joml.*;
 import org.valkyrienskies.mod.common.util.VectorConversionsMCKt;
 
 import java.lang.Math;
 
-import static com.github.guyapooye.clockworkadditions.util.WorldspaceUtil.*;
-import static com.simibubi.create.content.kinetics.base.DirectionalKineticBlock.FACING;
+import static com.github.guyapooye.clockworkadditions.util.WorldspaceUtil.getShipToWorldClient;
+import static com.github.guyapooye.clockworkadditions.util.WorldspaceUtil.getWorldSpaceClient;
 
-public class CVJointInstance extends SingleRotatingInstance<CVJointBlockEntity> implements DynamicInstance {
+public class ExtensibleHoseInstance extends BlockEntityInstance<ExtensibleHoseBlockEntity> implements DynamicInstance {
 
     final Direction facing;
 
-    final ModelData rod;
+    final ModelData[] hoses;
     final ModelData connector;
 
-    public CVJointInstance(MaterialManager materialManager, CVJointBlockEntity blockEntity) {
+    public ExtensibleHoseInstance(MaterialManager materialManager, ExtensibleHoseBlockEntity blockEntity) {
         super(materialManager, blockEntity);
         facing = blockEntity.getBlockState().getValue(BlockStateProperties.FACING);
         Material<ModelData> mat = getTransformMaterial();
-        rod = mat.getModel(PartialModelRegistry.CV_JOINT_ROD).createInstance();
-        connector = mat.getModel(PartialModelRegistry.CV_JOINT_CONNECTOR).createInstance();
+        hoses = new ModelData[10];
+            for (int i = 0; i < hoses.length; i++) {
+                hoses[i] = mat.getModel(PartialModelRegistry.EXTENSIBLE_HOSE_HOSE).createInstance();
+            }
+        connector = mat.getModel(PartialModelRegistry.EXTENSIBLE_HOSE_CONNECTOR).createInstance();
     }
 
     @Override
@@ -46,26 +41,30 @@ public class CVJointInstance extends SingleRotatingInstance<CVJointBlockEntity> 
 
         boolean disconnect = false;
 
-        CVJointBlockEntity other = null;
+        ExtensibleHoseBlockEntity other = null;
         if (blockEntity.target == null) disconnect = true;
         else {
-            other = BlockRegistry.CV_JOINT.get().getBlockEntity(world, blockEntity.target);
+            other = BlockRegistry.EXTENSIBLE_HOSE.get().getBlockEntity(world, blockEntity.target);
             if (other == null) disconnect = true;
         }
 
-        float angle = KineticBlockEntityRenderer.getAngleForTe(blockEntity, blockEntity.getBlockPos(), axis);
-        if (facing.getAxisDirection() == Direction.AxisDirection.POSITIVE) angle *= -1;
-
         if (disconnect) {
-            rod
-                    .loadIdentity()
-                    .translate(getInstancePosition())
-                    .centre()
-                    .rotateY(AngleHelper.horizontalAngle(facing))
-                    .rotateX(AngleHelper.verticalAngle(facing) + 180)
-                    .rotateZRadians(angle)
-                    .unCentre()
-            ;
+            for (int i = 0; i < hoses.length; i++) {
+                ModelData hose = hoses[i];
+                if (i == 0) {
+                    hose
+                            .loadIdentity()
+                            .translate(getInstancePosition())
+                            .centre()
+                            .rotateY(AngleHelper.horizontalAngle(facing))
+                            .rotateX(AngleHelper.verticalAngle(facing) + 180)
+                            .unCentre()
+                            .translateZ(0.25)
+                    ;
+                    continue;
+                }
+                hose.setEmptyTransform();
+            }
             connector.setEmptyTransform();
             return;
         }
@@ -86,18 +85,28 @@ public class CVJointInstance extends SingleRotatingInstance<CVJointBlockEntity> 
 
         Matrix4f bendMat = new Matrix4f(new Matrix4d(bmx, bmy, bmz, new Vector4d(0, 0, 0, 1)));
 
-        rod
-                .loadIdentity()
-                .translate(getInstancePosition())
-                .centre()
-                .transform(
-                        bendMat,
-                        new Matrix3f(0, 0, 0, 0, 0, 0, 0, 0, 0))
-                .rotateY(AngleHelper.horizontalAngle(facing))
-                .rotateX(AngleHelper.verticalAngle(facing) + 180)
-                .rotateZRadians(angle)
-                .unCentre()
-        ;
+        for (int i = 0; i < hoses.length; i++) {
+            ModelData hose = hoses[i];
+            if (i > len) {
+                hose.setEmptyTransform();
+                continue;
+            }
+            hose
+                    .loadIdentity()
+                    .translate(getInstancePosition())
+                    .centre()
+                    .transform(
+                            bendMat,
+                            new Matrix3f(0, 0, 0, 0, 0, 0, 0, 0, 0))
+                    .rotateY(AngleHelper.horizontalAngle(facing))
+                    .rotateX(AngleHelper.verticalAngle(facing) + 180)
+                    .unCentre()
+                    .translateZ((1+i-len)/2)
+            ;
+            if (i > len - 1) {
+                hose.scale(1, 1, (float) (len - i));
+            }
+        }
         if (blockEntity.renderConnector) {
             connector.setEmptyTransform();
             return;
@@ -111,29 +120,27 @@ public class CVJointInstance extends SingleRotatingInstance<CVJointBlockEntity> 
                         new Matrix3f(0, 0, 0, 0, 0, 0, 0, 0, 0))
                 .rotateY(AngleHelper.horizontalAngle(facing))
                 .rotateX(AngleHelper.verticalAngle(facing) + 180)
-                .rotateZRadians(angle)
                 .unCentre()
                 .translateZ(-len/2)
         ;
 
     }
 
-    @Override
-    protected Instancer<RotatingData> getModel() {
-        Direction dir = facing.getOpposite();
-        return getRotatingMaterial().getModel(PartialModelRegistry.CV_JOINT_BASE, blockState, dir);
-    }
 
     @Override
     public void remove() {
-        super.remove();
-        rod.delete();
+        for (ModelData hose : hoses) {
+            hose.delete();
+        }
         connector.delete();
     }
 
     @Override
     public void updateLight() {
         super.updateLight();
-        relight(pos, rod, connector);
+        relight(pos, connector);
+        for (ModelData hose : hoses) {
+            relight(pos, hose);
+        }
     }
 }
