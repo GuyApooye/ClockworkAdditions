@@ -5,6 +5,7 @@
   "block.clockworkadditions.copycat_wing": "Copycat Wing",
   "block.clockworkadditions.copycat_flap": "Copycat Flap",
   "block.clockworkadditions.cv_joint": "Constant Velocity Joint",
+  "block.clockworkadditions.inverted_redstone_resistor": "Inverted Redstone Resistor",
   "itemGroup.clockworkadditions" : "Clockwork Additions",
   "create.contraptions.kinetic_flap_bearing.normal": "Redstone Input acts Normally",
   "create.contraptions.kinetic_flap_bearing.inverted": "Redstone Input is Inverted",

@@ -10,6 +10,8 @@ import com.github.guyapooye.clockworkadditions.blocks.kinetics.cvjoint.CVJointIn
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.cvjoint.CVJointRenderer;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.handlebar.HandlebarBlockEntity;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.handlebar.HandlebarInstance;
+import com.github.guyapooye.clockworkadditions.blocks.kinetics.invertedresistor.InvertedRedstoneResistorBlockEntity;
+import com.github.guyapooye.clockworkadditions.blocks.kinetics.invertedresistor.InvertedRedstoneResistorRenderer;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.pedals.PedalsBlockEntity;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.pedals.PedalsInstance;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.pedals.PedalsRenderer;
@@ -63,6 +65,11 @@ public class BlockEntityRegistry {
     public static final BlockEntityEntry<? extends CWACopycatBlockEntity> COPYCAT = REGISTRATE
             .blockEntity("copycat", CWACopycatBlockEntity::new)
             .validBlocks(BlockRegistry.COPYCAT_WING,BlockRegistry.COPYCAT_FLAP)
+            .register();
+    public static final BlockEntityEntry<InvertedRedstoneResistorBlockEntity> INVERTED_RESISTOR = REGISTRATE
+            .blockEntity("inverted_redstone_resistor", InvertedRedstoneResistorBlockEntity::new)
+            .validBlocks(BlockRegistry.INVERTED_RESISTOR)
+            .renderer(() -> InvertedRedstoneResistorRenderer::new)
             .register();
 
     public static void register() {}

@@ -1,0 +1,17 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "clockworkadditions:block/inverted_redstone_resistor/block",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "clockworkadditions:block/inverted_redstone_resistor/block"
+    },
+    "axis=z": {
+      "model": "clockworkadditions:block/inverted_redstone_resistor/block",
+      "x": 90,
+      "y": 180
+    }
+  }
+}

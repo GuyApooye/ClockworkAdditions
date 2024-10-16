@@ -13,6 +13,7 @@ public class PartialModelRegistry {
     public static PartialModel CV_JOINT_BASE = new PartialModel(ClockworkAdditions.asResource("block/cv_joint/base"));
     public static PartialModel CV_JOINT_CONNECTOR = new PartialModel(ClockworkAdditions.asResource("block/cv_joint/connector"));
     public static PartialModel CV_JOINT_ROD = new PartialModel(ClockworkAdditions.asResource("block/cv_joint/rod"));
+    public static PartialModel INVERTED_RESISTOR_INDICATOR = new PartialModel(ClockworkAdditions.asResource("block/inverted_redstone_resistor/inverted_redstone_resistor"));
 
     public static void register() {}
 }
