@@ -7,21 +7,21 @@ import com.github.guyapooye.clockworkadditions.blocks.copycats.wingalikes.Copyca
 import com.github.guyapooye.clockworkadditions.blocks.copycats.wingalikes.CopycatWingBlock;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.cvjoint.CVJointBlock;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.handlebar.HandlebarBlock;
+import com.github.guyapooye.clockworkadditions.blocks.kinetics.invertedresistor.InvertedRedstoneResistorBlock;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.pedals.PedalsBlock;
 import com.github.guyapooye.clockworkadditions.blocks.redstone.gyro.RedstoneGyroBlock;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.SharedProperties;
+import com.simibubi.create.foundation.data.TagGen;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 
 import static com.github.guyapooye.clockworkadditions.ClockworkAdditions.REGISTRATE;
-import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.axeOnly;
 import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
 
@@ -97,7 +97,19 @@ public class BlockRegistry {
                     .addLayer(() -> RenderType::cutoutMipped)
                     .blockstate(BlockStateGen.horizontalBlockProvider(true))
                     .lang("Constant Velocity Joint")
+                    .simpleItem()
                     .register();
+    public static final BlockEntry<InvertedRedstoneResistorBlock> INVERTED_RESISTOR =
+            REGISTRATE.block("inverted_redstone_resistor", InvertedRedstoneResistorBlock::new)
+                    .initialProperties(SharedProperties::stone)
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .transform(BlockStressDefaults.setNoImpact())
+                    .transform(TagGen.axeOrPickaxe())
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .simpleItem()
+                    .lang("Inverted Redstone Resistor")
+                    .register();
+
     public static final BlockEntry<? extends CopycatWingBlock> COPYCAT_WING = registerCopycatWing();
     public static final BlockEntry<? extends CopycatFlapBlock> COPYCAT_FLAP = registerCopycatFlap();
     @ExpectPlatform
