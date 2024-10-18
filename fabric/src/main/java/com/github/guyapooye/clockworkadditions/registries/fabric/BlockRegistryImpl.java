@@ -28,5 +28,4 @@ public class BlockRegistryImpl extends BlockRegistry {
                 .transform(customItemModel("copycat_base", "flap"))
                 .register();
     }
-    public static void register() {}
 }

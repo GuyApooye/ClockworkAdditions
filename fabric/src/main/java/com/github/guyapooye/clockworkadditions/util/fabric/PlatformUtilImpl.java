@@ -11,7 +11,7 @@ public class PlatformUtilImpl {
     public static CompoundTag getPlayerCustomData(Player player) {
         return player.getCustomData();
     }
-    public static void runWhenOn(Enum e, Supplier<Runnable> supplier) {
-        EnvExecutor.runWhenOn((EnvType) e, supplier);
+    public static void runWhenOn(Enum<?> e, Runnable supplier) {
+        EnvExecutor.runWhenOn((EnvType) e,() -> supplier);
     }
 }

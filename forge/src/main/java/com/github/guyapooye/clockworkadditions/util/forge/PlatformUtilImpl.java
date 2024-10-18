@@ -11,7 +11,7 @@ public class PlatformUtilImpl {
     public static CompoundTag getPlayerCustomData(Player player) {
         return player.getPersistentData();
     }
-    public static void runWhenOn(Enum e, Supplier<Runnable> supplier) {
-        DistExecutor.unsafeRunWhenOn((Dist) e,supplier);
+    public static void runWhenOn(Enum<?> e, Runnable supplier) {
+        DistExecutor.unsafeRunWhenOn((Dist) e,() -> supplier);
     }
 }

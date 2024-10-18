@@ -24,6 +24,7 @@ public class CVJointInstance extends SingleRotatingInstance<CVJointBlockEntity> 
 
     final ModelData rod;
     final ModelData connector;
+    final ModelData connector2;
 
     public CVJointInstance(MaterialManager materialManager, CVJointBlockEntity blockEntity) {
         super(materialManager, blockEntity);
@@ -31,6 +32,7 @@ public class CVJointInstance extends SingleRotatingInstance<CVJointBlockEntity> 
         Material<ModelData> mat = getTransformMaterial();
         rod = mat.getModel(PartialModelRegistry.CV_JOINT_ROD).createInstance();
         connector = mat.getModel(PartialModelRegistry.CV_JOINT_CONNECTOR).createInstance();
+        connector2 = mat.getModel(PartialModelRegistry.CV_JOINT_CONNECTOR).createInstance();
     }
 
     @Override
@@ -59,6 +61,7 @@ public class CVJointInstance extends SingleRotatingInstance<CVJointBlockEntity> 
                     .unCentre()
             ;
             connector.setEmptyTransform();
+            connector2.setEmptyTransform();
             return;
         }
 
@@ -90,7 +93,21 @@ public class CVJointInstance extends SingleRotatingInstance<CVJointBlockEntity> 
                 .rotateZRadians(angle)
                 .unCentre()
         ;
-        if (blockEntity.renderConnector) {
+        connector2
+                .loadIdentity()
+                .translate(getInstancePosition())
+                .centre()
+                .transform(
+                        bendMat,
+                        new Matrix3f(0, 0, 0, 0, 0, 0, 0, 0, 0))
+                .rotateY(AngleHelper.horizontalAngle(facing))
+                .rotateX(AngleHelper.verticalAngle(facing) + 180)
+                .rotateZRadians(angle)
+                .scale(0.875f)
+                .unCentre()
+                .translateZ(-len*0.375)
+        ;
+        if (blockEntity.isOrigin) {
             connector.setEmptyTransform();
             return;
         }
@@ -121,11 +138,12 @@ public class CVJointInstance extends SingleRotatingInstance<CVJointBlockEntity> 
         super.remove();
         rod.delete();
         connector.delete();
+        connector2.delete();
     }
 
     @Override
     public void updateLight() {
         super.updateLight();
-        relight(pos, rod, connector);
+        relight(pos, rod, connector,connector2);
     }
 }

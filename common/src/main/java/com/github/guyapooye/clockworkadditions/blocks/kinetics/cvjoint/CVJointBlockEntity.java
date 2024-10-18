@@ -1,9 +1,11 @@
 package com.github.guyapooye.clockworkadditions.blocks.kinetics.cvjoint;
 
 import com.github.guyapooye.clockworkadditions.registries.BlockRegistry;
+import com.github.guyapooye.clockworkadditions.registries.ConfigRegistry;
+import com.github.guyapooye.clockworkadditions.util.PlatformUtil;
 import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
-import kotlin.Triple;
+import net.fabricmc.api.EnvType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
@@ -15,6 +17,7 @@ import org.valkyrienskies.core.api.ships.ClientShip;
 import org.valkyrienskies.core.api.ships.Ship;
 import org.valkyrienskies.mod.common.VSGameUtilsKt;
 
+import java.lang.Math;
 import java.util.List;
 
 import static com.simibubi.create.content.kinetics.base.DirectionalKineticBlock.FACING;
@@ -22,7 +25,7 @@ import static com.simibubi.create.content.kinetics.base.DirectionalKineticBlock.
 public class CVJointBlockEntity extends KineticBlockEntity {
 
     public BlockPos target;
-    public boolean renderConnector;
+    public boolean isOrigin;
 
     public CVJointBlockEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
         super(typeIn, pos, state);
@@ -31,6 +34,7 @@ public class CVJointBlockEntity extends KineticBlockEntity {
     @Override
     protected void read(CompoundTag compound, boolean clientPacket) {
         super.read(compound, clientPacket);
+        isOrigin = compound.getBoolean("isOrigin");
         target = NbtUtils.readBlockPos(compound.getCompound("target"));
     }
 
@@ -38,6 +42,7 @@ public class CVJointBlockEntity extends KineticBlockEntity {
     protected void write(CompoundTag compound, boolean clientPacket) {
         super.write(compound, clientPacket);
         if (target == null) return;
+        compound.putBoolean("isOrigin", isOrigin);
         compound.put("target", NbtUtils.writeBlockPos(target));
     }
 
@@ -122,13 +127,16 @@ public class CVJointBlockEntity extends KineticBlockEntity {
                 detach();
             return;
         };
-        if (renderConnector == other.renderConnector) renderConnector = !other.renderConnector;
-        if (getWorldSpace().sub(other.getWorldSpace()).lengthSquared() > 9) {
-            target = null;
-            other.target = null;
-            detachKinetics();
-            other.detachKinetics();
-        }
+        if (isOrigin == other.isOrigin) isOrigin = !other.isOrigin;
+        PlatformUtil.runWhenOn(EnvType.SERVER,() -> {
+            if (getWorldSpace().sub(other.getWorldSpace()).lengthSquared() > Math.pow(ConfigRegistry.server().stretchables.cvJointMaxLength.get(),2)) {
+
+                target = null;
+                other.target = null;
+                detachKinetics();
+                other.detachKinetics();
+            }
+        });
     }
 
     @Override

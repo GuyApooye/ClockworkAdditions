@@ -54,7 +54,7 @@ public class InvertedRedstoneResistorBlockEntity extends SplitShaftBlockEntity i
     }
 
     public void detachKinetics() {
-        RotationPropagator.handleRemoved(this.level, this.worldPosition, (KineticBlockEntity)this);
+        RotationPropagator.handleRemoved(this.level, this.worldPosition, this);
         this.level.scheduleTick(this.worldPosition, this.getBlockState().getBlock(), 0, TickPriority.EXTREMELY_HIGH);
     }
 
@@ -70,7 +70,7 @@ public class InvertedRedstoneResistorBlockEntity extends SplitShaftBlockEntity i
         super.read(compound, clientPacket);
     }
 
-    private final int getPower(Level worldIn, BlockPos pos) {
+    private int getPower(Level worldIn, BlockPos pos) {
         int power = 0;
         Direction[] var4 = Iterate.directions;
         Direction direction;

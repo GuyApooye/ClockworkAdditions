@@ -5,6 +5,8 @@ import com.github.guyapooye.clockworkadditions.blocks.bearings.heli.PhysicsBeari
 import com.github.guyapooye.clockworkadditions.blocks.bearings.heli.archived.BasePhysicsBearingBlock;
 import com.github.guyapooye.clockworkadditions.blocks.copycats.wingalikes.CopycatFlapBlock;
 import com.github.guyapooye.clockworkadditions.blocks.copycats.wingalikes.CopycatWingBlock;
+import com.github.guyapooye.clockworkadditions.blocks.fluids.extensiblehose.ExtensibleHoseBlock;
+import com.github.guyapooye.clockworkadditions.blocks.fluids.extensiblehose.ExtensibleHoseBlockEntity;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.cvjoint.CVJointBlock;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.handlebar.HandlebarBlock;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.invertedresistor.InvertedRedstoneResistorBlock;
@@ -15,6 +17,7 @@ import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.simibubi.create.foundation.data.TagGen;
+import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.client.renderer.RenderType;
@@ -96,6 +99,7 @@ public class BlockRegistry {
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .addLayer(() -> RenderType::cutoutMipped)
                     .blockstate(BlockStateGen.horizontalBlockProvider(true))
+                    .simpleItem()
                     .lang("Constant Velocity Joint")
                     .simpleItem()
                     .register();
@@ -108,6 +112,15 @@ public class BlockRegistry {
                     .addLayer(() -> RenderType::cutoutMipped)
                     .simpleItem()
                     .lang("Inverted Redstone Resistor")
+                    .register();
+    public static final BlockEntry<ExtensibleHoseBlock> EXTENSIBLE_HOSE =
+            REGISTRATE.block("extensible_hose", ExtensibleHoseBlock::new)
+                    .initialProperties(SharedProperties::stone)
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .blockstate(BlockStateGen.horizontalBlockProvider(true))
+                    .simpleItem()
+                    .lang("Extensible Hose")
                     .register();
 
     public static final BlockEntry<? extends CopycatWingBlock> COPYCAT_WING = registerCopycatWing();

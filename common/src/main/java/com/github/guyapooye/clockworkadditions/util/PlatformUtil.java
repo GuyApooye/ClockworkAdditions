@@ -12,7 +12,7 @@ public class PlatformUtil {
         throw new AssertionError();
     }
     @ExpectPlatform
-    public static void runWhenOn(Enum e, Supplier<Runnable> supplier) {
+    public static void runWhenOn(Enum<?> e, Runnable supplier) {
         throw new AssertionError();
     }
 }

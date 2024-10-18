@@ -26,7 +26,7 @@ public abstract class KineticBlockEntityMixin extends SmartBlockEntity {
 
     @Inject(method = "getFlickerScore",at = @At("HEAD"),remap = false, cancellable = true)
     private void resetFlickerScoreWithGyro(CallbackInfoReturnable<Integer> cir) {
-        if (getLevel().isClientSide) return;
+        if (level.isClientSide) return;
         ServerShip ship = VSGameUtilsKt.getShipManagingPos((ServerLevel) getLevel(),getBlockPos());
         if (ship == null) return;
         int gyroAmount = RedstoneGyroAttachment.getOrCreate(ship).getAmount();

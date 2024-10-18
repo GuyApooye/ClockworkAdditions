@@ -162,7 +162,7 @@ public class HandlebarBlockEntity extends GeneratingKineticBlockEntity {
             updateGeneratedRotation();
         }
         if (level.isClientSide) {
-            PlatformUtil.runWhenOn(EnvType.CLIENT,() -> this::tryToggleActive);
+            PlatformUtil.runWhenOn(EnvType.CLIENT,this::tryToggleActive);
             prevUser = user;
         }
         if (!level.isClientSide) {

@@ -5,6 +5,9 @@ import com.github.guyapooye.clockworkadditions.blocks.bearings.flap.KineticFlapB
 import com.github.guyapooye.clockworkadditions.blocks.bearings.heli.PhysicsBearingBlockEntity;
 import com.github.guyapooye.clockworkadditions.blocks.bearings.heli.archived.BasePhysicsBearingBlockEntity;
 import com.github.guyapooye.clockworkadditions.blocks.copycats.CWACopycatBlockEntity;
+import com.github.guyapooye.clockworkadditions.blocks.copycats.wingalikes.CopycatWingBlock;
+import com.github.guyapooye.clockworkadditions.blocks.fluids.extensiblehose.ExtensibleHoseBlock;
+import com.github.guyapooye.clockworkadditions.blocks.fluids.extensiblehose.ExtensibleHoseBlockEntity;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.cvjoint.CVJointBlockEntity;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.cvjoint.CVJointInstance;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.cvjoint.CVJointRenderer;
@@ -18,7 +21,13 @@ import com.github.guyapooye.clockworkadditions.blocks.kinetics.pedals.PedalsRend
 import com.github.guyapooye.clockworkadditions.blocks.redstone.gyro.RedstoneGyroBlockEntity;
 import com.simibubi.create.content.contraptions.bearing.BearingInstance;
 import com.simibubi.create.content.contraptions.bearing.BearingRenderer;
+import com.simibubi.create.foundation.data.BlockStateGen;
+import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
+import com.tterrag.registrate.util.entry.BlockEntry;
+import dev.architectury.injectables.annotations.ExpectPlatform;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import static com.github.guyapooye.clockworkadditions.ClockworkAdditions.REGISTRATE;
 
@@ -71,6 +80,11 @@ public class BlockEntityRegistry {
             .validBlocks(BlockRegistry.INVERTED_RESISTOR)
             .renderer(() -> InvertedRedstoneResistorRenderer::new)
             .register();
+    public static final BlockEntityEntry<? extends ExtensibleHoseBlockEntity<?>> EXTENSIBLE_HOSE = registerExtensibleHose();
+    @ExpectPlatform
+    public static BlockEntityEntry<? extends ExtensibleHoseBlockEntity<?>> registerExtensibleHose() {
+        throw new AssertionError();
+    }
 
     public static void register() {}
 }
