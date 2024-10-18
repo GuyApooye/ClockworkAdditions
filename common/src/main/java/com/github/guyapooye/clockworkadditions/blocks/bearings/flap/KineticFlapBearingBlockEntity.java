@@ -5,6 +5,7 @@ import com.simibubi.create.content.contraptions.*;
 import com.simibubi.create.content.contraptions.bearing.BearingBlock;
 import com.simibubi.create.content.contraptions.bearing.IBearingBlockEntity;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
+import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.INamedIconOptions;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollOptionBehaviour;
 import com.simibubi.create.foundation.gui.AllIcons;
@@ -52,73 +53,15 @@ public class KineticFlapBearingBlockEntity extends KineticBlockEntity implements
         super(type, pos, state);
     }
 
-    public final boolean getRedstoneSideOne() {
-        return this.redstoneSideOne;
-    }
-
-    public final void setRedstoneSideOne(boolean val) {
-        this.redstoneSideOne = val;
-    }
-
-    public final boolean getRedstoneSideTwo() {
-        return this.redstoneSideTwo;
-    }
-
-    public final void setRedstoneSideTwo(boolean val) {
-        this.redstoneSideTwo = val;
-    }
-
-    protected final float getBearingAngle() {
-        return this.bearingAngle;
-    }
-
-    protected final void setBearingAngle(float val) {
-        this.bearingAngle = val;
-    }
-
-    protected final float getClientAngleDiff() {
-        return this.clientAngleDiff;
-    }
-
-    protected final void setClientAngleDiff(float val) {
-        this.clientAngleDiff = val;
-    }
-
     public final boolean isRunning() {
         return this.isRunning;
-    }
-
-    protected final void setRunning(boolean val) {
-        this.isRunning = val;
-    }
-
-    public final boolean getAssembleNextTick() {
-        return this.assembleNextTick;
     }
 
     public final void setAssembleNextTick(boolean val) {
         this.assembleNextTick = val;
     }
 
-    @Nullable
-    protected final AssemblyException getLastException() {
-        return this.lastException;
-    }
-
-    protected final void setLastException(@Nullable AssemblyException val) {
-        this.lastException = val;
-    }
-
-    @Nullable
-    protected final ControlledContraptionEntity getFlap() {
-        return this.flap;
-    }
-
-    protected final void setFlap(@Nullable ControlledContraptionEntity val) {
-        this.flap = val;
-    }
-
-    public void addBehaviours(@NotNull List behaviours) {
+    public void addBehaviours(@NotNull List<BlockEntityBehaviour> behaviours) {
         super.addBehaviours(behaviours);
         this.poweredMode = new ScrollOptionBehaviour<>(PoweredMode.class, ClockworkAdditions.asTranslatable("contraptions.kinetic_flap_bearing.redstone_input_mode"), this, this.getMovementModeSlot());
         ScrollOptionBehaviour<PoweredMode> var10000 = this.poweredMode;
@@ -126,15 +69,9 @@ public class KineticFlapBearingBlockEntity extends KineticBlockEntity implements
         ScrollOptionBehaviour<PoweredMode> var10001 = this.poweredMode;
         behaviours.add(var10001);
     }
-
-    public final boolean isFlap() {
-        return true;
-    }
-
     private int getPower(Level worldIn, BlockPos pos) {
         int power = 0;
-        Direction[] var10000 = Iterate.directions;
-        Direction[] var4 = var10000;
+        Direction[] var4 = Iterate.directions;
         int var5 = 0;
 
         for(int var6 = var4.length; var5 < var6; ++var5) {
@@ -169,10 +106,8 @@ public class KineticFlapBearingBlockEntity extends KineticBlockEntity implements
             this.clientAngleDiff /= 2.0F;
         }
 
-        Level var10002 = this.level;
-        BlockPos var10003 = this.worldPosition;
-        if(poweredMode.get() == PoweredMode.NORMAL) this.redstoneLevel = 15-this.getPower(var10002, var10003);
-        else this.redstoneLevel = this.getPower(var10002, var10003);
+        if(poweredMode.get() == PoweredMode.NORMAL) this.redstoneLevel = 15-this.getPower(level, worldPosition);
+        else this.redstoneLevel = this.getPower(level, worldPosition);
 
 //        if (this.getBlockState().getValue((Property) BlockStateProperties.FACING) != Direction.UP && this.getBlockState().getValue((Property)BlockStateProperties.FACING) != Direction.DOWN) {
 //            if (this.getBlockState().getValue((Property)BlockStateProperties.FACING) != Direction.NORTH && this.getBlockState().getValue((Property)BlockStateProperties.FACING) != Direction.SOUTH) {

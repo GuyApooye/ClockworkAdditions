@@ -12,13 +12,14 @@ import java.util.function.BiFunction;
 import static net.minecraft.core.Direction.UP;
 
 public class ShapesRegistry {
-    public static VoxelShaper
+    public static final VoxelShaper
         PEDALS = shape(0,0,14,16,16,16).add(3,1,2,13,22,14).add(2.5,0,0,13.5,13,6).forDirectional(),
-        PEDALS_COLLISION = shape(0,0,14,16,16,16).add(3,1,2,13,22,14).forDirectional();
-    public static VoxelShape
+        PEDALS_COLLISION = shape(0,0,14,16,16,16).add(3,1,2,13,22,14).forDirectional(),
+        CV_JOINT = shape(5, 0, 5, 11, 8, 11).forDirectional(),
+        HELI_BEARING = shape(0,0,0,16,12,16).forDirectional()
+        ;
+    public static final VoxelShape
         HANDLEBAR = shape(5, 0, 5, 11, 6, 11).add(1, 6, 1, 15, 11, 15).build();
-    public static VoxelShaper
-        CV_JOINT = shape(5, 0, 5, 11, 8, 11).forDirectional();
     private static Builder shape(VoxelShape shape) {
         return new Builder(shape);
     }

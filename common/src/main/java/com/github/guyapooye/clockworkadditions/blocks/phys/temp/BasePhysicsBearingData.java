@@ -1,4 +1,4 @@
-package com.github.guyapooye.clockworkadditions.blocks.phys.alternator.archived;
+package com.github.guyapooye.clockworkadditions.blocks.phys.temp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.jetbrains.annotations.NotNull;

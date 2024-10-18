@@ -1,4 +1,4 @@
-package com.github.guyapooye.clockworkadditions.blocks.phys.alternator.archived;
+package com.github.guyapooye.clockworkadditions.blocks.phys.temp;
 
 import com.github.guyapooye.clockworkadditions.util.GlueAssembler;
 import com.simibubi.create.AllSoundEvents;
