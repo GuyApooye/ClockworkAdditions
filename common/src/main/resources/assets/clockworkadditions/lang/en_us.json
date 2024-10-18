@@ -5,6 +5,8 @@
   "block.clockworkadditions.copycat_wing": "Copycat Wing",
   "block.clockworkadditions.copycat_flap": "Copycat Flap",
   "block.clockworkadditions.cv_joint": "Constant Velocity Joint",
+  "block.clockworkaddition.extensible_hose": "Extensible Hose",
+  "block.clockworkadditions.inverted_redstone_resistor": "Inverted Redstone Resistor",
   "itemGroup.clockworkadditions" : "Clockwork Additions",
   "create.contraptions.kinetic_flap_bearing.normal": "Redstone Input acts Normally",
   "create.contraptions.kinetic_flap_bearing.inverted": "Redstone Input is Inverted",
@@ -15,6 +17,5 @@
   "create.redstone.gyro.pid": "Use PID control to determine redstone output",
   "create.redstone.gyro.powered": "All output directions are powered",
   "clockworkadditions.contraptions.kinetic_flap_bearing.redstone_input_mode": "Normal or Inverted",
-  "clockworkadditions.circuits.gyro.output_mode": "Redstone Output Mode",
-  "clockworkadditions.redstone.redstone_link.max_range": "Max Range"
+  "clockworkadditions.circuits.gyro.output_mode": "Redstone Output Mode"
 }

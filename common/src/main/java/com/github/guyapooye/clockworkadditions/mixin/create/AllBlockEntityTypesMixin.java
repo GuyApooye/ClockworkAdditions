@@ -1,6 +1,7 @@
 package com.github.guyapooye.clockworkadditions.mixin.create;
 
 import com.github.guyapooye.clockworkadditions.registries.BlockRegistry;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.simibubi.create.AllBlockEntityTypes;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.decoration.copycat.CopycatBlockEntity;
@@ -19,5 +20,4 @@ public class AllBlockEntityTypesMixin {
             REGISTRATE.blockEntity("copycat", CopycatBlockEntity::new)
                     .validBlocks(AllBlocks.COPYCAT_PANEL, AllBlocks.COPYCAT_STEP, BlockRegistry.COPYCAT_WING, BlockRegistry.COPYCAT_FLAP)
                     .register();
-
 }

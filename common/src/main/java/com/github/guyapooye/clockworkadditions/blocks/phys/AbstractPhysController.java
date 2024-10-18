@@ -1,8 +1,5 @@
 package com.github.guyapooye.clockworkadditions.blocks.phys;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.github.guyapooye.clockworkadditions.blocks.phys.alternator.archived.BasePhysicsBearingData;
-import com.mojang.datafixers.util.Pair;
 import kotlin.jvm.functions.Function1;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;

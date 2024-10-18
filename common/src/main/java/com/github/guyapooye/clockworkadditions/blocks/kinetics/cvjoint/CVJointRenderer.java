@@ -5,7 +5,6 @@ import com.github.guyapooye.clockworkadditions.registries.PartialModelRegistry;
 import com.jozufozu.flywheel.backend.Backend;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Matrix3f;
 import com.mojang.math.Matrix4f;
 import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
@@ -16,8 +15,6 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
-import org.joml.Matrix4d;
-import org.valkyrienskies.mod.common.util.VectorConversionsMCKt;
 
 import static com.github.guyapooye.clockworkadditions.blocks.kinetics.cvjoint.CVJointInstance.getLength;
 import static com.github.guyapooye.clockworkadditions.blocks.kinetics.cvjoint.CVJointInstance.getMatrix;
@@ -91,7 +88,7 @@ public class CVJointRenderer extends KineticBlockEntityRenderer<CVJointBlockEnti
             ;
             connector2.light(light)
                     .renderInto(ms, vertexBuilder);
-            if (blockEntity.renderConnector) {
+            if (blockEntity.isOrigin) {
                 connector.delete();
                 return;
             }

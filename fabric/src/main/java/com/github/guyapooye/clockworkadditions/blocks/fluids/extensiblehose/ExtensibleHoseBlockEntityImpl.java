@@ -1,0 +1,33 @@
+package com.github.guyapooye.clockworkadditions.blocks.fluids.extensiblehose;
+
+import io.github.fabricators_of_create.porting_lib.transfer.fluid.FluidTank;
+import io.github.fabricators_of_create.porting_lib.transfer.fluid.FluidTransferable;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
+
+import static com.simibubi.create.content.kinetics.base.DirectionalKineticBlock.FACING;
+
+public class ExtensibleHoseBlockEntityImpl extends ExtensibleHoseBlockEntity<FluidTank> implements FluidTransferable {
+
+    public ExtensibleHoseBlockEntityImpl(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
+        super(typeIn, pos, state);
+    }
+
+    @Override
+    public FluidTank createTank() {
+        return new FluidTank(81000);
+    }
+
+    @Override
+    public @Nullable Storage<FluidVariant> getFluidStorage(Direction side) {
+        if (side == getBlockState().getValue(FACING).getOpposite()) {
+            return tank;
+        }
+        return null;
+    }
+}

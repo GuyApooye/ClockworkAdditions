@@ -21,13 +21,11 @@ public class PedalsDrivingPacket implements C2SCWPacket {
     private final Collection<Integer> pressedKeys;
 
     public PedalsDrivingPacket(int seatId, @NotNull Collection<Integer> pressedKeys) {
-        super();
         this.seatId = seatId;
         this.pressedKeys = pressedKeys;
     }
 
     public PedalsDrivingPacket(@NotNull FriendlyByteBuf buffer) {
-        super();
         this.seatId = buffer.readInt();
         pressedKeys = new ArrayList<>();
         int size = buffer.readVarInt();
@@ -36,7 +34,7 @@ public class PedalsDrivingPacket implements C2SCWPacket {
     }
 
     public void handle(@NotNull ServerNetworkContext context) {
-        context.enqueueWork(() -> handle$lambda$0(context, PedalsDrivingPacket.this));
+        context.enqueueWork(() -> handle$lambda$0(context, this));
         context.setPacketHandled(true);
     }
 

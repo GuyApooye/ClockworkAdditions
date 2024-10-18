@@ -8,16 +8,13 @@ import com.jozufozu.flywheel.api.Material;
 import com.jozufozu.flywheel.api.MaterialManager;
 import com.jozufozu.flywheel.api.instance.DynamicInstance;
 import com.jozufozu.flywheel.core.materials.model.ModelData;
-import com.mojang.math.Matrix3f;
 import com.mojang.math.Matrix4f;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
 import com.simibubi.create.content.kinetics.base.SingleRotatingInstance;
 import com.simibubi.create.content.kinetics.base.flwdata.RotatingData;
 import com.simibubi.create.foundation.utility.AngleHelper;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.joml.Matrix4d;
 import org.joml.Vector3d;
@@ -102,7 +99,7 @@ public class CVJointInstance extends SingleRotatingInstance<CVJointBlockEntity> 
                 .unCentre()
                 .translateZ(-len*0.375)
         ;
-        if (blockEntity.renderConnector) {
+        if (blockEntity.isOrigin) {
             connector.setEmptyTransform();
             return;
         }

@@ -13,17 +13,8 @@ import net.minecraft.world.item.ItemStack;
 import static com.github.guyapooye.clockworkadditions.ClockworkAdditions.*;
 
 public class ClockworkAdditionsFabric implements ModInitializer {
-    private void initializeCreativeModeTab() {
-        CWACreativeModeTab = new CreativeModeTab(ItemGroupUtil.expandArrayAndGetId(),MOD_ID) {
-            @Override
-            public ItemStack makeIcon() {
-                return BlockRegistry.KINETIC_FLAP_BEARING.asStack();
-            }
-        };
-    }
     @Override
     public void onInitialize() {
-        initializeCreativeModeTab();
         ClockworkAdditions.init();
         ConfigRegistryImpl.register();
         BlockRegistryImpl.register();

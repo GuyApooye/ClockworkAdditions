@@ -1,4 +1,4 @@
-package com.github.guyapooye.clockworkadditions.blocks.phys.alternator;
+package com.github.guyapooye.clockworkadditions.blocks.phys.helicopter;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.guyapooye.clockworkadditions.blocks.phys.PhysData;
@@ -9,11 +9,11 @@ import org.joml.Vector3dc;
 import org.valkyrienskies.core.apigame.constraints.VSAttachmentConstraint;
 import org.valkyrienskies.core.apigame.constraints.VSConstraintAndId;
 import org.valkyrienskies.core.apigame.constraints.VSHingeOrientationConstraint;
-import com.github.guyapooye.clockworkadditions.blocks.phys.alternator.AlternatorBearingData.AlternatorBearingUpdateData;
+import com.github.guyapooye.clockworkadditions.blocks.phys.helicopter.HelicopterBearingData.AlternatorBearingUpdateData;
 
 @Getter
 @Setter
-public class AlternatorBearingData implements PhysData<AlternatorBearingUpdateData> {
+public class HelicopterBearingData implements PhysData<AlternatorBearingUpdateData> {
     @Nullable
     private final Vector3dc bearingPosition;
     @Nullable
@@ -31,13 +31,13 @@ public class AlternatorBearingData implements PhysData<AlternatorBearingUpdateDa
     private Integer hingeId;
     /*why would you ever use this bruh*/
     @Deprecated
-    public AlternatorBearingData() {
+    public HelicopterBearingData() {
 
         this.bearingPosition = null;
         this.bearingAxis = null;
         this.shiptraptionId = -1L;
     }
-    public AlternatorBearingData(@Nullable Vector3dc bearingPosition,
+    public HelicopterBearingData(@Nullable Vector3dc bearingPosition,
                                  @Nullable Vector3dc bearingAxis,
                                  long shiptraptionID,
                                  VSConstraintAndId attachConstraint,
@@ -56,6 +56,8 @@ public class AlternatorBearingData implements PhysData<AlternatorBearingUpdateDa
         attachId = updateData.attachId;
         hingeId = updateData.hingeId;
     }
+
+
     public record AlternatorBearingUpdateData(VSAttachmentConstraint attachConstraint,
                                               Integer attachId,
                                               VSHingeOrientationConstraint hingeConstraint,

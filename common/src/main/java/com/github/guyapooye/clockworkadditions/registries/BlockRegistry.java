@@ -4,16 +4,19 @@ import com.github.guyapooye.clockworkadditions.ClockworkAdditions;
 import com.github.guyapooye.clockworkadditions.blocks.bearings.flap.KineticFlapBearingBlock;
 import com.github.guyapooye.clockworkadditions.blocks.copycats.wingalikes.CopycatFlapBlock;
 import com.github.guyapooye.clockworkadditions.blocks.copycats.wingalikes.CopycatWingBlock;
+import com.github.guyapooye.clockworkadditions.blocks.fluids.extensiblehose.ExtensibleHoseBlock;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.cvjoint.CVJointBlock;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.handlebar.HandlebarBlock;
+import com.github.guyapooye.clockworkadditions.blocks.kinetics.invertedresistor.InvertedRedstoneResistorBlock;
 import com.github.guyapooye.clockworkadditions.blocks.kinetics.pedals.PedalsBlock;
-import com.github.guyapooye.clockworkadditions.blocks.phys.alternator.AlternatorBearingBlock;
-import com.github.guyapooye.clockworkadditions.blocks.phys.alternator.archived.BasePhysicsBearingBlock;
+import com.github.guyapooye.clockworkadditions.blocks.phys.temp.BasePhysicsBearingBlock;
+import com.github.guyapooye.clockworkadditions.blocks.phys.helicopter.HelicopterBearingBlock;
 import com.github.guyapooye.clockworkadditions.blocks.redstone.gyro.RedstoneGyroBlock;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.SharedProperties;
+import com.simibubi.create.foundation.data.TagGen;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.client.renderer.RenderType;
@@ -30,8 +33,8 @@ public class BlockRegistry {
     static {
         REGISTRATE.creativeModeTab(() -> ClockworkAdditions.CWACreativeModeTab);
     }
-    public static final BlockEntry<BasePhysicsBearingBlock> BASE_PHYSICS_BEARING =
-            REGISTRATE.block("base_physics_bearing", BasePhysicsBearingBlock::new)
+    public static final BlockEntry<BasePhysicsBearingBlock> BASE_BEARING =
+            REGISTRATE.block("base_bearing", BasePhysicsBearingBlock::new)
                     .initialProperties(SharedProperties::stone)
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .transform(axeOrPickaxe())
@@ -40,9 +43,8 @@ public class BlockRegistry {
                     .simpleItem()
                     .lang("Helicopter Physics Bearing")
                     .register();
-
-    public static final BlockEntry<AlternatorBearingBlock> ALTERNATOR_BEARING =
-            REGISTRATE.block("kinetic_alternator", AlternatorBearingBlock::new)
+    public static final BlockEntry<HelicopterBearingBlock> HELICOPTER_BEARING =
+            REGISTRATE.block("helicopter_bearing", HelicopterBearingBlock::new)
                     .initialProperties(SharedProperties::stone)
                     .properties(BlockBehaviour.Properties::noOcclusion)
                     .transform(axeOrPickaxe())
@@ -101,6 +103,25 @@ public class BlockRegistry {
                     .blockstate(BlockStateGen.horizontalBlockProvider(true))
                     .simpleItem()
                     .lang("Constant Velocity Joint")
+                    .register();
+    public static final BlockEntry<InvertedRedstoneResistorBlock> INVERTED_RESISTOR =
+            REGISTRATE.block("inverted_redstone_resistor", InvertedRedstoneResistorBlock::new)
+                    .initialProperties(SharedProperties::stone)
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .transform(BlockStressDefaults.setNoImpact())
+                    .transform(TagGen.axeOrPickaxe())
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .simpleItem()
+                    .lang("Inverted Redstone Resistor")
+                    .register();
+    public static final BlockEntry<ExtensibleHoseBlock> EXTENSIBLE_HOSE =
+            REGISTRATE.block("extensible_hose", ExtensibleHoseBlock::new)
+                    .initialProperties(SharedProperties::stone)
+                    .properties(BlockBehaviour.Properties::noOcclusion)
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .blockstate(BlockStateGen.horizontalBlockProvider(true))
+                    .simpleItem()
+                    .lang("Extensible Hose")
                     .register();
     public static final BlockEntry<? extends CopycatWingBlock> COPYCAT_WING = registerCopycatWing();
     public static final BlockEntry<? extends CopycatFlapBlock> COPYCAT_FLAP = registerCopycatFlap();
