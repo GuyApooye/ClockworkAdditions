@@ -16,8 +16,7 @@ public class ShapesRegistry {
         PEDALS = shape(0,0,14,16,16,16).add(3,1,2,13,22,14).add(2.5,0,0,13.5,13,6).forDirectional(),
         PEDALS_COLLISION = shape(0,0,14,16,16,16).add(3,1,2,13,22,14).forDirectional(),
         CV_JOINT = shape(5, 0, 5, 11, 8, 11).forDirectional(),
-        HELI_BEARING = shape(0,0,0,16,12,16).forDirectional(),
-        EXTENSIBLE_HOSE = shape(4, 0, 4, 12, 8, 12).forDirectional()
+        HELI_BEARING = shape(0,0,0,16,12,16).forDirectional()
         ;
     public static final VoxelShape
         HANDLEBAR = shape(5, 0, 5, 11, 6, 11).add(1, 6, 1, 15, 11, 15).build();
