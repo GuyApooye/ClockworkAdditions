@@ -29,7 +29,6 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.BlockHitResult;
@@ -111,10 +110,10 @@ public interface ICopycatBlock extends IBE<CWACopycatBlockEntity>, IWrenchable{
                 return InteractionResult.SUCCESS;
 
             ufte.setMaterial(material);
-            ufte.setConsumedItem(itemInHand);
-            ufte.getLevel()
-                    .playSound(null, ufte.getBlockPos(), material.getSoundType()
-                            .getPlaceSound(), SoundSource.BLOCKS, 1, .75f);
+            ItemStack BlockItem = itemInHand.copy();
+            BlockItem.setCount(1);
+            ufte.setConsumedItem(BlockItem);
+            ufte.getLevel().playSound(null, ufte.getBlockPos(), material.getSoundType().getPlaceSound(), SoundSource.BLOCKS, 1, .75f);
 
             if (pPlayer.isCreative())
                 return InteractionResult.SUCCESS;

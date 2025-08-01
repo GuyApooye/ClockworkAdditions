@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " N",
+    "NF"
+  ],
+  "key": {
+    "N": {
+      "item": "minecraft:iron_nugget"
+    },
+    "F": {
+      "item": "vs_clockwork:flap"
+    }
+  },
+  "result": {
+    "item": "clockworkadditions:copycat_flap",
+    "count": 1 
+  }
+}

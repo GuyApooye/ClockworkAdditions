@@ -1,9 +1,7 @@
 package com.github.guyapooye.clockworkadditions;
 
 import com.github.guyapooye.clockworkadditions.registries.*;
-import com.github.guyapooye.clockworkadditions.util.PlatformUtil;
 import com.simibubi.create.foundation.data.CreateRegistrate;
-import net.fabricmc.api.EnvType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
@@ -25,6 +23,8 @@ public class ClockworkAdditions
 		output.accept(BlockRegistry.COPYCAT_FLAP);
 		output.accept(BlockRegistry.CV_JOINT);
 		output.accept(BlockRegistry.INVERTED_RESISTOR);
+		output.accept(BlockRegistry.EXTENSIBLE_HOSE);
+		output.accept(BlockRegistry.REDSTONE_GYRO);
 	}
 	public static void init() {
 		BlockRegistry.register();

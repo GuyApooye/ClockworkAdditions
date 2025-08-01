@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "vs_clockwork:redstone_resistor"
+    }
+  ],
+  "result": {
+    "item": "clockworkadditions:inverted_redstone_resistor",
+    "count": 1
+  }
+}

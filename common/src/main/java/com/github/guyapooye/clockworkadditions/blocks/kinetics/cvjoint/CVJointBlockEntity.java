@@ -2,10 +2,8 @@ package com.github.guyapooye.clockworkadditions.blocks.kinetics.cvjoint;
 
 import com.github.guyapooye.clockworkadditions.registries.BlockRegistry;
 import com.github.guyapooye.clockworkadditions.registries.ConfigRegistry;
-import com.github.guyapooye.clockworkadditions.util.PlatformUtil;
 import com.simibubi.create.content.kinetics.base.IRotate;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
-import net.fabricmc.api.EnvType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
@@ -118,25 +116,22 @@ public class CVJointBlockEntity extends KineticBlockEntity {
     public void tick() {
         super.tick();
         if (target == null) {
-            detach();
-            return;
-        }
-        CVJointBlockEntity other = BlockRegistry.CV_JOINT.get().getBlockEntity(level, target);
-        if (other == null) {
-            if (level.isLoaded(target))
-                detach();
-            return;
-        };
-        if (isOrigin == other.isOrigin) isOrigin = !other.isOrigin;
-        PlatformUtil.runWhenOn(EnvType.SERVER,() -> {
-            if (getWorldSpace().sub(other.getWorldSpace()).lengthSquared() > Math.pow(ConfigRegistry.server().stretchables.cvJointMaxLength.get(),2)) {
+            this.detach();
+        } else {
+            CVJointBlockEntity other = BlockRegistry.CV_JOINT.get().getBlockEntity(level, target);
+            if (other == null) {
+                if (level.isLoaded(this.target)) this.detach();
+            } else {
+                if (this.isOrigin == other.isOrigin) this.isOrigin = !other.isOrigin;
 
-                target = null;
-                other.target = null;
-                detachKinetics();
-                other.detachKinetics();
+                if (getWorldSpace().sub(other.getWorldSpace()).lengthSquared() > Math.pow(ConfigRegistry.server().stretchables.cvJointMaxLength.get(), 2)) {
+                    target = null;
+                    other.target = null;
+                    detachKinetics();
+                    other.detachKinetics();
+                }
             }
-        });
+        }
     }
 
     @Override
