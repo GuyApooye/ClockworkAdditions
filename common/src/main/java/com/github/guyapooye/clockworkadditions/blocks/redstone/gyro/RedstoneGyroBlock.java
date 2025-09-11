@@ -23,7 +23,7 @@ public class RedstoneGyroBlock extends AbstractFourSidedPoweredBlock implements 
 
 
     public RedstoneGyroBlock(Properties properties) {
-        super(properties);
+        super(properties.noCollission());
         registerDefaultState(defaultBlockState()
                 .setValue(NORTH,false)
                 .setValue(SOUTH,false)
