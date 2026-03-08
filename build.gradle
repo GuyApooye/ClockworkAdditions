@@ -1,64 +1,278 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
+import java.util.zip.ZipFile
+import java.util.zip.ZipOutputStream
+import java.util.zip.ZipEntry
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            name = 'ParchmentMC'
+            url = 'https://maven.parchmentmc.org'
+        }
+    }
+    dependencies {
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.22'
+        classpath 'org.jetbrains.kotlin:kotlin-serialization:1.9.22'
+        classpath 'com.guardsquare:proguard-gradle:7.8.2'
+    }
+}
+
 plugins {
-    id "architectury-plugin" version "3.4-SNAPSHOT"
-    id "dev.architectury.loom" version "1.5-SNAPSHOT" apply false
-    id "io.github.pacifistmc.forgix" version "1.2.6"
+    id 'dev.architectury.loom' version '1.3.355'
+    id 'architectury-plugin' version '3.4.146'
+    id "org.jetbrains.kotlin.jvm" version "$kotlin_version"
+    id 'com.matthewprenger.cursegradle' version '1.4.0'
+    id "com.modrinth.minotaur" version "2.4.5"
+    id "com.github.johnrengelman.shadow" version "8.1.1"
+}
+
+if (project.hasProperty("CustomReleaseVersion")) {
+    version = project.property("CustomReleaseVersion").replaceFirst("^release/", "")
+} else {
+    String gitRevision = "git rev-parse HEAD".execute().text.trim()
+    if (gitRevision.isEmpty()) {
+        gitRevision = 'unknown'
+    }
+
+    version = mod_version + '+' + (gitRevision.length() >= 10 ? gitRevision.substring(0, 10) : gitRevision)
 }
 
 architectury {
-    minecraft = rootProject.minecraft_version
+    minecraft = project.minecraft_version
+    platformSetupLoomIde()
+    forge()
 }
 
-forgix {
-    group = "com.github.guyapooye.clockworkadditions"
-    //Something seems to be wrong in this line
-//    mergedJarName = "ClockworkAdditions-${mod_version}-${"git rev-parse HEAD".execute().text.trim().substring(0, 10)}-multiloader.jar"
-    mergedJarName = "ClockworkAdditions-${mod_version}-multiloader.jar"
-}
+allprojects {
+    archivesBaseName = rootProject.archives_base_name
+    version = rootProject.version
+    group = rootProject.maven_group
 
-subprojects {
-    apply plugin: "dev.architectury.loom"
+    configurations.configureEach {
+        resolutionStrategy.force "org.lwjgl:lwjgl-stb:3.3.1"
+        resolutionStrategy.force "org.lwjgl:lwjgl-opengl:3.3.1"
+        resolutionStrategy.force "org.lwjgl:lwjgl-openal:3.3.1"
+        resolutionStrategy.force "org.lwjgl:lwjgl-tinyfd:3.3.1"
+        resolutionStrategy.force "org.lwjgl:lwjgl-jemalloc:3.3.1"
+        resolutionStrategy.force "org.lwjgl:lwjgl-glfw:3.3.1"
+        resolutionStrategy.force "org.lwjgl:lwjgl:3.3.1"
+    }
+
+    repositories {
+        mavenLocal()
+
+        maven {
+            name = "CurseForge Maven"
+            url = "https://cursemaven.com"
+            content { includeGroup("curse.maven") }
+        }
+        maven {
+            name = "Modrinth Maven"
+            url = "https://api.modrinth.com/maven"
+            content { includeGroup("maven.modrinth") }
+        }
+        maven {
+            name = "Valkyrien Skies Internal"
+            url = project.vs_maven_url ?: 'https://maven.valkyrienskies.org'
+        }
+        maven {
+            name = 'Kotlin for Forge'
+            url = 'https://thedarkcolour.github.io/KotlinForForge/'
+        }
+        maven {
+            url = "https://maven.createmod.net"
+        }
+        maven {
+            name = "create maven"
+            url = "https://maven.tterrag.com/"
+            content {
+                includeGroup("com.simibubi.create")
+                includeGroup("com.jozufozu.flywheel")
+                includeGroup("com.tterrag.registrate")
+            }
+        }
+        maven {
+            name = 'ParchmentMC'
+            url = 'https://maven.parchmentmc.org'
+        }
+    }
 
     loom {
         silentMojangMappingsLicense()
     }
 
     dependencies {
-        minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
-        // The following line declares the mojmap mappings, you may use other mappings as well
-        mappings loom.officialMojangMappings()
-        // The following line declares the yarn mappings you may select this one as well.
-        // mappings "net.fabricmc:yarn:@YARN_MAPPINGS@:v2"
-    }
-}
-
-allprojects {
-    apply plugin: "java"
-    apply plugin: "architectury-plugin"
-    apply plugin: "maven-publish"
-
-    archivesBaseName = rootProject.archives_base_name
-    version = rootProject.mod_version
-    group = rootProject.maven_group
-
-    repositories {
-        mavenLocal()
-        maven {
-            name = "Valkyrien Skies Internal"
-            url = 'https://maven.valkyrienskies.org'
+        minecraft "net.minecraft:minecraft:$rootProject.minecraft_version"
+        mappings loom.layered() {
+            officialMojangMappings()
+            parchment("org.parchmentmc.data:parchment-1.20.1:2023.09.03@zip")
         }
-        // Add repositories to retrieve artifacts from in here.
-        // You should only use this when depending on other mods because
-        // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
-        // See https://docs.gradle.org/current/userguide/declaring_repositories.html
-        // for more information about repositories.
-    }
-
-    tasks.withType(JavaCompile) {
-        options.encoding = "UTF-8"
-        options.release.set(17)
     }
 
     java {
         withSourcesJar()
     }
+
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = "UTF-8"
+
+        options.release = 17
+    }
+
+    tasks.withType(KotlinJvmCompile).configureEach {
+        kotlinOptions {
+            jvmTarget = "17"
+            freeCompilerArgs += "-Xjvm-default=all"
+
+        }
+    }
+
+    String buildNumber = System.getenv("GITHUB_RUN_NUMBER")
 }
+
+dependencies {
+    forge("net.minecraftforge:forge:${minecraft_version}-${forge_version}")
+
+    //Joml
+    implementation("org.joml:joml:1.10.4")
+    implementation("org.joml:joml-primitives:1.10.0")
+    include("org.joml:joml-primitives:1.10.0")
+
+    //Mixin
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.4.1"))
+    include("io.github.llamalad7:mixinextras-forge:0.4.1")
+
+    //瓦尔基里
+    modApi("org.valkyrienskies:valkyrienskies-120-forge:${rootProject.vs2_version}") { transitive = false }
+    implementation("org.valkyrienskies.core:api:${rootProject.vscore_version}") { transitive = false }
+    implementation("org.valkyrienskies.core:util:${rootProject.vscore_version}") { transitive = false }
+    implementation("org.valkyrienskies.core:internal:${rootProject.vscore_version}") { transitive = false }
+    implementation("thedarkcolour:kotlinforforge:${rootProject.kotlin_forge}")
+
+    //机械动力
+    modImplementation("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") { transitive = false }
+    modImplementation("net.createmod.ponder:Ponder-Forge-${minecraft_version}:${ponder_version}")
+    modCompileOnly("dev.engine-room.flywheel:flywheel-forge-api-${minecraft_version}:${flywheel_version}")
+    modRuntimeOnly("dev.engine-room.flywheel:flywheel-forge-${minecraft_version}:${flywheel_version}")
+    modImplementation("com.tterrag.registrate:Registrate:${registrate_version}")
+
+    modImplementation(files("libs/architectury-forge-9.1.12.jar"))
+    modImplementation(files("libs/kelvin-forge-1.20.1-0.4.0+ad27706cf1.jar"))
+    modImplementation(files("libs/clockwork-1.20.1-forge.jar"))
+}
+
+processResources {
+    filesMatching("META-INF/mods.toml") {
+        expand([
+                "version"               : version,
+                "loader_version_range"  : loader_version_range,
+                "mod_license"           : mod_license,
+                "mod_id"                : mod_id,
+                "mod_version"           : mod_version,
+                "mod_name"              : archives_base_name,
+                "mod_authors"           : mod_authors,
+                "mod_description"       : mod_description,
+                "forge_version_range"   : forge_version_range,
+                "minecraft_version_range": minecraft_version_range,
+                "project"               : project
+        ])
+    }
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDirs+=file("src/main/generated/resources")
+        }
+    }
+}
+
+loom {
+
+    runs {
+        data {
+            data()
+
+            programArgs("--all", "--mod", "$mod_id")
+            programArgs("--output", file("src/main/generated/resources").absolutePath)
+            programArgs("--existing", file("src/main/resources").absolutePath)
+        }
+    }
+    forge {
+        mixinConfig "clockworkadditions.mixins.json"
+        convertAccessWideners.set(true)
+
+    }
+    mixin {
+        defaultRefmapName = "clockworkadditions.refmap.json"
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 17
+}
+
+shadowJar {
+    archiveClassifier.set("")
+
+    dependencies {
+        include(dependency("org.joml:joml-primitives:1.10.0"))
+        include(dependency("com.llamalad7:mixinextras"))
+    }
+    relocate "org.joml.primitives", "org.shadow.org.joml.primitives"
+
+    exclude("mappings/**")
+    exclude("version.json")
+    exclude("flightrecorder-config.jfc")
+    exclude("pack.png")
+
+    zip64 true
+}
+
+remapJar {
+    input.set jar.archiveFile
+    archiveClassifier.set null
+}
+
+jar {
+    archiveClassifier.set "dev"
+}
+
+components.java {
+    withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
+        skip()
+    }
+}
+
+task obfuscateMod(type: proguard.gradle.ProGuardTask) {
+    configuration 'proguard.conf'
+    group 'build'
+
+    injars "${buildDir}/libs/${project.name}-${version}.jar"
+
+    outjars "${buildDir}/libs/${project.name}-${version}-obf.jar"
+
+
+    doFirst {
+        Set<File> allFiles = new HashSet<>()
+
+        allFiles.addAll(configurations.minecraftLibraries.files)
+        allFiles.addAll(configurations.forgeRuntimeLibrary.files)
+        allFiles.addAll(configurations.forgeUserdev.files)
+        allFiles.addAll(configurations.compileClasspath.files)
+
+        allFiles = allFiles.findAll { !it.name.contains('fmlearlydisplay') }
+
+        libraryjars files(allFiles)
+    }
+
+    libraryjars "${System.getProperty('java.home')}/lib/rt.jar"
+    libraryjars "${System.getProperty('java.home')}/lib/jce.jar"
+
+    if (JavaVersion.current() >= JavaVersion.VERSION_17) {
+        libraryjars "${System.getProperty('java.home')}/jmods"
+    }
+
+}
+
