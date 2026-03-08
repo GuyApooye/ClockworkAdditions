@@ -1,9 +1,4 @@
 # ClockworkAdditions 1.18.2
 
-TODO:
-
-Gyroscope/Rotation Sensor
-
-Wanderlite Casing
-
-Copycat Wing and Copycat Flap
+Want to copy/modify anything from this repository? Send me a message on Discord - @GuyApooye.
+Forking of this repository is allowed for contributions' sake only.
