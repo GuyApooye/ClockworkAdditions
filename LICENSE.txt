@@ -1,0 +1,14 @@
+Copyright (c) 2026 CN_GOOD_GRASS
+All rights reserved.
+
+The project code released by the owner is provided solely for the purpose
+of creating extensions. Any other use, including but not limited to
+copying, modifying, distributing, or commercial exploitation, is strictly
+prohibited without prior written permission from the copyright holder.
+
+Permission is hereby granted to use this work in user-created content packs
+and integration packages, provided that:
+1. The original copyright notice is retained.
+2. No commercial distribution is made without prior written consent.
+3. Modifications are clearly documented.
+4. Authors must be notified of any extensions or derivative works.

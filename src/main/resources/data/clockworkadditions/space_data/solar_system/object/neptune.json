@@ -1,0 +1,28 @@
+{
+  "type": "planet",
+  "scale": 24622000 ,
+  "carmen_line_height": 2.0e5,
+  "pos": [-4.4E+12,-1.17E+11,-7.63E+11],
+  "rotate": [9.860e-1, 1.171e-1, 2.285e-1, 0],
+  "texture": "space:textures/celestial_body/planet/neptune/surface.png",
+  "atmospheric": {
+    "height": 2.0e4,
+    "color": [59, 111, 182],
+    "temperature": 72,
+    "molar_mass": 0.00253,
+    "sea_level_density": 0.45
+  },
+  "ring": {
+    "ring_inside_height": 1,
+    "ring_outside_height": 1,
+    "texture": "space:textures/celestial_body/planet/jupiter/surface.png"
+  },
+  "dimension": {
+    "id": "space:neptune"
+  },
+
+  "mass": 1.02E+26,
+  "speed": [974,-89.1,-5392],
+  "rotate_speed": 1.084e-4,
+  "compute": true
+}

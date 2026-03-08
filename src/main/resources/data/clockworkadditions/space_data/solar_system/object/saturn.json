@@ -1,0 +1,28 @@
+{
+  "type": "planet",
+  "scale": 58232000,
+  "carmen_line_height": 4.0e5,
+  "pos": [-8.25E+11,-5.17E+10,-1.09E+12],
+  "rotate": [9.865e-1, -7.440e-2, 1.145e-2, 0],
+  "texture": "space:textures/celestial_body/planet/saturn/surface.png",
+  "atmospheric": {
+    "height": 4.0e4,
+    "color": [226, 212, 182],
+    "temperature": 134,
+    "molar_mass": 0.00207,
+    "sea_level_density": 0.19
+  },
+  "ring": {
+    "ring_inside_height": 1,
+    "ring_outside_height": 1,
+    "texture": "space:textures/celestial_body/planet/jupiter/surface.png"
+  },
+  "dimension": {
+    "id": "space:saturn"
+  },
+
+  "mass": 5.68E+26,
+  "speed": [8199,225,-5831],
+  "rotate_speed": 1.640e-4,
+  "compute": true
+}

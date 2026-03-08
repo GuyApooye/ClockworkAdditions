@@ -1,0 +1,16 @@
+{
+  "type": "planet",
+  "scale": 1737500,
+  "carmen_line_height": 2.0e4,
+  "pos": [1.56E+10,-23615210,-1.47E+11],
+  "rotate": [9.990e-1, 8.247e-3, -7.451e-3, 0],
+  "texture": "space:textures/celestial_body/planet/moon/surface.png",
+  "dimension": {
+    "id": "space:moon"
+  },
+
+  "mass": 7.35E+22,
+  "speed": [30150,-7.58,4015],
+  "rotate_speed": 2.663e-6,
+  "compute": true
+}

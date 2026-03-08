@@ -1,0 +1,30 @@
+{
+  "type": "planet",
+  "scale": 6.371e6,
+  "carmen_line_height": 1.0e5,
+  "pos": [1.53E+10,10876018,-1.47E+11],
+  "rotate": [9.79048e-1, 2.4822e-2, -2.02153e-1, 0],
+  "texture": "space:textures/celestial_body/planet/earth/surface.png",
+  "night_texture": "space:textures/celestial_body/planet/earth/surface_night.png",
+  "normal": "space:textures/celestial_body/planet/earth/normal.png",
+  "fluid": "space:textures/celestial_body/planet/earth/fluid.png",
+  "atmospheric": {
+    "height": 2.5e6,
+    "color": [134, 210, 218],
+    "temperature": 288,
+    "molar_mass": 0.02896,
+    "sea_level_density": 1.225
+  },
+  "cloud": {
+    "height": 18000,
+    "texture": "space:textures/celestial_body/planet/earth/cloud.png"
+  },
+  "dimension": {
+    "id": "minecraft:overworld"
+  },
+
+  "mass": 5.97e+24,
+  "speed": [30185,1.90,2951],
+  "rotate_speed": 7.2921e-5,
+  "compute": true
+}

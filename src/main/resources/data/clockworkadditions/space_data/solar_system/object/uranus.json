@@ -1,0 +1,28 @@
+{
+  "type": "planet",
+  "scale": 25362000,
+  "carmen_line_height": 1.5e5,
+  "pos": [-6.79E+11,1.59E+9,-2.8E+12],
+  "rotate": [7.227e-2, 7.219e-1, 5.703e-2, 0],
+  "texture": "space:textures/celestial_body/planet/uranus/surface.png",
+  "atmospheric": {
+    "height": 1.5e4,
+    "color": [206, 229, 242],
+    "temperature": 76,
+    "molar_mass": 0.00264,
+    "sea_level_density": 0.42
+  },
+  "ring": {
+    "ring_inside_height": 1,
+    "ring_outside_height": 1,
+    "texture": "space:textures/celestial_body/planet/jupiter/surface.png"
+  },
+  "dimension": {
+    "id": "space:uranus"
+  },
+
+  "mass": 8.68E+25,
+  "speed": [6662,91.2,-1290],
+  "rotate_speed": 1.012e-4,
+  "compute": true
+}

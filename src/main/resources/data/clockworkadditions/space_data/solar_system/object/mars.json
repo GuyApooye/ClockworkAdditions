@@ -1,0 +1,23 @@
+{
+  "type": "planet",
+  "scale": 3389500,
+  "carmen_line_height": 8.0e4,
+  "pos": [-1.87E+11,-6.37E+9,8.37E+10],
+  "rotate": [9.7592e-1, 7.459e-2, -2.050e-1, 0],
+  "texture": "space:textures/celestial_body/planet/mars/surface.png",
+  "atmospheric": {
+    "height": 8.0e3,
+    "color": [226, 123, 88],
+    "temperature": 210,
+    "molar_mass": 0.04334,
+    "sea_level_density": 0.020
+  },
+  "dimension": {
+    "id": "space:mars"
+  },
+
+  "mass": 6.42E+23,
+  "speed": [-10835,241,-24197],
+  "rotate_speed": 7.061e-5,
+  "compute": true
+}

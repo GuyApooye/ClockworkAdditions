@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:overworld",
+  "generator": {
+    "type": "minecraft:flat",
+    "settings": {
+      "biome": "minecraft:void",
+      "features": false,
+      "lakes": false,
+      "layers": [
+        {
+          "block": "space:mars_stone",
+          "height": 1
+        }
+      ]
+
+    }
+  }
+}

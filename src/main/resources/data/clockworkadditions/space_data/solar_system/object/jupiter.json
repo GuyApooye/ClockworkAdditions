@@ -1,0 +1,28 @@
+{
+  "type": "planet",
+  "scale": 69911000,
+  "carmen_line_height": 2.7e5,
+  "pos": [6.04E+11,1.58E+10,5.41E+11],
+  "rotate": [9.99629e-1, -1.5702e-2, 2.2236e-2, 0],
+  "texture": "space:textures/celestial_body/planet/jupiter/surface.png",
+  "atmospheric": {
+    "height": 2.7e4,
+    "color": [186, 163, 133],
+    "temperature": 165,
+    "molar_mass": 0.00222,
+    "sea_level_density": 0.16
+  },
+  "ring": {
+    "ring_inside_height": 1,
+    "ring_outside_height": 1,
+    "texture": "space:textures/celestial_body/planet/jupiter/surface.png"
+  },
+  "dimension": {
+    "id": "space:jupiter"
+  },
+
+  "mass": 1.9E+27,
+  "speed": [-8589,-154,9124],
+  "rotate_speed": 1.756e-4,
+  "compute": true
+}

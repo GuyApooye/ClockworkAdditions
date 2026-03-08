@@ -1,0 +1,23 @@
+{
+  "type": "planet",
+  "scale": 6051802,
+  "carmen_line_height": 2.5e5,
+  "pos": [4.39E+9,1.69E+9,-1.08E+11],
+  "rotate": [-3.472e-3, -7.117e-1, 6.188e-2, 0],
+  "texture": "space:textures/celestial_body/planet/venus/surface.png",
+  "atmospheric": {
+    "height": 25000,
+    "color": [237, 228, 166],
+    "temperature": 737,
+    "molar_mass": 0.04345,
+    "sea_level_density": 65
+  },
+  "dimension": {
+    "id": "space:venus"
+  },
+
+  "mass": 4.87E+24,
+  "speed": [35141,2010,1269],
+  "rotate_speed": 2.991e-7,
+  "compute": true
+}
