@@ -11,7 +11,7 @@ import static com.guyapooye.clockworkadditions.ClockworkAdditions.REGISTRATE;
 public class BlockEntityRegistry {
     public static final BlockEntityEntry<PedalsBlockEntity> PEDALS = REGISTRATE
             .blockEntity("mechanical_pedals", PedalsBlockEntity::new)
-            .visual(() -> OrientedRotatingVisual.of(AllPartialModels.SHAFT_HALF), false)
+            .visual(() -> OrientedRotatingVisual.backHorizontal(PartialModelRegistry.SHAFT_HALF), false)
             .validBlocks(BlockRegistry.PEDALS)
             .renderer(() -> PedalsRenderer::new)
             .register();

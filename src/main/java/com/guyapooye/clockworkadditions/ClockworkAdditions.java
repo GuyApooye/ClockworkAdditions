@@ -2,6 +2,7 @@ package com.guyapooye.clockworkadditions;
 
 import com.guyapooye.clockworkadditions.registries.BlockEntityRegistry;
 import com.guyapooye.clockworkadditions.registries.BlockRegistry;
+import com.guyapooye.clockworkadditions.registries.EntityRegistry;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -42,12 +43,13 @@ public class ClockworkAdditions
 	}
 	public static void init() {
 		BlockRegistry.register();
+		EntityRegistry.ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
 		BlockEntityRegistry.register();
 	}
 
 	@NotNull
 	public static ResourceLocation asResource(@NotNull String path) {
-		return new ResourceLocation("com/guyapooye/clockworkadditions", path);
+		return new ResourceLocation("clockworkadditions", path);
 	}
 	public static Component asTranslatable(String translatable) {
 		return Component.translatable(translatable);

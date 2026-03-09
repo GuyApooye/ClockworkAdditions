@@ -34,6 +34,7 @@ public class BlockRegistry {
                     .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
                     .simpleItem()
                     .lang("Mechanical Pedals")
+                    .blockstate(BlockStateGen.horizontalBlockProvider(true))
                     .register();
 //    public static final BlockEntry<ExtensibleHoseBlock> EXTENSIBLE_HOSE =
 //            REGISTRATE.block("extensible_hose", ExtensibleHoseBlock::new)
