@@ -1,16 +1,15 @@
 package com.guyapooye.clockworkadditions.registries;
 
+import com.guyapooye.clockworkadditions.blocks.gas.SelfPrimingCoalBurnerBlock;
 import com.guyapooye.clockworkadditions.blocks.kinetics.pedals.PedalsBlock;
 import com.simibubi.create.AllTags;
-import com.simibubi.create.api.stress.BlockStressValues;
 import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.entry.BlockEntry;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.MapColor;
+import org.valkyrienskies.clockwork.ClockworkDisplaySources;
 import static com.guyapooye.clockworkadditions.ClockworkAdditions.REGISTRATE;
-import static com.simibubi.create.foundation.data.TagGen.axeOnly;
+import static com.simibubi.create.api.behaviour.display.DisplaySource.displaySource;
 
 
 public class BlockRegistry {
@@ -45,6 +44,15 @@ public class BlockRegistry {
 //                    .simpleItem()
 //                    .lang("Extensible Hose")
 //                    .register();
+
+    public static final BlockEntry<SelfPrimingCoalBurnerBlock> SELF_PRIMING_COAL_BURNER =
+            REGISTRATE.block("self_priming_coal_burner", SelfPrimingCoalBurnerBlock::new)
+                    .initialProperties(SharedProperties::netheriteMetal)
+                    .properties((BlockBehaviour.Properties::noOcclusion))
+                    .item()
+                    .build()
+                    .lang("Self Priming Coal Burner")
+                    .register();
 
     public static void register() {
     }

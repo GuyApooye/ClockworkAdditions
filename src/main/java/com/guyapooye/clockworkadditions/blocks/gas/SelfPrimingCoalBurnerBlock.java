@@ -1,160 +1,188 @@
 package com.guyapooye.clockworkadditions.blocks.gas;
 
-import com.google.common.base.Optional;
-import com.guyapooye.clockworkadditions.blocks.kinetics.pedals.PedalsBlock;
-import com.guyapooye.clockworkadditions.blocks.kinetics.pedals.PedalsBlockEntity;
-import com.guyapooye.clockworkadditions.entities.pedals.PedalsEntity;
 import com.guyapooye.clockworkadditions.registries.BlockEntityRegistry;
-import com.guyapooye.clockworkadditions.registries.ShapesRegistry;
-import com.simibubi.create.AllTags;
-import com.simibubi.create.content.contraptions.actors.seat.SeatEntity;
-import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
 import com.simibubi.create.foundation.block.IBE;
-import com.simibubi.create.foundation.block.ProperWaterloggedBlock;
-import com.simibubi.create.infrastructure.config.AllConfigs;
+import dev.architectury.registry.fuel.FuelRegistry;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.TamableAnimal;
-import net.minecraft.world.entity.monster.Shulker;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.pathfinder.PathComputationType;
-import net.minecraft.world.phys.AABB;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.util.FakePlayer;
-import org.valkyrienskies.clockwork.content.logistics.gas.generation.coal_burner.CoalBurnerBlockEntity;
+import org.jetbrains.annotations.NotNull;
+import org.valkyrienskies.clockwork.util.gui.IHaveDuctStats;
+import org.valkyrienskies.kelvin.api.DuctNode;
+import org.valkyrienskies.kelvin.api.DuctNodePos;
+import org.valkyrienskies.kelvin.util.INodeBlock;
 
 import java.util.List;
 
-public class SelfPrimingCoalBurnerBlock extends PedalsBlock {
+public class SelfPrimingCoalBurnerBlock extends HorizontalDirectionalBlock implements INodeBlock, IBE<SelfPrimingCoalBurnerBlockEntity>, IHaveDuctStats {
+
+    public static final BooleanProperty LIT = BlockStateProperties.LIT;
 
     public SelfPrimingCoalBurnerBlock(Properties properties) {
         super(properties);
-        registerDefaultState(defaultBlockState().setValue(WATERLOGGED, false));
+        this.registerDefaultState(this.defaultBlockState()
+                .setValue(FACING, Direction.NORTH)
+                .setValue(LIT, false));
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        super.createBlockStateDefinition(pBuilder.add(WATERLOGGED));
-    }
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (!(level.getBlockEntity(pos) instanceof SelfPrimingCoalBurnerBlockEntity be)) return InteractionResult.PASS;
 
-    @Override
-    public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-        return withWater(super.getStateForPlacement(pContext), pContext);
-    }
+        ItemStack item = player.getItemInHand(hand);
 
-    @Override
-    public BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pNeighborPos) {
-        updateWater(pLevel, pState, pCurrentPos);
-        return pState;
-    }
+        if (player.isShiftKeyDown()) return InteractionResult.PASS;
 
-    @Override
-    public FluidState getFluidState(BlockState pState) {
-        return fluidState(pState);
-    }
-
-    @Override
-    public void fallOn(Level level, BlockState blockState, BlockPos blockPos, Entity entity, float f) {
-        super.fallOn(level, blockState, blockPos, entity, f * 0.5F);
-    }
-
-    @Override
-    public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext ctx) {
-        return ShapesRegistry.PEDALS.get(blockState.getValue(SelfPrimingCoalBurnerBlock.HORIZONTAL_FACING));
-    }
-
-    @Override
-    public VoxelShape getCollisionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext ctx) {
-//        if (ctx instanceof EntityCollisionContext ecc && ecc.getEntity() instanceof Player)
-//            return AllShapes.TURNTABLE_SHAPE;
-        return ShapesRegistry.PEDALS_COLLISION.get(blockState.getValue(SelfPrimingCoalBurnerBlock.HORIZONTAL_FACING));
-    }
-
-
-    @Override
-    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult p_225533_6_) {
-        if (player.isShiftKeyDown() || player instanceof FakePlayer) return InteractionResult.PASS;
-
-        List<SeatEntity> seats = world.getEntitiesOfClass(SeatEntity.class, new AABB(pos));
-        if (!seats.isEmpty()) {
-            SeatEntity seatEntity = seats.get(0);
-            List<Entity> passengers = seatEntity.getPassengers();
-            if (!passengers.isEmpty() && passengers.get(0) instanceof Player)
-                return InteractionResult.PASS;
-            if (!world.isClientSide) {
-                seatEntity.ejectPassengers();
-                player.startRiding(seatEntity);
+        if (item.isEmpty()) {
+            if (!be.storedFuelStack.isEmpty()) {
+                player.setItemInHand(hand, be.remainingItemStack);
+                be.remainingItemStack = ItemStack.EMPTY;
+            } else if (!be.storedFuelStack.isEmpty()) {
+                player.setItemInHand(hand, be.storedFuelStack);
+                be.storedFuelStack = ItemStack.EMPTY;
             }
             return InteractionResult.SUCCESS;
         }
 
-        if (world.isClientSide) return InteractionResult.SUCCESS;
-        sitDown(world, pos, getLeashed(world, player).or(player));
-        return InteractionResult.SUCCESS;
-    }
+        if (FuelRegistry.get(item) > 0 && !player.isShiftKeyDown()) {
+            if (be.storedFuelStack.isEmpty()) {
+                be.storedFuelStack = item.copy();
+                if (!player.isCreative()) player.setItemInHand(hand, ItemStack.EMPTY);
+            } else if (be.storedFuelStack.getItem().equals(item.getItem())) {
+                if (be.storedFuelStack.getCount() + item.getCount() <= item.getMaxStackSize()) {
+                    ItemStack copy = item.copy();
+                    copy.setCount(copy.getCount() + be.storedFuelStack.getCount());
+                    be.storedFuelStack = copy;
+                    if (!player.isCreative()) player.setItemInHand(hand, ItemStack.EMPTY);
+                } else {
+                    ItemStack copy = item.copy();
+                    copy.setCount(item.getMaxStackSize());
+                    be.storedFuelStack = copy;
+                    if (!player.isCreative()) {
+                        item.setCount(be.storedFuelStack.getCount() + item.getCount() - item.getMaxStackSize());
+                    }
+                }
+            }
+            return InteractionResult.SUCCESS;
+        }
 
-    public static void sitDown(Level world, BlockPos pos, Entity entity) {
-        if (world.isClientSide) return;
-        PedalsEntity seat = new PedalsEntity(world, pos);
-        seat.setPos(pos.getX() + .5, pos.getY() + .6, pos.getZ() + .5);
-        world.addFreshEntity(seat);
-        entity.startRiding(seat, true);
-        if (entity instanceof TamableAnimal ta) ta.setInSittingPose(true);
-    }
-
-    public static Optional<Entity> getLeashed(Level level, Player player) {
-        List<Entity> entities = level.getEntities((Entity) null, player.getBoundingBox().inflate(10), e -> true);
-        for (Entity e : entities) if (e instanceof Mob mob && mob.getLeashHolder() == player && SelfPrimingCoalBurnerBlock.canBePickedUp(e)) return Optional.of(mob);
-        return Optional.absent();
-    }
-
-    public static boolean canBePickedUp(Entity passenger) {
-        if (passenger instanceof Shulker) return false;
-        if (passenger instanceof Player) return false;
-        if (AllTags.AllEntityTags.IGNORE_SEAT.matches(passenger)) return false;
-        if (!AllConfigs.server().logistics.seatHostileMobs.get() && !passenger.getType().getCategory().isFriendly()) return false;
-        return passenger instanceof LivingEntity;
+        return InteractionResult.PASS;
     }
 
     @Override
-    public boolean hasShaftTowards(LevelReader world, BlockPos pos, BlockState state, Direction face) {
-        return face == Direction.DOWN;
+    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
+        super.onPlace(state, level, pos, oldState, isMoving);
+        nodePlace(state, level, pos, oldState, isMoving);
     }
 
     @Override
-    public boolean isPathfindable(BlockState state, BlockGetter reader, BlockPos pos, PathComputationType type) {
+    public void onRemove(BlockState state, Level level, BlockPos pos,
+                         BlockState newState, boolean isMoving) {
+        nodeRemove(state, level, pos, newState, isMoving);
+        IBE.onRemove(state, level, pos, newState);
+    }
+
+    @Override
+    public Class<SelfPrimingCoalBurnerBlockEntity> getBlockEntityClass() {
+        return SelfPrimingCoalBurnerBlockEntity.class;
+    }
+
+    @Override
+    public BlockEntityType<? extends SelfPrimingCoalBurnerBlockEntity> getBlockEntityType() {
+        return BlockEntityRegistry.SELF_PRIMING_COAL_BURNER.get();
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(FACING, LIT);
+        super.createBlockStateDefinition(builder);
+    }
+
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+        return this.defaultBlockState()
+                .setValue(FACING, ctx.getHorizontalDirection().getOpposite());
+    }
+
+    @Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        if (state.getValue(AbstractFurnaceBlock.LIT)) {
+            double d = pos.getX() + 0.5;
+            double e = pos.getY() + 0.25;
+            double f = pos.getZ() + 0.5;
+            if (random.nextDouble() < 0.1) {
+                level.playLocalSound(d, e, f, SoundEvents.FURNACE_FIRE_CRACKLE,
+                        SoundSource.BLOCKS, 1.0f, 1.0f, false);
+            }
+
+            Direction direction = state.getValue(AbstractFurnaceBlock.FACING);
+            Direction.Axis axis = direction.getAxis();
+            double g = 0.52;
+            double h = random.nextDouble() * 0.6 - 0.3;
+            double i = (axis == Direction.Axis.X) ? direction.getStepX() * g : h;
+            double j = random.nextDouble() * 6.0 / 16.0;
+            double k = (axis == Direction.Axis.Z) ? direction.getStepZ() * g : h;
+
+            level.addParticle(ParticleTypes.SMOKE, d + i, e + j, f + k, 0.0, 0.0, 0.0);
+            level.addParticle(ParticleTypes.FLAME, d + i, e + j, f + k, 0.0, 0.0, 0.0);
+        }
+    }
+
+    @Override
+    public List<Component> getAdditionalInfoLines() {
+        return List.of(
+                Component.translatable("vs_clockwork.duct_stats.produces_heat").withStyle(ChatFormatting.GOLD),
+                Component.translatable("vs_clockwork.coal_burner.function").withStyle(ChatFormatting.WHITE)
+        );
+    }
+
+    @Override
+    public void nodePlace(@NotNull BlockState blockState, @NotNull Level level, @NotNull BlockPos blockPos, @NotNull BlockState blockState1, boolean b) {
+
+    }
+
+    @Override
+    public void nodeAddClient(@NotNull BlockState blockState, @NotNull Level level, @NotNull BlockPos blockPos) {
+
+    }
+
+    @Override
+    public void nodeRemoveClient(@NotNull BlockState blockState, @NotNull Level level, @NotNull BlockPos blockPos) {
+        int a = 0;
+    }
+
+    @Override
+    public void nodeRemove(@NotNull BlockState blockState, @NotNull Level level, @NotNull BlockPos blockPos, @NotNull BlockState blockState1, boolean b) {
+    }
+
+    @Override
+    public @NotNull DuctNode createNode(@NotNull DuctNodePos ductNodePos) {
+        return null;
+    }
+
+    @Override
+    public boolean canConnectTo(@NotNull BlockPos blockPos, @NotNull BlockPos blockPos1, @NotNull Direction direction, @NotNull BlockGetter blockGetter) {
         return false;
-    }
-
-    @Override
-    public Class<CoalBurnerBlockEntity> getBlockEntityClass() {
-        return CoalBurnerBlockEntity.class;
-    }
-
-    @Override
-    public BlockEntityType<? extends CoalBurnerBlockEntity> getBlockEntityType() {
-        return CWBlo.PEDALS.get();
-    }
-
-    @Override
-    public Direction.Axis getRotationAxis(BlockState state) {
-        return Direction.Axis.Y;
     }
 }

@@ -1,11 +1,9 @@
 package com.guyapooye.clockworkadditions.registries;
 
+import com.guyapooye.clockworkadditions.blocks.gas.SelfPrimingCoalBurnerBlockEntity;
 import com.guyapooye.clockworkadditions.blocks.kinetics.pedals.PedalsBlockEntity;
 import com.guyapooye.clockworkadditions.blocks.kinetics.pedals.PedalsVisual;
-import com.simibubi.create.AllPartialModels;
-import com.simibubi.create.content.kinetics.base.OrientedRotatingVisual;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 
 import static com.guyapooye.clockworkadditions.ClockworkAdditions.REGISTRATE;
 
@@ -25,6 +23,11 @@ public class BlockEntityRegistry {
 //            .validBlocks(BlockRegistry.INVERTED_RESISTOR)
 //            .renderer(() -> InvertedRedstoneResistorRenderer::new)
 //            .register();
+
+    public static final BlockEntityEntry<SelfPrimingCoalBurnerBlockEntity> SELF_PRIMING_COAL_BURNER = REGISTRATE
+            .blockEntity("self_priming_coal_burner", SelfPrimingCoalBurnerBlockEntity::new)
+            .validBlocks(BlockRegistry.SELF_PRIMING_COAL_BURNER)
+            .register();
 
     public static void register() {
     }
