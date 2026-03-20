@@ -1,21 +1,17 @@
-package com.guyapooye.clockworkadditions.blocks.kinetics.pedals;
+package com.guyapooye.clockworkadditions.blocks.gas;
 
+import com.google.common.base.Optional;
+import com.guyapooye.clockworkadditions.blocks.kinetics.pedals.PedalsBlock;
+import com.guyapooye.clockworkadditions.blocks.kinetics.pedals.PedalsBlockEntity;
 import com.guyapooye.clockworkadditions.entities.pedals.PedalsEntity;
 import com.guyapooye.clockworkadditions.registries.BlockEntityRegistry;
-import com.google.common.base.Optional;
 import com.guyapooye.clockworkadditions.registries.ShapesRegistry;
-import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllTags;
-import com.simibubi.create.content.contraptions.actors.seat.SeatBlock;
 import com.simibubi.create.content.contraptions.actors.seat.SeatEntity;
 import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
-import com.simibubi.create.content.kinetics.millstone.MillstoneBlock;
-import com.simibubi.create.content.kinetics.millstone.MillstoneBlockEntity;
 import com.simibubi.create.foundation.block.IBE;
 import com.simibubi.create.foundation.block.ProperWaterloggedBlock;
-import com.simibubi.create.foundation.utility.BlockHelper;
 import com.simibubi.create.infrastructure.config.AllConfigs;
-import net.createmod.catnip.data.Couple;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -26,8 +22,6 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.monster.Shulker;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -44,13 +38,13 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.util.FakePlayer;
-import org.valkyrienskies.clockwork.content.logistics.gas.generation.coal_burner.CoalBurnerBlock;
+import org.valkyrienskies.clockwork.content.logistics.gas.generation.coal_burner.CoalBurnerBlockEntity;
 
 import java.util.List;
 
-public class PedalsBlock extends HorizontalKineticBlock implements ProperWaterloggedBlock, IBE<PedalsBlockEntity> {
+public class SelfPrimingCoalBurnerBlock extends PedalsBlock {
 
-    public PedalsBlock(Properties properties) {
+    public SelfPrimingCoalBurnerBlock(Properties properties) {
         super(properties);
         registerDefaultState(defaultBlockState().setValue(WATERLOGGED, false));
     }
@@ -83,14 +77,14 @@ public class PedalsBlock extends HorizontalKineticBlock implements ProperWaterlo
 
     @Override
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext ctx) {
-        return ShapesRegistry.PEDALS.get(blockState.getValue(PedalsBlock.HORIZONTAL_FACING));
+        return ShapesRegistry.PEDALS.get(blockState.getValue(SelfPrimingCoalBurnerBlock.HORIZONTAL_FACING));
     }
 
     @Override
     public VoxelShape getCollisionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext ctx) {
 //        if (ctx instanceof EntityCollisionContext ecc && ecc.getEntity() instanceof Player)
 //            return AllShapes.TURNTABLE_SHAPE;
-        return ShapesRegistry.PEDALS_COLLISION.get(blockState.getValue(PedalsBlock.HORIZONTAL_FACING));
+        return ShapesRegistry.PEDALS_COLLISION.get(blockState.getValue(SelfPrimingCoalBurnerBlock.HORIZONTAL_FACING));
     }
 
 
@@ -127,7 +121,7 @@ public class PedalsBlock extends HorizontalKineticBlock implements ProperWaterlo
 
     public static Optional<Entity> getLeashed(Level level, Player player) {
         List<Entity> entities = level.getEntities((Entity) null, player.getBoundingBox().inflate(10), e -> true);
-        for (Entity e : entities) if (e instanceof Mob mob && mob.getLeashHolder() == player && PedalsBlock.canBePickedUp(e)) return Optional.of(mob);
+        for (Entity e : entities) if (e instanceof Mob mob && mob.getLeashHolder() == player && SelfPrimingCoalBurnerBlock.canBePickedUp(e)) return Optional.of(mob);
         return Optional.absent();
     }
 
@@ -150,13 +144,13 @@ public class PedalsBlock extends HorizontalKineticBlock implements ProperWaterlo
     }
 
     @Override
-    public Class<PedalsBlockEntity> getBlockEntityClass() {
-        return PedalsBlockEntity.class;
+    public Class<CoalBurnerBlockEntity> getBlockEntityClass() {
+        return CoalBurnerBlockEntity.class;
     }
 
     @Override
-    public BlockEntityType<? extends PedalsBlockEntity> getBlockEntityType() {
-        return BlockEntityRegistry.PEDALS.get();
+    public BlockEntityType<? extends CoalBurnerBlockEntity> getBlockEntityType() {
+        return CWBlo.PEDALS.get();
     }
 
     @Override

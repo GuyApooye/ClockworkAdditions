@@ -158,8 +158,8 @@ dependencies {
     modImplementation("com.tterrag.registrate:Registrate:${registrate_version}")
 
     modImplementation(files("libs/architectury-forge-9.1.12.jar"))
-    modImplementation(files("libs/kelvin-forge-1.20.1-0.4.0+ad27706cf1.jar"))
-    modImplementation(files("libs/clockwork-1.20.1-forge.jar"))
+    modImplementation(files("libs/kelvin-forge-1.20.1-0.5.0+b79a61b0b5.jar"))
+    modImplementation(files("libs/clockwork-0.5.5.2.jar"))
 }
 
 processResources {

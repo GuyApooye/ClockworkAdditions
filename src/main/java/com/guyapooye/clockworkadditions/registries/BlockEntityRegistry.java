@@ -1,19 +1,19 @@
 package com.guyapooye.clockworkadditions.registries;
 
 import com.guyapooye.clockworkadditions.blocks.kinetics.pedals.PedalsBlockEntity;
-import com.guyapooye.clockworkadditions.blocks.kinetics.pedals.PedalsRenderer;
+import com.guyapooye.clockworkadditions.blocks.kinetics.pedals.PedalsVisual;
 import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.kinetics.base.OrientedRotatingVisual;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 
 import static com.guyapooye.clockworkadditions.ClockworkAdditions.REGISTRATE;
 
 public class BlockEntityRegistry {
     public static final BlockEntityEntry<PedalsBlockEntity> PEDALS = REGISTRATE
             .blockEntity("mechanical_pedals", PedalsBlockEntity::new)
-            .visual(() -> OrientedRotatingVisual.backHorizontal(PartialModelRegistry.SHAFT_HALF), false)
+            .visual(() -> PedalsVisual::new)
             .validBlocks(BlockRegistry.PEDALS)
-            .renderer(() -> PedalsRenderer::new)
             .register();
 //    public static final BlockEntityEntry<? extends HandlebarBlockEntity> HANDLEBAR = REGISTRATE
 //            .blockEntity("handlebar", HandlebarBlockEntity::new)
@@ -26,5 +26,6 @@ public class BlockEntityRegistry {
 //            .renderer(() -> InvertedRedstoneResistorRenderer::new)
 //            .register();
 
-    public static void register() {}
+    public static void register() {
+    }
 }

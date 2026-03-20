@@ -2,20 +2,12 @@ package com.guyapooye.clockworkadditions.blocks.kinetics.pedals;
 
 import com.guyapooye.clockworkadditions.registries.BlockRegistry;
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
-import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.NotNull;
-import org.joml.Vector3d;
 import org.joml.Vector3f;
-
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Objects;
 
 public class PedalsBlockEntity extends GeneratingKineticBlockEntity {
 
